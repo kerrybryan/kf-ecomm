@@ -75,6 +75,8 @@ export async function PUT(request, { params }) {
       'isReferenceImage',
     ];
 
+    const previousStatus = product.status;
+
     updatableFields.forEach((field) => {
       if (body[field] !== undefined) {
         product[field] = body[field];
@@ -82,6 +84,52 @@ export async function PUT(request, { params }) {
     });
 
     await product.save();
+
+    // Trigger Social Media Launch Automation if transitioning from draft to published
+    if (previousStatus === 'draft' && body.status === 'published') {
+      try {
+        const AutomationRule = (await import('@/models/AutomationRule')).default;
+        const SocialPost = (await import('@/models/SocialPost')).default;
+        const SocialAccount = (await import('@/models/SocialAccount')).default;
+        const { publishPostToAllPlatforms } = await import('@/lib/socialPublisher');
+
+        const rule = await AutomationRule.findOne({ trigger: 'product_published', enabled: true });
+        if (rule) {
+          const captionTemplate =
+            rule.defaultCaptionTemplate ||
+            'Introducing the {productName} — handcrafted in {material}. Starting at ${price}.\n\nExplore our bespoke Scandinavian collection online at Nordika Studio. ✨\n\n#NordicDesign #ScandinavianLiving #BespokeFurniture';
+
+          const renderedCaption = captionTemplate
+            .replace(/\{productName\}/g, product.name)
+            .replace(/\{price\}/g, Number(product.price).toLocaleString())
+            .replace(/\{material\}/g, product.materials?.join(', ') || 'Solid European Oak');
+
+          const autoPost = await SocialPost.create({
+            productId: product._id,
+            mediaType: 'image',
+            mediaUrl: product.images?.[0] || '',
+            platforms: rule.defaultPlatforms?.length > 0 ? rule.defaultPlatforms : ['instagram', 'pinterest'],
+            captions: {
+              default: renderedCaption,
+              instagram: renderedCaption,
+              facebook: renderedCaption,
+              pinterest: renderedCaption,
+            },
+            status: rule.mode === 'auto_publish' ? 'queued' : 'draft',
+            createdBy: auth.user?._id || null,
+          });
+
+          if (rule.mode === 'auto_publish') {
+            const connectedAccounts = await SocialAccount.find({ status: 'connected' });
+            await publishPostToAllPlatforms(autoPost, connectedAccounts);
+          }
+        }
+      } catch (autoErr) {
+        console.error('Social auto-publish trigger error:', autoErr);
+        // Non-blocking for product save
+      }
+    }
+
     return NextResponse.json({ success: true, data: product, message: 'Product updated successfully' });
   } catch (error) {
     console.error('Admin update product error:', error);
