@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-bg-page: #F3ECE1;
+    --color-bg-section: #EAE1D2;
+    --color-card: #FFFFFF;
+    --color-dark: #1A1613;
+    --color-accent-gold: #A8875E;
+    --color-text: #2B2620;
+    --color-text-muted: #6B6459;
+    --color-border: #DCD1BE;
+  }
+
+  body {
+    background-color: var(--color-bg-page);
+    color: var(--color-text);
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, .font-serif {
+    font-family: var(--font-serif), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  }
+}
+
+.font-serif-heading {
+  font-family: var(--font-serif), Georgia, serif;
+}
+
+/* Hide scrollbar for smooth carousel browsing */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Scroll snap utilities */
+.snap-mandatory {
+  scroll-snap-type: x mandatory;
+}
+.snap-align-start {
+  scroll-snap-align: start;
+}
+
+/* Auto-scroll marquee animation for category sliding row */
+@keyframes continuous-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-smooth {
+  display: flex;
+  width: max-content;
+  animation: continuous-marquee 40s linear infinite;
+}
+
+.animate-marquee-smooth:hover,
+.animate-marquee-smooth.is-paused {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee-smooth {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #DCD1BE;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #A8875E;
+}
