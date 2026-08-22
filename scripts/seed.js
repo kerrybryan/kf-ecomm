@@ -335,6 +335,170 @@ const SourcedItemSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+const SocialAccountSchema = new mongoose.Schema(
+  {
+    platform: { type: String, required: true },
+    accountName: { type: String, required: true },
+    accountHandle: { type: String, default: '' },
+    accountAvatarUrl: { type: String, default: '' },
+    profileUrl: { type: String, default: '' },
+    status: { type: String, enum: ['connected', 'expired', 'disconnected'], default: 'connected' },
+    connectedAt: { type: Date, default: Date.now },
+    followerCount: { type: Number, default: 0 },
+  },
+  { timestamps: true }
+);
+
+const SocialPostSchema = new mongoose.Schema(
+  {
+    productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', default: null },
+    mediaType: { type: String, enum: ['image', 'video'], default: 'image' },
+    mediaUrl: { type: String, required: true },
+    platforms: { type: [String], default: ['instagram', 'pinterest'] },
+    captions: {
+      default: { type: String, default: '' },
+      instagram: { type: String, default: '' },
+      facebook: { type: String, default: '' },
+      tiktok: { type: String, default: '' },
+      pinterest: { type: String, default: '' },
+    },
+    scheduledFor: { type: Date, default: null },
+    status: { type: String, enum: ['draft', 'queued', 'posted', 'failed'], default: 'draft' },
+    publishedAt: { type: Date, default: null },
+    platformPostIds: { type: Map, of: String, default: {} },
+    engagementStats: { type: Map, of: Object, default: {} },
+    errorLog: { type: String, default: '' },
+    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null },
+  },
+  { timestamps: true }
+);
+
+const AutomationRuleSchema = new mongoose.Schema(
+  {
+    trigger: { type: String, default: 'product_published' },
+    mode: { type: String, enum: ['auto_publish', 'review_queue'], default: 'review_queue' },
+    defaultPlatforms: { type: [String], default: ['instagram', 'pinterest', 'facebook'] },
+    defaultCaptionTemplate: { type: String, default: '' },
+    enabled: { type: Boolean, default: true },
+  },
+  { timestamps: true }
+);
+
+const RawMaterialSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    sku: { type: String, required: true, unique: true },
+    category: { type: String, default: 'timber' },
+    inStock: { type: Number, default: 0 },
+    unit: { type: String, default: 'units' },
+    unitCost: { type: Number, default: 0 },
+    reorderThreshold: { type: Number, default: 10 },
+    supplier: { type: String, default: 'Nordic Forest Mill' },
+  },
+  { timestamps: true }
+);
+
+const ProductionOrderSchema = new mongoose.Schema(
+  {
+    orderId: { type: mongoose.Schema.Types.ObjectId, ref: 'Order', default: null },
+    productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
+    productName: { type: String, required: true },
+    productSku: { type: String, default: '' },
+    productImage: { type: String, default: '' },
+    customSpecifications: { type: Object, default: {} },
+    currentStage: { type: String, default: 'timber_selection' },
+    priority: { type: String, default: 'standard' },
+    leadCraftsman: { type: String, default: 'Lars Lindqvist' },
+    workshopBench: { type: String, default: 'Bench 3 - Joinery East' },
+    stageHistory: { type: Array, default: [] },
+    materialsRequired: { type: Array, default: [] },
+    targetCompletionDate: { type: Date, default: null },
+    actualCompletionDate: { type: Date, default: null },
+    status: { type: String, default: 'in_progress' },
+  },
+  { timestamps: true }
+);
+
+const DeliveryZoneSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    code: { type: String, required: true, unique: true },
+    regionCodes: { type: [String], default: [] },
+    baseCost: { type: Number, default: 150 },
+    freeShippingThreshold: { type: Number, default: 2000 },
+    whiteGloveSurcharge: { type: Number, default: 250 },
+    active: { type: Boolean, default: true },
+  },
+  { timestamps: true }
+);
+
+const ShipmentSchema = new mongoose.Schema(
+  {
+    orderId: { type: mongoose.Schema.Types.ObjectId, ref: 'Order' },
+    trackingNumber: { type: String, required: true, unique: true },
+    carrier: { type: String, default: 'Nordika White-Glove Fleet' },
+    driverName: { type: String, default: 'Erik Holmgren' },
+    driverPhone: { type: String, default: '+1 (206) 555-0144' },
+    vehicleId: { type: String, default: 'Van #4 (Sprinter EV)' },
+    deliveryZone: { type: String, default: 'Greater Seattle & Puget Sound' },
+    status: { type: String, default: 'pending_dispatch' },
+    deliveryWindow: { type: Object, default: {} },
+    timeline: { type: Array, default: [] },
+    proofOfDelivery: { type: Object, default: {} },
+  },
+  { timestamps: true }
+);
+
+const WarrantyClaimSchema = new mongoose.Schema(
+  {
+    orderId: { type: mongoose.Schema.Types.ObjectId, ref: 'Order' },
+    claimNumber: { type: String, required: true, unique: true },
+    customerName: { type: String, required: true },
+    customerEmail: { type: String, required: true },
+    productName: { type: String, required: true },
+    claimType: { type: String, default: 'transit_damage' },
+    description: { type: String, required: true },
+    photoUrls: { type: [String], default: [] },
+    severity: { type: String, default: 'minor_touchup' },
+    status: { type: String, default: 'submitted' },
+    resolutionNotes: { type: String, default: '' },
+    assignedArtisan: { type: String, default: '' },
+    resolvedAt: { type: Date, default: null },
+  },
+  { timestamps: true }
+);
+
+const LedgerEntrySchema = new mongoose.Schema(
+  {
+    entryNumber: { type: String, required: true, unique: true },
+    date: { type: Date, default: Date.now },
+    type: { type: String, required: true },
+    category: { type: String, required: true },
+    amount: { type: Number, required: true },
+    debit: { type: Number, default: 0 },
+    credit: { type: Number, default: 0 },
+    referenceId: { type: String, default: '' },
+    description: { type: String, required: true },
+    status: { type: String, default: 'posted' },
+    createdBy: { type: String, default: 'System Automation' },
+  },
+  { timestamps: true }
+);
+
+const ExpenseSchema = new mongoose.Schema(
+  {
+    title: { type: String, required: true },
+    category: { type: String, default: 'raw_timber_lumber' },
+    amount: { type: Number, required: true },
+    date: { type: Date, default: Date.now },
+    vendor: { type: String, default: 'Nordic Wood Suppliers' },
+    paymentMethod: { type: String, default: 'bank_wire' },
+    notes: { type: String, default: '' },
+    ledgerEntryId: { type: mongoose.Schema.Types.ObjectId, ref: 'LedgerEntry', default: null },
+  },
+  { timestamps: true }
+);
+
 const Category = mongoose.models.Category || mongoose.model('Category', CategorySchema);
 const Product = mongoose.models.Product || mongoose.model('Product', ProductSchema);
 const Order = mongoose.models.Order || mongoose.model('Order', OrderSchema);
@@ -345,6 +509,16 @@ const Review = mongoose.models.Review || mongoose.model('Review', ReviewSchema);
 const Setting = mongoose.models.Setting || mongoose.model('Setting', SettingSchema);
 const Newsletter = mongoose.models.Newsletter || mongoose.model('Newsletter', NewsletterSchema);
 const SourcedItem = mongoose.models.SourcedItem || mongoose.model('SourcedItem', SourcedItemSchema);
+const SocialAccount = mongoose.models.SocialAccount || mongoose.model('SocialAccount', SocialAccountSchema);
+const SocialPost = mongoose.models.SocialPost || mongoose.model('SocialPost', SocialPostSchema);
+const AutomationRule = mongoose.models.AutomationRule || mongoose.model('AutomationRule', AutomationRuleSchema);
+const RawMaterial = mongoose.models.RawMaterial || mongoose.model('RawMaterial', RawMaterialSchema);
+const ProductionOrder = mongoose.models.ProductionOrder || mongoose.model('ProductionOrder', ProductionOrderSchema);
+const DeliveryZone = mongoose.models.DeliveryZone || mongoose.model('DeliveryZone', DeliveryZoneSchema);
+const Shipment = mongoose.models.Shipment || mongoose.model('Shipment', ShipmentSchema);
+const WarrantyClaim = mongoose.models.WarrantyClaim || mongoose.model('WarrantyClaim', WarrantyClaimSchema);
+const LedgerEntry = mongoose.models.LedgerEntry || mongoose.model('LedgerEntry', LedgerEntrySchema);
+const Expense = mongoose.models.Expense || mongoose.model('Expense', ExpenseSchema);
 
 // Helper to generate dates over the past 30 days
 function getRandomPastDate(daysAgo = 30) {
@@ -1163,6 +1337,16 @@ async function seed() {
       Setting.deleteMany({}),
       Newsletter.deleteMany({}),
       SourcedItem.deleteMany({}),
+      SocialAccount.deleteMany({}),
+      SocialPost.deleteMany({}),
+      AutomationRule.deleteMany({}),
+      RawMaterial.deleteMany({}),
+      ProductionOrder.deleteMany({}),
+      DeliveryZone.deleteMany({}),
+      Shipment.deleteMany({}),
+      WarrantyClaim.deleteMany({}),
+      LedgerEntry.deleteMany({}),
+      Expense.deleteMany({}),
     ]);
 
     // 1.1 Seed Store Settings
@@ -1488,17 +1672,727 @@ async function seed() {
     const createdSourcedItems = await SourcedItem.insertMany(sourcedItemDocs);
     console.log(`✅ Seeded ${createdSourcedItems.length} source studio inspiration items.`);
 
+    // 10. Seed Social Accounts
+    console.log('📱 Seeding Connected Social Media Accounts...');
+    const socialAccountDocs = [
+      {
+        platform: 'instagram',
+        accountName: 'Nordika Scandinavian Studio',
+        accountHandle: '@nordika.studio',
+        accountAvatarUrl: 'https://picsum.photos/seed/nordika-avatar/200/200',
+        profileUrl: 'https://instagram.com/nordika.studio',
+        status: 'connected',
+        followerCount: 24800,
+        connectedAt: getRandomPastDate(60),
+      },
+      {
+        platform: 'pinterest',
+        accountName: 'Nordika Scandinavian Living',
+        accountHandle: '@nordikahome',
+        accountAvatarUrl: 'https://picsum.photos/seed/nordika-avatar/200/200',
+        profileUrl: 'https://pinterest.com/nordikahome',
+        status: 'connected',
+        followerCount: 41200,
+        connectedAt: getRandomPastDate(50),
+      },
+      {
+        platform: 'facebook',
+        accountName: 'Nordika Studio Official Page',
+        accountHandle: 'Nordika Scandinavian Furniture',
+        accountAvatarUrl: 'https://picsum.photos/seed/nordika-avatar/200/200',
+        profileUrl: 'https://facebook.com/nordikastudio',
+        status: 'connected',
+        followerCount: 18200,
+        connectedAt: getRandomPastDate(45),
+      },
+      {
+        platform: 'tiktok',
+        accountName: 'Nordika Studio Workshop',
+        accountHandle: '@nordikadesign',
+        accountAvatarUrl: 'https://picsum.photos/seed/nordika-avatar/200/200',
+        profileUrl: 'https://tiktok.com/@nordikadesign',
+        status: 'connected',
+        followerCount: 52400,
+        connectedAt: getRandomPastDate(30),
+      },
+    ];
+    const createdSocialAccounts = await SocialAccount.insertMany(socialAccountDocs);
+    console.log(`✅ Seeded ${createdSocialAccounts.length} social platform accounts.`);
+
+    // 11. Seed Automation Rule
+    console.log('⚙️ Seeding Product Launch Social Automation Rule...');
+    const createdAutomationRule = await AutomationRule.create({
+      trigger: 'product_published',
+      mode: 'review_queue',
+      defaultPlatforms: ['instagram', 'pinterest', 'facebook'],
+      defaultCaptionTemplate:
+        'Introducing the {productName} — masterfully crafted in {material}. Starting at ${price}.\n\nExplore our bespoke Scandinavian collection online at Nordika Studio. ✨\n\n#NordicDesign #ScandinavianLiving #BespokeFurniture #NordikaStudio #LuxuryInteriors',
+      enabled: true,
+    });
+    console.log('✅ Seeded social automation rules.');
+
+    // 12. Seed Social Posts (2 posted, 2 queued for future, 1 draft)
+    console.log('🚀 Seeding Social Posts across calendar & queue...');
+    const now = new Date();
+    const futureDate1 = new Date(now.getTime() + 2 * 24 * 60 * 60 * 1000); // 2 days from now
+    const futureDate2 = new Date(now.getTime() + 5 * 24 * 60 * 60 * 1000); // 5 days from now
+
+    const socialPostDocs = [
+      {
+        productId: createdProducts[0]._id,
+        mediaType: 'image',
+        mediaUrl: createdProducts[0].images[0],
+        platforms: ['instagram', 'pinterest', 'facebook'],
+        captions: {
+          default: `Sculptural serenity for intentional spaces. The ${createdProducts[0].name} balances clean Nordic proportions with tactile bouclé.\n\nHandcrafted for those who find beauty in restraint.\n\nDiscover the studio collection at nordika.com ✨\n\n#NordicDesign #ScandinavianModern #ArchitecturalFurniture #QuietLuxury`,
+          instagram: `Sculptural serenity for intentional spaces. The ${createdProducts[0].name} balances clean Nordic proportions with tactile bouclé.\n\nDiscover the studio collection at nordika.com ✨\n\n#NordicDesign #ScandinavianModern #ArchitecturalFurniture #QuietLuxury`,
+        },
+        status: 'posted',
+        publishedAt: getRandomPastDate(3),
+        platformPostIds: {
+          instagram: 'ig_post_889123_a9b1',
+          pinterest: 'pin_art_889123_c2d4',
+          facebook: 'fb_feed_889123_e5f6',
+        },
+        engagementStats: {
+          instagram: { likes: 1420, comments: 38, views: 8200 },
+          pinterest: { likes: 310, comments: 12, views: 5600 },
+        },
+        createdBy: createdUsers[0]._id,
+      },
+      {
+        productId: createdProducts[1]._id,
+        mediaType: 'image',
+        mediaUrl: createdProducts[1].images[0],
+        platforms: ['instagram', 'pinterest'],
+        captions: {
+          default: `Every joint tells a story of honest craftsmanship. Featuring solid European Oak, the ${createdProducts[1].name} brings organic warmth to your dining room.\n\nShop the link in bio ✨\n\n#BespokeJoinery #ScandinavianInterior #ModernWoodwork`,
+        },
+        status: 'posted',
+        publishedAt: getRandomPastDate(7),
+        platformPostIds: {
+          instagram: 'ig_post_778219_x1y2',
+          pinterest: 'pin_art_778219_z3w4',
+        },
+        engagementStats: {
+          instagram: { likes: 980, comments: 24, views: 6100 },
+        },
+        createdBy: createdUsers[0]._id,
+      },
+      {
+        productId: createdProducts[2]._id,
+        mediaType: 'image',
+        mediaUrl: createdProducts[2].images[0],
+        platforms: ['instagram', 'pinterest', 'facebook'],
+        captions: {
+          default: `Upcoming Workshop Drop: The ${createdProducts[2].name}. Releasing this weekend in limited batches.\n\n#NordicCraft #ScandinavianStyle #InteriorInspo`,
+        },
+        status: 'queued',
+        scheduledFor: futureDate1,
+        createdBy: createdUsers[0]._id,
+      },
+      {
+        productId: createdProducts[3]._id,
+        mediaType: 'image',
+        mediaUrl: createdProducts[3].images[0],
+        platforms: ['instagram', 'tiktok'],
+        captions: {
+          default: `Workshop ASMR: Hand-finishing the curved joinery of the ${createdProducts[3].name}. 🪵\n\n#WoodworkingASMR #Joinery #ScandinavianDesign`,
+        },
+        status: 'queued',
+        scheduledFor: futureDate2,
+        createdBy: createdUsers[0]._id,
+      },
+      {
+        productId: createdProducts[4]._id,
+        mediaType: 'image',
+        mediaUrl: createdProducts[4].images[0],
+        platforms: ['instagram'],
+        captions: {
+          default: `Draft social copy for ${createdProducts[4].name}.\n\n#NordikaStudio`,
+        },
+        status: 'draft',
+        createdBy: createdUsers[0]._id,
+      },
+    ];
+    const createdSocialPosts = await SocialPost.insertMany(socialPostDocs);
+    console.log(`✅ Seeded ${createdSocialPosts.length} social posts (posted, queued, draft).`);
+
+    // 13. Seed Raw Materials
+    console.log('🪵 Seeding Workshop Raw Materials Inventory...');
+    const rawMaterialDocs = [
+      {
+        name: 'FSC European White Oak 8/4',
+        sku: 'MAT-OAK-8-4',
+        category: 'timber',
+        inStock: 450,
+        unit: 'bdft',
+        unitCost: 14.5,
+        reorderThreshold: 100,
+        supplier: 'Scandinavian Sustainable Forest Co.',
+      },
+      {
+        name: 'American Black Walnut 6/4',
+        sku: 'MAT-WALNUT-6-4',
+        category: 'timber',
+        inStock: 280,
+        unit: 'bdft',
+        unitCost: 19.0,
+        reorderThreshold: 60,
+        supplier: 'Pacific Timber Mills',
+      },
+      {
+        name: 'Nordic Natural Bouclé Fabric (Cream)',
+        sku: 'MAT-BOUCLE-CRM',
+        category: 'fabric',
+        inStock: 85,
+        unit: 'meters',
+        unitCost: 65.0,
+        reorderThreshold: 20,
+        supplier: 'Kvadrat Textiles Denmark',
+      },
+      {
+        name: 'Brushed Solid Brass Corner Brackets',
+        sku: 'MAT-BRASS-BRKT',
+        category: 'hardware',
+        inStock: 320,
+        unit: 'units',
+        unitCost: 8.5,
+        reorderThreshold: 50,
+        supplier: 'Nordic Metal Artisans',
+      },
+      {
+        name: 'Organic Hardwax Matte Oil (Clear)',
+        sku: 'MAT-OIL-MATTE',
+        category: 'finish',
+        inStock: 45,
+        unit: 'liters',
+        unitCost: 38.0,
+        reorderThreshold: 10,
+        supplier: 'Osmo Scandinavian Finishes',
+      },
+      {
+        name: 'High-Resilience Latex Furniture Foam',
+        sku: 'MAT-FOAM-HR',
+        category: 'foam',
+        inStock: 60,
+        unit: 'units',
+        unitCost: 45.0,
+        reorderThreshold: 15,
+        supplier: 'PureLatex Eco Comfort',
+      },
+    ];
+    const createdMaterials = await RawMaterial.insertMany(rawMaterialDocs);
+    console.log(`✅ Seeded ${createdMaterials.length} workshop raw materials.`);
+
+    // 14. Seed Production Orders (Kanban)
+    console.log('🔨 Seeding Workshop Production Orders with Audit Histories...');
+    const prodOrderDocs = [
+      {
+        orderId: createdOrders[0]._id,
+        productId: createdProducts[0]._id,
+        productName: createdProducts[0].name,
+        productSku: createdProducts[0].slug.toUpperCase(),
+        productImage: createdProducts[0].images[0],
+        customSpecifications: {
+          woodFinish: 'Natural Matte Hardwax Oil',
+          fabricChoice: 'Nordic Bouclé Cream',
+        },
+        currentStage: 'cutting_joinery',
+        priority: 'rush',
+        leadCraftsman: 'Lars Lindqvist',
+        workshopBench: 'Bench 4 - Joinery East',
+        stageHistory: [
+          {
+            stage: 'timber_selection',
+            enteredAt: getRandomPastDate(5),
+            completedAt: getRandomPastDate(3),
+            durationHours: 12.5,
+            craftsman: 'Lars Lindqvist',
+            notes: 'Selected matched-grain European White Oak flitches with zero knot defects.',
+          },
+          {
+            stage: 'cutting_joinery',
+            enteredAt: getRandomPastDate(3),
+            craftsman: 'Lars Lindqvist',
+            notes: 'CNC profile cut complete. Mortise and tenon joints dry-fit verified.',
+          },
+        ],
+        materialsRequired: [
+          { materialId: createdMaterials[0]._id, name: createdMaterials[0].name, quantity: 24, unit: 'bdft', deducted: true },
+          { materialId: createdMaterials[2]._id, name: createdMaterials[2].name, quantity: 8, unit: 'meters', deducted: true },
+        ],
+        targetCompletionDate: new Date(Date.now() + 6 * 24 * 60 * 60 * 1000),
+        status: 'in_progress',
+      },
+      {
+        orderId: createdOrders[1]._id,
+        productId: createdProducts[1]._id,
+        productName: createdProducts[1].name,
+        productSku: createdProducts[1].slug.toUpperCase(),
+        productImage: createdProducts[1].images[0],
+        currentStage: 'finishing_staining',
+        priority: 'standard',
+        leadCraftsman: 'Freja Eriksen',
+        workshopBench: 'Booth 2 - Spray & Polish',
+        stageHistory: [
+          {
+            stage: 'timber_selection',
+            enteredAt: getRandomPastDate(12),
+            completedAt: getRandomPastDate(10),
+            durationHours: 14.0,
+            craftsman: 'Freja Eriksen',
+            notes: 'Quarter-sawn oak selected.',
+          },
+          {
+            stage: 'cutting_joinery',
+            enteredAt: getRandomPastDate(10),
+            completedAt: getRandomPastDate(6),
+            durationHours: 28.0,
+            craftsman: 'Lars Lindqvist',
+            notes: 'Dovetail apron joints hand-planed.',
+          },
+          {
+            stage: 'hand_sanding',
+            enteredAt: getRandomPastDate(6),
+            completedAt: getRandomPastDate(3),
+            durationHours: 18.5,
+            craftsman: 'Freja Eriksen',
+            notes: 'Progressed from 120-grit to 320-grit mirror smooth.',
+          },
+          {
+            stage: 'finishing_staining',
+            enteredAt: getRandomPastDate(3),
+            craftsman: 'Freja Eriksen',
+            notes: 'First coat of organic hardwax oil curing.',
+          },
+        ],
+        materialsRequired: [
+          { materialId: createdMaterials[0]._id, name: createdMaterials[0].name, quantity: 36, unit: 'bdft', deducted: true },
+          { materialId: createdMaterials[4]._id, name: createdMaterials[4].name, quantity: 2, unit: 'liters', deducted: true },
+        ],
+        targetCompletionDate: new Date(Date.now() + 4 * 24 * 60 * 60 * 1000),
+        status: 'in_progress',
+      },
+      {
+        orderId: createdOrders[2]._id,
+        productId: createdProducts[2]._id,
+        productName: createdProducts[2].name,
+        productSku: createdProducts[2].slug.toUpperCase(),
+        productImage: createdProducts[2].images[0],
+        currentStage: 'hand_sanding',
+        priority: 'vip',
+        leadCraftsman: 'Magnus Vance',
+        workshopBench: 'Bench 1 - Master Assembly',
+        stageHistory: [
+          {
+            stage: 'timber_selection',
+            enteredAt: getRandomPastDate(8),
+            completedAt: getRandomPastDate(6),
+            durationHours: 9.0,
+            craftsman: 'Magnus Vance',
+            notes: 'Selected figured walnut stock.',
+          },
+          {
+            stage: 'cutting_joinery',
+            enteredAt: getRandomPastDate(6),
+            completedAt: getRandomPastDate(2),
+            durationHours: 24.0,
+            craftsman: 'Magnus Vance',
+            notes: 'Domino tenons and mitred corners bonded with marine polyurethane.',
+          },
+          {
+            stage: 'hand_sanding',
+            enteredAt: getRandomPastDate(2),
+            craftsman: 'Magnus Vance',
+            notes: 'Edging chamfers being rounded by hand.',
+          },
+        ],
+        materialsRequired: [
+          { materialId: createdMaterials[1]._id, name: createdMaterials[1].name, quantity: 18, unit: 'bdft', deducted: true },
+          { materialId: createdMaterials[3]._id, name: createdMaterials[3].name, quantity: 8, unit: 'units', deducted: true },
+        ],
+        targetCompletionDate: new Date(Date.now() + 8 * 24 * 60 * 60 * 1000),
+        status: 'in_progress',
+      },
+      {
+        productId: createdProducts[3]._id,
+        productName: createdProducts[3].name,
+        productSku: createdProducts[3].slug.toUpperCase(),
+        productImage: createdProducts[3].images[0],
+        currentStage: 'quality_inspection',
+        priority: 'standard',
+        leadCraftsman: 'Lars Lindqvist',
+        workshopBench: 'Inspection Area QC-1',
+        stageHistory: [
+          { stage: 'timber_selection', enteredAt: getRandomPastDate(15), completedAt: getRandomPastDate(13), durationHours: 10.0 },
+          { stage: 'cutting_joinery', enteredAt: getRandomPastDate(13), completedAt: getRandomPastDate(8), durationHours: 26.0 },
+          { stage: 'hand_sanding', enteredAt: getRandomPastDate(8), completedAt: getRandomPastDate(5), durationHours: 16.0 },
+          { stage: 'finishing_staining', enteredAt: getRandomPastDate(5), completedAt: getRandomPastDate(2), durationHours: 22.0 },
+          { stage: 'upholstery', enteredAt: getRandomPastDate(2), completedAt: getRandomPastDate(1), durationHours: 8.0 },
+          { stage: 'quality_inspection', enteredAt: getRandomPastDate(1), craftsman: 'Lars Lindqvist', notes: 'Checking joint deflection under 300lb load.' },
+        ],
+        targetCompletionDate: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
+        status: 'in_progress',
+      },
+      {
+        productId: createdProducts[4]._id,
+        productName: createdProducts[4].name,
+        productSku: createdProducts[4].slug.toUpperCase(),
+        productImage: createdProducts[4].images[0],
+        currentStage: 'timber_selection',
+        priority: 'standard',
+        leadCraftsman: 'Freja Eriksen',
+        workshopBench: 'Timber Intake Bay',
+        stageHistory: [
+          { stage: 'timber_selection', enteredAt: getRandomPastDate(1), craftsman: 'Freja Eriksen', notes: 'Awaiting kiln-dried batch delivery.' },
+        ],
+        targetCompletionDate: new Date(Date.now() + 18 * 24 * 60 * 60 * 1000),
+        status: 'in_progress',
+      },
+      {
+        productId: createdProducts[5]._id,
+        productName: createdProducts[5].name,
+        productSku: createdProducts[5].slug.toUpperCase(),
+        productImage: createdProducts[5].images[0],
+        currentStage: 'completed',
+        priority: 'standard',
+        leadCraftsman: 'Magnus Vance',
+        workshopBench: 'Dispatch Logistics Bay',
+        stageHistory: [
+          { stage: 'timber_selection', enteredAt: getRandomPastDate(25), completedAt: getRandomPastDate(23), durationHours: 11.0 },
+          { stage: 'cutting_joinery', enteredAt: getRandomPastDate(23), completedAt: getRandomPastDate(18), durationHours: 25.0 },
+          { stage: 'hand_sanding', enteredAt: getRandomPastDate(18), completedAt: getRandomPastDate(14), durationHours: 18.0 },
+          { stage: 'finishing_staining', enteredAt: getRandomPastDate(14), completedAt: getRandomPastDate(10), durationHours: 24.0 },
+          { stage: 'quality_inspection', enteredAt: getRandomPastDate(10), completedAt: getRandomPastDate(9), durationHours: 4.0 },
+          { stage: 'completed', enteredAt: getRandomPastDate(9), completedAt: getRandomPastDate(9), durationHours: 0 },
+        ],
+        actualCompletionDate: getRandomPastDate(9),
+        targetCompletionDate: getRandomPastDate(7),
+        status: 'completed',
+      },
+    ];
+    const createdProdOrders = await ProductionOrder.insertMany(prodOrderDocs);
+    console.log(`✅ Seeded ${createdProdOrders.length} production orders with stage telemetry.`);
+
+    // 15. Seed Delivery Zones
+    console.log('🚚 Seeding Delivery Zones...');
+    const deliveryZoneDocs = [
+      {
+        name: 'Greater Seattle & Puget Sound',
+        code: 'ZONE-SEATTLE',
+        regionCodes: ['WA-981', 'WA-980', 'WA-982', 'WA-983', 'WA-984'],
+        baseCost: 150,
+        freeShippingThreshold: 2000,
+        whiteGloveSurcharge: 250,
+        active: true,
+      },
+      {
+        name: 'Pacific Northwest Regional (WA/OR/ID)',
+        code: 'ZONE-PNW',
+        regionCodes: ['WA', 'OR', 'ID'],
+        baseCost: 250,
+        freeShippingThreshold: 3000,
+        whiteGloveSurcharge: 350,
+        active: true,
+      },
+      {
+        name: 'Continental US Freight Tier',
+        code: 'ZONE-US-CONT',
+        regionCodes: ['CA', 'NY', 'TX', 'IL', 'FL', 'MA', 'CO'],
+        baseCost: 350,
+        freeShippingThreshold: 4500,
+        whiteGloveSurcharge: 450,
+        active: true,
+      },
+      {
+        name: 'Alaska, Hawaii & Offshore',
+        code: 'ZONE-OFFSHORE',
+        regionCodes: ['AK', 'HI'],
+        baseCost: 650,
+        freeShippingThreshold: 7500,
+        whiteGloveSurcharge: 650,
+        active: true,
+      },
+    ];
+    const createdZones = await DeliveryZone.insertMany(deliveryZoneDocs);
+    console.log(`✅ Seeded ${createdZones.length} delivery zones.`);
+
+    // 16. Seed Shipments
+    console.log('📦 Seeding Shipments & White-Glove Deliveries...');
+    const shipmentDocs = [
+      {
+        orderId: createdOrders[0]._id,
+        trackingNumber: 'NORD-LOG-982144',
+        carrier: 'Nordika White-Glove Fleet',
+        driverName: 'Erik Holmgren',
+        driverPhone: '+1 (206) 555-0144',
+        vehicleId: 'Van #4 (Sprinter EV)',
+        deliveryZone: 'Greater Seattle & Puget Sound',
+        status: 'out_for_delivery',
+        deliveryWindow: {
+          date: new Date(),
+          timeSlot: '09:00 - 13:00',
+          instructions: 'Call gate buzzer #402. White-glove setup in primary living space.',
+        },
+        timeline: [
+          { status: 'pending_dispatch', timestamp: getRandomPastDate(2), location: 'Seattle Workshop Hub', note: 'Quality inspection passed.' },
+          { status: 'dispatched', timestamp: getRandomPastDate(1), location: 'Puget Sound Logistics Dock', note: 'Loaded onto Van #4.' },
+          { status: 'out_for_delivery', timestamp: new Date(), location: 'Seattle Downtown Route', note: 'Driver en route to customer residence.' },
+        ],
+      },
+      {
+        orderId: createdOrders[1]._id,
+        trackingNumber: 'NORD-LOG-871239',
+        carrier: 'Nordika White-Glove Fleet',
+        driverName: 'Erik Holmgren',
+        driverPhone: '+1 (206) 555-0144',
+        vehicleId: 'Van #4 (Sprinter EV)',
+        deliveryZone: 'Greater Seattle & Puget Sound',
+        status: 'delivered',
+        deliveryWindow: {
+          date: getRandomPastDate(4),
+          timeSlot: '13:00 - 17:00',
+        },
+        timeline: [
+          { status: 'pending_dispatch', timestamp: getRandomPastDate(6), location: 'Seattle Hub' },
+          { status: 'dispatched', timestamp: getRandomPastDate(5), location: 'Seattle Hub' },
+          { status: 'delivered', timestamp: getRandomPastDate(4), location: 'Bellevue, WA', note: 'Signed and placed in dining room.' },
+        ],
+        proofOfDelivery: {
+          signatureUrl: 'sig_pad_customer_elena_r',
+          photoUrls: ['https://picsum.photos/seed/pod-dining-table/800/600'],
+          recipientName: 'Elena Rostova',
+          deliveredAt: getRandomPastDate(4),
+          conditionNotes: 'Delivered in pristine condition. Felt floor glides applied.',
+        },
+      },
+      {
+        orderId: createdOrders[2]._id,
+        trackingNumber: 'NORD-LOG-761920',
+        carrier: 'Freight Scandinavian Logistics',
+        driverName: 'Sven Carlsson',
+        driverPhone: '+1 (503) 555-0188',
+        vehicleId: 'Freight Carrier #12',
+        deliveryZone: 'Pacific Northwest Regional (WA/OR/ID)',
+        status: 'dispatched',
+        deliveryWindow: {
+          date: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
+          timeSlot: '10:00 - 14:00',
+        },
+        timeline: [
+          { status: 'pending_dispatch', timestamp: getRandomPastDate(2), location: 'Seattle Workshop Hub' },
+          { status: 'dispatched', timestamp: getRandomPastDate(1), location: 'Portland Transfer Depot' },
+        ],
+      },
+    ];
+    const createdShipments = await Shipment.insertMany(shipmentDocs);
+    console.log(`✅ Seeded ${createdShipments.length} white-glove shipments with POD.`);
+
+    // 17. Seed Warranty & Damage Claims
+    console.log('🛡️ Seeding 5-Year Warranty & Damage Claims...');
+    const warrantyDocs = [
+      {
+        orderId: createdOrders[1]._id,
+        claimNumber: 'CLAIM-2026-0041',
+        customerName: 'Elena Rostova',
+        customerEmail: 'elena.rostova@designarch.com',
+        productName: createdProducts[1].name,
+        claimType: 'transit_damage',
+        description: 'Minor 3mm edge scuff on underside of dining table apron received during freight transit.',
+        photoUrls: ['https://picsum.photos/seed/damage-scuff/800/600'],
+        severity: 'minor_touchup',
+        status: 'under_review',
+        assignedArtisan: 'Lars Lindqvist',
+        resolutionNotes: 'Artisan scheduled for complimentary on-site hardwax oil blending touchup.',
+      },
+      {
+        orderId: createdOrders[2]._id,
+        claimNumber: 'CLAIM-2026-0028',
+        customerName: 'Marcus Aurelius Vance',
+        customerEmail: 'm.vance@nordichomes.com',
+        productName: createdProducts[2].name,
+        claimType: 'craftsmanship_defect',
+        description: 'Brass corner bracket screw requires torque adjustment.',
+        photoUrls: ['https://picsum.photos/seed/bracket-check/800/600'],
+        severity: 'minor_touchup',
+        status: 'resolved',
+        assignedArtisan: 'Magnus Vance',
+        resolutionNotes: 'Hardware torqued and thread-locked to factory spec. Customer delighted.',
+        resolvedAt: getRandomPastDate(5),
+      },
+    ];
+    const createdWarranties = await WarrantyClaim.insertMany(warrantyDocs);
+    console.log(`✅ Seeded ${createdWarranties.length} warranty claims.`);
+
+    // 18. Seed Expenses
+    console.log('🧾 Seeding Workshop Operating Expenses...');
+    const expenseDocs = [
+      {
+        title: 'FSC Certified European White Oak Lumber (500 bdft)',
+        category: 'raw_timber_lumber',
+        amount: 7250,
+        date: getRandomPastDate(25),
+        vendor: 'Scandinavian Sustainable Forest Co.',
+        paymentMethod: 'bank_wire',
+        notes: 'Premium quarter-sawn 8/4 inventory replenishment.',
+      },
+      {
+        title: 'Kvadrat Bouclé Fabric Roll & Velvet (60m)',
+        category: 'upholstery_fabrics',
+        amount: 3900,
+        date: getRandomPastDate(20),
+        vendor: 'Kvadrat Textiles Denmark',
+        paymentMethod: 'bank_wire',
+        notes: 'Cream and Charcoal colorway bolts.',
+      },
+      {
+        title: 'Workshop Facility Rent & Clean Power (Seattle Hub)',
+        category: 'workshop_rent_utilities',
+        amount: 4500,
+        date: getRandomPastDate(15),
+        vendor: 'Westlake Industrial Holdings',
+        paymentMethod: 'ach',
+      },
+      {
+        title: 'Sprinter EV Fleet White-Glove Maintenance & Fuel',
+        category: 'white_glove_logistics',
+        amount: 850,
+        date: getRandomPastDate(10),
+        vendor: 'Pacific Fleet Services',
+        paymentMethod: 'credit_card',
+      },
+      {
+        title: 'Architectural Digest & Meta Digital Marketing Campaign',
+        category: 'marketing_advertising',
+        amount: 2200,
+        date: getRandomPastDate(8),
+        vendor: 'Meta Platforms & Conde Nast',
+        paymentMethod: 'credit_card',
+      },
+      {
+        title: 'Artisan Workshop Tooling & Festool Router Blades',
+        category: 'hardware_joinery',
+        amount: 680,
+        date: getRandomPastDate(5),
+        vendor: 'Festool Precision Woodworking Tools',
+        paymentMethod: 'credit_card',
+      },
+    ];
+    const createdExpenses = await Expense.insertMany(expenseDocs);
+    console.log(`✅ Seeded ${createdExpenses.length} workshop expenses.`);
+
+    // 19. Seed General Ledger Entries (Auto-populating journal)
+    console.log('📚 Seeding General Ledger Journal Entries...');
+    const ledgerDocs = [
+      {
+        entryNumber: 'LEDG-2026-0001',
+        date: getRandomPastDate(28),
+        type: 'revenue',
+        category: 'PRODUCT SALES',
+        amount: 3450,
+        debit: 0,
+        credit: 3450,
+        referenceId: 'NORD-10001',
+        description: 'Customer Order Payment: Haven Modular Bouclé Sectional',
+        status: 'posted',
+      },
+      {
+        entryNumber: 'LEDG-2026-0002',
+        date: getRandomPastDate(25),
+        type: 'expense',
+        category: 'RAW TIMBER LUMBER',
+        amount: 7250,
+        debit: 7250,
+        credit: 0,
+        referenceId: 'PO-OAK-500',
+        description: 'Expense: FSC Certified European White Oak Lumber',
+        status: 'posted',
+      },
+      {
+        entryNumber: 'LEDG-2026-0003',
+        date: getRandomPastDate(22),
+        type: 'revenue',
+        category: 'PRODUCT SALES',
+        amount: 2890,
+        debit: 0,
+        credit: 2890,
+        referenceId: 'NORD-10002',
+        description: 'Customer Order Payment: Stockholm Dining Table',
+        status: 'posted',
+      },
+      {
+        entryNumber: 'LEDG-2026-0004',
+        date: getRandomPastDate(20),
+        type: 'expense',
+        category: 'UPHOLSTERY FABRICS',
+        amount: 3900,
+        debit: 3900,
+        credit: 0,
+        referenceId: 'PO-KVADRAT-60',
+        description: 'Expense: Kvadrat Bouclé Fabric Roll & Velvet',
+        status: 'posted',
+      },
+      {
+        entryNumber: 'LEDG-2026-0005',
+        date: getRandomPastDate(15),
+        type: 'expense',
+        category: 'WORKSHOP RENT & UTILITIES',
+        amount: 4500,
+        debit: 4500,
+        credit: 0,
+        referenceId: 'EXP-RENT-AUG',
+        description: 'Expense: Workshop Facility Rent & Clean Power',
+        status: 'posted',
+      },
+      {
+        entryNumber: 'LEDG-2026-0006',
+        date: getRandomPastDate(10),
+        type: 'agent_payout',
+        category: 'TRADE AGENT COMMISSIONS',
+        amount: 1450,
+        debit: 1450,
+        credit: 0,
+        referenceId: 'PAY-AGENT-01',
+        description: 'Commission Payout: Henrik Vanger Design Trade Commission',
+        status: 'posted',
+      },
+      {
+        entryNumber: 'LEDG-2026-0007',
+        date: getRandomPastDate(5),
+        type: 'revenue',
+        category: 'WHITE-GLOVE LOGISTICS',
+        amount: 450,
+        debit: 0,
+        credit: 450,
+        referenceId: 'NORD-10005',
+        description: 'Customer Shipping Charge: White-Glove Delivery Puget Sound',
+        status: 'posted',
+      },
+    ];
+    const createdLedger = await LedgerEntry.insertMany(ledgerDocs);
+    console.log(`✅ Seeded ${createdLedger.length} general ledger journal entries.`);
+
     console.log('\n=========================================');
     console.log('🎉 SEEDING COMPLETED SUCCESSFULLY!');
     console.log(`Summary:`);
-    console.log(` - Categories:    ${createdCategories.length}`);
-    console.log(` - Products:      ${createdProducts.length}`);
-    console.log(` - Users:         ${createdUsers.length}`);
-    console.log(` - Orders:        ${createdOrders.length}`);
-    console.log(` - Inquiries:     ${createdInquiries.length}`);
-    console.log(` - Agents:        ${createdAgents.length}`);
-    console.log(` - Reviews:       ${createdReviews.length}`);
-    console.log(` - Sourced Items: ${createdSourcedItems.length}`);
+    console.log(` - Categories:        ${createdCategories.length}`);
+    console.log(` - Products:          ${createdProducts.length}`);
+    console.log(` - Users:             ${createdUsers.length}`);
+    console.log(` - Orders:            ${createdOrders.length}`);
+    console.log(` - Inquiries:         ${createdInquiries.length}`);
+    console.log(` - Agents:            ${createdAgents.length}`);
+    console.log(` - Reviews:           ${createdReviews.length}`);
+    console.log(` - Sourced Items:     ${createdSourcedItems.length}`);
+    console.log(` - Social Accounts:   ${createdSocialAccounts.length}`);
+    console.log(` - Social Posts:      ${createdSocialPosts.length}`);
+    console.log(` - Raw Materials:     ${createdMaterials.length}`);
+    console.log(` - Production Orders: ${createdProdOrders.length}`);
+    console.log(` - Delivery Zones:    ${createdZones.length}`);
+    console.log(` - Shipments:         ${createdShipments.length}`);
+    console.log(` - Warranty Claims:   ${createdWarranties.length}`);
+    console.log(` - Expenses:          ${createdExpenses.length}`);
+    console.log(` - Ledger Entries:    ${createdLedger.length}`);
     console.log('=========================================\n');
     process.exit(0);
   } catch (err) {

@@ -18,6 +18,10 @@ import {
   Sparkles,
   Wand2,
   Image as ImageIcon,
+  Share2,
+  Hammer,
+  Truck,
+  DollarSign,
 } from 'lucide-react';
 import StatusBadge from '../ui/StatusBadge';
 
@@ -48,10 +52,37 @@ const NAV_ITEMS = [
     roles: ['super_admin', 'product_manager', 'admin'],
   },
   {
+    name: 'Social Media',
+    href: '/admin/social',
+    icon: Share2,
+    badge: 'Hub',
+    roles: ['super_admin', 'product_manager', 'sales_manager', 'admin'],
+  },
+  {
+    name: 'Manufacturing',
+    href: '/admin/manufacturing',
+    icon: Hammer,
+    badge: 'Workshop',
+    roles: ['super_admin', 'product_manager', 'admin'],
+  },
+  {
     name: 'Orders',
     href: '/admin/orders',
     icon: ShoppingBag,
     roles: ['super_admin', 'sales_manager', 'support', 'admin'],
+  },
+  {
+    name: 'Logistics & Delivery',
+    href: '/admin/fulfillment',
+    icon: Truck,
+    badge: 'Fleet',
+    roles: ['super_admin', 'sales_manager', 'support', 'admin'],
+  },
+  {
+    name: 'Finance & P&L',
+    href: '/admin/finance',
+    icon: DollarSign,
+    roles: ['super_admin', 'admin'],
   },
   {
     name: 'Custom Quotes & Wholesale',
