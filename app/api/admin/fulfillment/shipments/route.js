@@ -66,7 +66,7 @@ export async function POST(request) {
     const body = await request.json();
     const {
       orderId,
-      carrier = 'Nordika White-Glove Fleet',
+      carrier = 'KB Furniture White-Glove Fleet',
       deliveryService = 'white_glove_assembly',
       driverName = 'Erik Holmgren',
       driverPhone = '+1 (206) 555-0144',
@@ -101,7 +101,7 @@ export async function POST(request) {
         {
           status: 'pending_dispatch',
           timestamp: new Date(),
-          location: 'Nordika Seattle Hub',
+          location: 'KB Furniture Seattle Hub',
           note: 'Shipment created and scheduled for white-glove delivery appointment.',
         },
       ],

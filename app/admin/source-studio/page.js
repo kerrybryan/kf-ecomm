@@ -4,25 +4,27 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
-  Sparkles,
   Plus,
   Search,
   Filter,
   ArrowRight,
-  ShieldAlert,
+  Calculator,
   Wand2,
   Package,
   Layers,
   RefreshCw,
   ExternalLink,
+  Tag,
+  CheckCircle2,
 } from 'lucide-react';
 import StatusBadge from '@/components/admin/ui/StatusBadge';
 
 export default function SourceStudioListPage() {
   const [items, setItems] = useState([]);
-  const [counts, setCounts] = useState({ total: 0, analyzing: 0, reviewed: 0, converted: 0, discarded: 0 });
+  const [counts, setCounts] = useState({ total: 0, new: 0, priced: 0, content_ready: 0, converted: 0, discarded: 0 });
   const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState('all');
+  const [categoryFilter, setCategoryFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
 
   const fetchItems = async () => {
@@ -30,6 +32,7 @@ export default function SourceStudioListPage() {
       setLoading(true);
       const url = new URL('/api/admin/source-studio', window.location.origin);
       if (statusFilter !== 'all') url.searchParams.set('status', statusFilter);
+      if (categoryFilter !== 'all') url.searchParams.set('category', categoryFilter);
       if (searchTerm) url.searchParams.set('search', searchTerm);
 
       const res = await fetch(url.toString());
@@ -47,7 +50,7 @@ export default function SourceStudioListPage() {
 
   useEffect(() => {
     fetchItems();
-  }, [statusFilter]);
+  }, [statusFilter, categoryFilter]);
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -59,271 +62,261 @@ export default function SourceStudioListPage() {
       {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-serif font-bold text-[#1A1613]">Source Studio</h1>
-            <span className="text-[10px] uppercase font-bold tracking-widest text-[#A8875E] bg-[#A8875E]/15 px-2 py-0.5 rounded border border-[#A8875E]/30">
-              AI Vision & Sourcing
+          <div className="flex items-center gap-2 mb-1">
+            <span className="w-2 h-2 rounded-full bg-[#B8551F]" />
+            <span className="text-[11px] font-bold text-[#B8551F] uppercase tracking-wider">
+              SOURCE STUDIO · INSPIRATION HUB
             </span>
           </div>
-          <p className="text-xs text-[#7C7265] mt-1">
-            Turn inspiration photos from Pinterest and web links into priced, branded Nordic furniture listings.
+          <h1 className="text-2xl font-extrabold text-[#201C18] tracking-tight">
+            Sourced Inspiration Pieces
+          </h1>
+          <p className="text-xs text-[#6B6459] mt-1">
+            Track furniture inspirations from photos and links, price them via the Category Pricing Engine, and create social content in Content Studio.
           </p>
         </div>
 
         <div className="flex items-center gap-3">
           <Link
-            href="/admin/image-studio"
-            className="px-4 py-2.5 rounded-xl border border-[#D5CCC2] text-xs font-semibold text-[#4A4036] hover:bg-[#FAF8F5] flex items-center gap-2 transition-all shadow-sm"
+            href="/admin/pricing/calculate"
+            className="px-3.5 py-2.5 rounded-xl border-2 border-[#E5DDD3] bg-white text-xs font-bold text-[#201C18] hover:bg-[#FAF8F5] flex items-center gap-2 transition-all shadow-xs"
           >
-            <Wand2 className="w-4 h-4 text-[#A8875E]" />
-            Image Studio
+            <Calculator className="w-4 h-4 text-[#B8551F]" />
+            Pricing Calculator
+          </Link>
+          <Link
+            href="/admin/content-studio"
+            className="px-3.5 py-2.5 rounded-xl border-2 border-[#E5DDD3] bg-white text-xs font-bold text-[#201C18] hover:bg-[#FAF8F5] flex items-center gap-2 transition-all shadow-xs"
+          >
+            <Wand2 className="w-4 h-4 text-[#B8551F]" />
+            Content Studio
           </Link>
           <Link
             href="/admin/source-studio/new"
-            className="px-4 py-2.5 rounded-xl bg-[#A8875E] hover:bg-[#967750] text-white text-xs font-bold flex items-center gap-2 transition-all shadow-sm"
+            id="import-inspiration-btn"
+            className="px-4 py-2.5 rounded-xl bg-[#B8551F] hover:bg-[#8F4116] text-white text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-all shadow-md active:scale-[0.98]"
           >
             <Plus className="w-4 h-4" />
-            Import Inspiration Image
+            Import Piece
           </Link>
         </div>
       </div>
 
-      {/* KPI Cards */}
+      {/* KPI Stats Strip */}
       <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
         <button
-          type="button"
           onClick={() => setStatusFilter('all')}
-          className={`p-4 rounded-xl border text-left transition-all ${
+          className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
             statusFilter === 'all'
-              ? 'border-[#A8875E] bg-[#FAF8F5] ring-1 ring-[#A8875E]'
-              : 'border-[#EBE5DF] bg-white hover:border-[#D5CCC2]'
+              ? 'bg-white border-[#B8551F] shadow-sm'
+              : 'bg-white/60 border-[#E5DDD3] hover:border-[#B8551F]/50'
           }`}
         >
-          <p className="text-[10px] uppercase font-bold text-[#7C7265] tracking-wider">Total Sourced</p>
-          <p className="text-xl font-serif font-bold text-[#1A1613] mt-1">{counts.total}</p>
+          <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#6B6459]">
+            Total Pieces
+          </span>
+          <p className="text-xl font-extrabold text-[#201C18] mt-0.5">{counts.total || 0}</p>
         </button>
 
         <button
-          type="button"
-          onClick={() => setStatusFilter('reviewed')}
-          className={`p-4 rounded-xl border text-left transition-all ${
-            statusFilter === 'reviewed'
-              ? 'border-[#A8875E] bg-[#FAF8F5] ring-1 ring-[#A8875E]'
-              : 'border-[#EBE5DF] bg-white hover:border-[#D5CCC2]'
+          onClick={() => setStatusFilter('new')}
+          className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
+            statusFilter === 'new'
+              ? 'bg-white border-amber-500 shadow-sm'
+              : 'bg-white/60 border-[#E5DDD3] hover:border-amber-400'
           }`}
         >
-          <p className="text-[10px] uppercase font-bold text-amber-700 tracking-wider">Priced & Reviewed</p>
-          <p className="text-xl font-serif font-bold text-[#1A1613] mt-1">{counts.reviewed}</p>
+          <span className="text-[10px] font-extrabold uppercase tracking-wider text-amber-700">
+            Unpriced (New)
+          </span>
+          <p className="text-xl font-extrabold text-amber-600 mt-0.5">{counts.new || 0}</p>
         </button>
 
         <button
-          type="button"
+          onClick={() => setStatusFilter('priced')}
+          className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
+            statusFilter === 'priced'
+              ? 'bg-white border-emerald-500 shadow-sm'
+              : 'bg-white/60 border-[#E5DDD3] hover:border-emerald-400'
+          }`}
+        >
+          <span className="text-[10px] font-extrabold uppercase tracking-wider text-emerald-700">
+            Priced
+          </span>
+          <p className="text-xl font-extrabold text-emerald-600 mt-0.5">{counts.priced || 0}</p>
+        </button>
+
+        <button
+          onClick={() => setStatusFilter('content_ready')}
+          className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
+            statusFilter === 'content_ready'
+              ? 'bg-white border-blue-500 shadow-sm'
+              : 'bg-white/60 border-[#E5DDD3] hover:border-blue-400'
+          }`}
+        >
+          <span className="text-[10px] font-extrabold uppercase tracking-wider text-blue-700">
+            Content Ready
+          </span>
+          <p className="text-xl font-extrabold text-blue-600 mt-0.5">{counts.content_ready || 0}</p>
+        </button>
+
+        <button
           onClick={() => setStatusFilter('converted_to_product')}
-          className={`p-4 rounded-xl border text-left transition-all ${
+          className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
             statusFilter === 'converted_to_product'
-              ? 'border-[#A8875E] bg-[#FAF8F5] ring-1 ring-[#A8875E]'
-              : 'border-[#EBE5DF] bg-white hover:border-[#D5CCC2]'
+              ? 'bg-white border-[#B8551F] shadow-sm'
+              : 'bg-white/60 border-[#E5DDD3] hover:border-[#B8551F]/50'
           }`}
         >
-          <p className="text-[10px] uppercase font-bold text-emerald-700 tracking-wider">Converted</p>
-          <p className="text-xl font-serif font-bold text-[#1A1613] mt-1">{counts.converted}</p>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setStatusFilter('analyzing')}
-          className={`p-4 rounded-xl border text-left transition-all ${
-            statusFilter === 'analyzing'
-              ? 'border-[#A8875E] bg-[#FAF8F5] ring-1 ring-[#A8875E]'
-              : 'border-[#EBE5DF] bg-white hover:border-[#D5CCC2]'
-          }`}
-        >
-          <p className="text-[10px] uppercase font-bold text-blue-700 tracking-wider">Analyzing</p>
-          <p className="text-xl font-serif font-bold text-[#1A1613] mt-1">{counts.analyzing}</p>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setStatusFilter('discarded')}
-          className={`p-4 rounded-xl border text-left transition-all ${
-            statusFilter === 'discarded'
-              ? 'border-[#A8875E] bg-[#FAF8F5] ring-1 ring-[#A8875E]'
-              : 'border-[#EBE5DF] bg-white hover:border-[#D5CCC2]'
-          }`}
-        >
-          <p className="text-[10px] uppercase font-bold text-gray-500 tracking-wider">Discarded</p>
-          <p className="text-xl font-serif font-bold text-[#1A1613] mt-1">{counts.discarded}</p>
+          <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#B8551F]">
+            Converted
+          </span>
+          <p className="text-xl font-extrabold text-[#B8551F] mt-0.5">{counts.converted || 0}</p>
         </button>
       </div>
 
       {/* Filter & Search Bar */}
-      <div className="bg-white rounded-xl border border-[#EBE5DF] p-3 flex flex-col sm:flex-row items-center justify-between gap-3">
-        <form onSubmit={handleSearchSubmit} className="relative w-full sm:w-80">
-          <Search className="w-4 h-4 text-[#A3998D] absolute left-3.5 top-1/2 -translate-y-1/2" />
+      <div className="bg-white rounded-2xl p-4 border-2 border-[#E5DDD3] shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
+        <form onSubmit={handleSearchSubmit} className="relative w-full md:w-80">
           <input
             type="text"
-            placeholder="Search furniture type, materials, URL..."
+            placeholder="Search piece name or notes..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-3.5 py-2 rounded-lg border border-[#EBE5DF] text-xs font-medium text-[#1A1613] focus:outline-none focus:border-[#A8875E]"
+            className="w-full bg-[#FAF8F5] border border-[#E5DDD3] rounded-xl px-4 py-2.5 pl-10 text-xs text-[#201C18] focus:outline-none focus:border-[#B8551F]"
           />
+          <Search className="w-4 h-4 text-[#6B6459] absolute left-3.5 top-3" />
         </form>
 
-        <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+        <div className="flex items-center gap-2 w-full md:w-auto justify-end">
           <button
-            type="button"
             onClick={fetchItems}
-            className="p-2 rounded-lg border border-[#EBE5DF] hover:bg-[#FAF8F5] text-[#7C7265] hover:text-[#1A1613] transition-colors"
-            title="Refresh Table"
+            className="p-2.5 rounded-xl border border-[#E5DDD3] bg-[#FAF8F5] hover:bg-white text-[#6B6459] hover:text-[#201C18] transition-colors"
+            title="Refresh List"
           >
             <RefreshCw className="w-4 h-4" />
           </button>
         </div>
       </div>
 
-      {/* Sourced Items Catalog Grid / Table */}
-      {loading ? (
-        <div className="bg-white rounded-2xl border border-[#EBE5DF] p-12 text-center">
-          <div className="w-8 h-8 border-2 border-[#A8875E] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-          <p className="text-xs text-[#7C7265]">Loading sourced inspiration catalog...</p>
-        </div>
-      ) : items.length === 0 ? (
-        <div className="bg-white rounded-2xl border border-[#EBE5DF] p-12 text-center space-y-4">
-          <div className="w-12 h-12 rounded-full bg-[#FAF8F5] border border-[#EBE5DF] text-[#A8875E] flex items-center justify-center mx-auto">
-            <Sparkles className="w-6 h-6" />
+      {/* Gallery Cards Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {loading ? (
+          Array.from({ length: 8 }).map((_, i) => (
+            <div key={i} className="h-80 bg-white rounded-2xl border-2 border-[#E5DDD3] p-4 animate-pulse" />
+          ))
+        ) : items.length === 0 ? (
+          <div className="col-span-full py-16 bg-white rounded-2xl border-2 border-dashed border-[#E5DDD3] text-center space-y-3">
+            <Layers className="w-10 h-10 text-[#6B6459] mx-auto opacity-50" />
+            <p className="text-sm font-bold text-[#201C18]">No sourced inspiration pieces found</p>
+            <p className="text-xs text-[#6B6459]">Import your first photo or reference link to start pricing</p>
+            <Link
+              href="/admin/source-studio/new"
+              className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#B8551F] text-white rounded-xl text-xs font-bold uppercase tracking-wider mt-2"
+            >
+              <Plus className="w-4 h-4" />
+              Import Piece
+            </Link>
           </div>
-          <div className="max-w-md mx-auto">
-            <h3 className="text-sm font-bold text-[#1A1613]">No Sourced Items Found</h3>
-            <p className="text-xs text-[#7C7265] mt-1">
-              Import an inspiration image from Pinterest, a designer portfolio, or upload a photo to start AI classification and workshop pricing.
-            </p>
-          </div>
-          <Link
-            href="/admin/source-studio/new"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#A8875E] hover:bg-[#967750] text-white text-xs font-bold transition-all shadow-sm"
-          >
-            <Plus className="w-4 h-4" />
-            Import First Inspiration Photo
-          </Link>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {items.map((item) => {
-            const hasAi = Boolean(item.aiAnalysis?.furnitureType);
-            const isRef = item.isReferenceOnly;
-            const price = item.manualOverride?.finalPrice || item.aiAnalysis?.suggestedPriceMin;
-
-            return (
-              <div
-                key={item._id}
-                className="bg-white rounded-2xl border border-[#EBE5DF] overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col group"
-              >
-                {/* Thumbnail Header */}
-                <div className="relative h-52 w-full bg-[#FAF8F5] border-b border-[#EBE5DF] overflow-hidden">
-                  <Image
+        ) : (
+          items.map((item) => (
+            <div
+              key={item._id}
+              className="bg-white rounded-2xl border-2 border-[#E5DDD3] hover:border-[#B8551F] overflow-hidden flex flex-col justify-between shadow-xs hover:shadow-md transition-all duration-200 group"
+            >
+              <div>
+                {/* Image Container */}
+                <div className="relative aspect-4/3 bg-[#FAF8F5] overflow-hidden">
+                  <img
                     src={item.sourceImageUrl}
-                    alt={item.aiAnalysis?.furnitureType || 'Sourced Furniture Piece'}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    sizes="(max-width: 768px) 100vw, 33vw"
+                    alt={item.name || item.category}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
 
-                  {/* Status Badges */}
-                  <div className="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
-                    <StatusBadge status={item.status} size="xs" />
-                    {isRef && (
-                      <span className="text-[9px] font-bold text-amber-900 bg-amber-100/90 backdrop-blur-md px-2 py-0.5 rounded-full border border-amber-300 flex items-center gap-1 shadow-sm">
-                        <ShieldAlert className="w-2.5 h-2.5 text-amber-700" />
-                        Reference Photo
+                  {/* Status Badge */}
+                  <div className="absolute top-3 left-3">
+                    {item.price > 0 ? (
+                      <span className="px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-emerald-600 text-white shadow-xs">
+                        Priced · {item.price.toLocaleString()} ETB
+                      </span>
+                    ) : (
+                      <span className="px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-amber-500 text-white shadow-xs">
+                        Unpriced (Draft)
                       </span>
                     )}
                   </div>
 
-                  {item.aiAnalysis?.complexityRating && (
-                    <div className="absolute top-3 right-3 bg-black/70 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded">
-                      {item.aiAnalysis.complexityRating} complexity
+                  {/* Category Pill */}
+                  <div className="absolute top-3 right-3">
+                    <span className="px-2 py-0.5 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-black/70 text-white backdrop-blur-xs">
+                      {item.category}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Body Content */}
+                <div className="p-4 space-y-2">
+                  <h3 className="text-sm font-extrabold text-[#201C18] line-clamp-1">
+                    {item.name || 'Untitled Piece'}
+                  </h3>
+
+                  {item.notes && (
+                    <p className="text-[11px] text-[#6B6459] line-clamp-2 italic">
+                      "{item.notes}"
+                    </p>
+                  )}
+
+                  {/* Pricing Breakdown Snapshot if priced */}
+                  {item.costBreakdown?.totalCost > 0 && (
+                    <div className="p-2.5 bg-[#FAF8F5] rounded-xl border border-[#E5DDD3] text-[11px] space-y-1">
+                      <div className="flex justify-between text-[#6B6459]">
+                        <span>Craft Cost:</span>
+                        <span className="font-bold text-[#201C18]">
+                          {item.costBreakdown.totalCost.toLocaleString()} Birr
+                        </span>
+                      </div>
+                      <div className="flex justify-between text-[#6B6459]">
+                        <span>Selling Price:</span>
+                        <span className="font-extrabold text-[#B8551F]">
+                          {item.price.toLocaleString()} Birr ({item.costBreakdown.marginPercent}% margin)
+                        </span>
+                      </div>
                     </div>
                   )}
                 </div>
+              </div>
 
-                {/* Card Content */}
-                <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
-                  <div className="space-y-2">
-                    <h3 className="text-sm font-bold text-[#1A1613] line-clamp-1">
-                      {item.aiAnalysis?.furnitureType || 'Analyzing Furniture Piece...'}
-                    </h3>
+              {/* Action Buttons */}
+              <div className="p-4 pt-0 space-y-2">
+                <div className="grid grid-cols-2 gap-2">
+                  <Link
+                    href={`/admin/pricing/calculate?sourceItemId=${item._id}&category=${encodeURIComponent(
+                      item.category
+                    )}`}
+                    className="w-full bg-[#FAF8F5] hover:bg-[#EAE1D2] border border-[#E5DDD3] py-2 px-2 rounded-xl text-[11px] font-bold text-[#201C18] flex items-center justify-center gap-1.5 transition-colors"
+                  >
+                    <Calculator className="w-3.5 h-3.5 text-[#B8551F]" />
+                    <span>{item.price > 0 ? 'Edit Price' : 'Set Price'}</span>
+                  </Link>
 
-                    {/* Materials tags */}
-                    <div className="flex flex-wrap gap-1.5">
-                      {item.aiAnalysis?.materials?.slice(0, 3).map((mat, i) => (
-                        <span
-                          key={i}
-                          className="text-[10px] font-medium text-[#4A4036] bg-[#FAF8F5] px-2 py-0.5 rounded border border-[#EBE5DF]"
-                        >
-                          {mat}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Dimensions & Confidence */}
-                    {item.aiAnalysis?.estimatedDimensions && (
-                      <p className="text-[11px] text-[#7C7265] font-mono">
-                        📐 {item.aiAnalysis.estimatedDimensions}
-                      </p>
-                    )}
-                  </div>
-
-                  {/* Pricing Comparison */}
-                  <div className="bg-[#FAF8F5] rounded-xl p-3 border border-[#EBE5DF] flex items-center justify-between">
-                    <div>
-                      <span className="text-[10px] uppercase font-bold text-[#7C7265] block">AI Market Range</span>
-                      <span className="text-xs font-semibold text-[#4A4036]">
-                        ${item.aiAnalysis?.suggestedPriceMin || 0} – ${item.aiAnalysis?.suggestedPriceMax || 0}
-                      </span>
-                    </div>
-
-                    <div className="text-right">
-                      <span className="text-[10px] uppercase font-bold text-[#A8875E] block">Workshop Final</span>
-                      <span className="text-sm font-serif font-bold text-[#1A1613]">
-                        {price ? `$${price.toLocaleString()}` : '—'}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Card Actions Footer */}
-                  <div className="pt-2 border-t border-[#EBE5DF] flex items-center justify-between gap-2">
-                    {item.linkedProductId ? (
-                      <Link
-                        href={`/admin/products/${item.linkedProductId._id || item.linkedProductId}/edit`}
-                        className="text-xs font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1"
-                      >
-                        <Package className="w-3.5 h-3.5" />
-                        View Draft Product
-                      </Link>
-                    ) : (
-                      <Link
-                        href={`/admin/image-studio?sourceId=${item._id}&imageUrl=${encodeURIComponent(item.sourceImageUrl)}`}
-                        className="text-xs font-semibold text-[#7C7265] hover:text-[#1A1613] flex items-center gap-1"
-                      >
-                        <Wand2 className="w-3.5 h-3.5 text-[#A8875E]" />
-                        Retouch Image
-                      </Link>
-                    )}
-
-                    <Link
-                      href={`/admin/source-studio/${item._id}`}
-                      className="px-3.5 py-1.5 rounded-lg bg-[#FAF8F5] hover:bg-[#A8875E] hover:text-white text-[#1A1613] text-xs font-bold border border-[#D5CCC2] transition-all flex items-center gap-1.5"
-                    >
-                      Review & Price
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
-                  </div>
+                  <Link
+                    href={`/admin/content-studio?targetId=${item._id}&targetType=SourcedItem`}
+                    className={`w-full py-2 px-2 rounded-xl text-[11px] font-bold flex items-center justify-center gap-1.5 transition-colors ${
+                      item.price > 0
+                        ? 'bg-[#201C18] hover:bg-[#B8551F] text-white'
+                        : 'bg-stone-200 text-stone-500 cursor-not-allowed opacity-75'
+                    }`}
+                  >
+                    <Wand2 className="w-3.5 h-3.5" />
+                    <span>Studio {item.price > 0 ? '' : '🔒'}</span>
+                  </Link>
                 </div>
               </div>
-            );
-          })}
-        </div>
-      )}
+
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
 }

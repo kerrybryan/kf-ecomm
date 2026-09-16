@@ -25,6 +25,7 @@ export default function ProductForm({ initialData = null, isEdit = false }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [generatingDesc, setGeneratingDesc] = useState(false);
 
   const [formData, setFormData] = useState({
     name: initialData?.name || '',
@@ -33,7 +34,7 @@ export default function ProductForm({ initialData = null, isEdit = false }) {
     price: initialData?.price !== undefined ? initialData.price : '',
     originalPrice: initialData?.originalPrice || '',
     description: initialData?.description || '',
-    images: initialData?.images || ['https://picsum.photos/seed/nordika-sofa/800/800'],
+    images: initialData?.images || ['https://picsum.photos/seed/kb-sofa/800/800'],
     colors: initialData?.colors || ['Natural Oak', 'Oatmeal Bouclé'],
     materials: initialData?.materials || ['Solid European Oak', 'Bouclé Fabric'],
     specs: {
@@ -54,6 +55,35 @@ export default function ProductForm({ initialData = null, isEdit = false }) {
   });
 
   const [newImageUrl, setNewImageUrl] = useState('');
+
+  const handleGenerateDescription = async () => {
+    setGeneratingDesc(true);
+    setError('');
+    try {
+      const res = await fetch('/api/admin/ai/generate-description', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          category: formData.category,
+          materials: formData.materials,
+          colors: formData.colors,
+          dimensions: formData.specs?.dimensions,
+          price: formData.price,
+        }),
+      });
+      const data = await res.json();
+      if (data.success && data.description) {
+        setFormData((prev) => ({ ...prev, description: data.description }));
+      } else {
+        setError(data.error || 'Failed to generate description with Gemini');
+      }
+    } catch (err) {
+      setError('Gemini description generator error: ' + err.message);
+    } finally {
+      setGeneratingDesc(false);
+    }
+  };
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -284,7 +314,22 @@ export default function ProductForm({ initialData = null, isEdit = false }) {
                 </FormField>
               </div>
 
-              <FormField label="Product Description" required>
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <label className="block text-xs font-bold text-zinc-900">
+                    Product Description <span className="text-rose-500">*</span>
+                  </label>
+                  <button
+                    type="button"
+                    onClick={handleGenerateDescription}
+                    disabled={generatingDesc}
+                    id="gemini-desc-btn"
+                    className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#FAF8F5] hover:bg-[#EAE1D2] border border-[#E5DDD3] rounded-lg text-xs font-bold text-[#B8551F] transition-all disabled:opacity-50 cursor-pointer shadow-2xs"
+                  >
+                    <Sparkles className={`w-3.5 h-3.5 ${generatingDesc ? 'animate-spin text-[#B8551F]' : 'text-[#D99A2B]'}`} />
+                    <span>{generatingDesc ? 'Drafting with Gemini...' : formData.description ? 'Regenerate with Gemini' : 'Generate with Gemini'}</span>
+                  </button>
+                </div>
                 <TextArea
                   rows={4}
                   value={formData.description}
@@ -292,7 +337,10 @@ export default function ProductForm({ initialData = null, isEdit = false }) {
                   placeholder="Describe craftsmanship, wood joints, bouclé textures, and styling ideas..."
                   required
                 />
-              </FormField>
+                <p className="text-[10px] text-[#6B6459] italic flex items-center gap-1">
+                  <span>✨ AI-drafted — please review before publishing</span>
+                </p>
+              </div>
             </div>
           </AdminCard>
 
@@ -541,7 +589,7 @@ export default function ProductForm({ initialData = null, isEdit = false }) {
 
                 <Toggle
                   label="Best Seller Flag"
-                  description="Include in 'Today's Best Selling' curated grid"
+                  description="Include in 'Today's Best Selling' homepage grid"
                   checked={formData.isBestSeller}
                   onChange={(checked) => setFormData({ ...formData, isBestSeller: checked })}
                 />

@@ -79,7 +79,7 @@ export default function OrderInvoicePage() {
           <div>
             <div className="flex items-center gap-2 mb-1">
               <span className="font-serif text-2xl font-bold tracking-wider text-zinc-900">
-                NORDIKA
+                KB FURNITURE
               </span>
               <span className="text-[10px] uppercase font-bold tracking-widest text-[#A8875E] border border-[#A8875E] px-1 rounded">
                 STUDIO
@@ -89,7 +89,7 @@ export default function OrderInvoicePage() {
               Handcrafted Scandinavian Luxury Joinery & Architectural Woodwork
             </p>
             <p className="text-[11px] text-zinc-400 mt-2">
-              440 Westlake Ave N, Suite 300, Seattle, WA 98109 • concierge@nordika.com
+              440 Westlake Ave N, Suite 300, Seattle, WA 98109 • concierge@kbfurniture.com
             </p>
           </div>
 
@@ -100,7 +100,7 @@ export default function OrderInvoicePage() {
             </p>
             <p className="text-xs text-zinc-500 mt-1">Date: {invoiceDate}</p>
             <p className="text-xs text-zinc-500 capitalize">
-              Payment Status: <span className="font-semibold text-emerald-700">{order.paymentStatus || 'Paid'}</span>
+              Payment Status: <span className="font-semibold text-[#6B7A5E]">{order.paymentStatus || 'Paid'}</span>
             </p>
           </div>
         </div>
@@ -165,9 +165,9 @@ export default function OrderInvoicePage() {
                     </p>
                   </td>
                   <td className="px-4 py-3.5 text-center font-medium">{item.quantity}</td>
-                  <td className="px-4 py-3.5 text-right font-mono">${item.price?.toLocaleString()}</td>
+                  <td className="px-4 py-3.5 text-right font-mono">ETB {item.price?.toLocaleString()}</td>
                   <td className="px-4 py-3.5 text-right font-bold font-mono">
-                    ${((item.price || 0) * (item.quantity || 1)).toLocaleString()}
+                    ETB {((item.price || 0) * (item.quantity || 1)).toLocaleString()}
                   </td>
                 </tr>
               ))}
@@ -180,21 +180,21 @@ export default function OrderInvoicePage() {
           <div className="w-72 space-y-2 border-t border-zinc-200 pt-3">
             <div className="flex justify-between text-zinc-600">
               <span>Subtotal:</span>
-              <span className="font-mono font-semibold">${order.subtotal?.toLocaleString()}</span>
+              <span className="font-mono font-semibold">ETB {order.subtotal?.toLocaleString()}</span>
             </div>
             <div className="flex justify-between text-zinc-600">
-              <span>White-Glove Delivery:</span>
+              <span>Delivery:</span>
               <span className="font-mono font-semibold">
-                {order.shipping === 0 ? '$0.00 (Complimentary)' : `$${order.shipping?.toLocaleString()}`}
+                {order.shipping === 0 ? 'ETB 0 (Free Delivery)' : `ETB ${order.shipping?.toLocaleString()}`}
               </span>
             </div>
             <div className="flex justify-between text-zinc-600">
-              <span>Sales Tax:</span>
-              <span className="font-mono font-semibold">${order.tax?.toLocaleString()}</span>
+              <span>15% VAT:</span>
+              <span className="font-mono font-semibold">ETB {order.tax?.toLocaleString()}</span>
             </div>
             <div className="flex justify-between text-sm font-bold text-zinc-900 border-t border-zinc-200 pt-2">
               <span>Grand Total:</span>
-              <span className="font-mono text-[#A8875E]">${order.total?.toLocaleString()}</span>
+              <span className="font-mono text-[#A8875E]">ETB {order.total?.toLocaleString()}</span>
             </div>
           </div>
         </div>
@@ -202,11 +202,11 @@ export default function OrderInvoicePage() {
         {/* Bottom Notice */}
         <div className="border-t border-zinc-100 pt-6 text-[11px] text-zinc-400 space-y-1 text-center">
           <p className="font-semibold text-zinc-600">
-            Thank you for choosing Nordika Scandinavian Studio.
+            Thank you for choosing KB Furniture.
           </p>
           <p>
             All architectural woodwork is backed by our 10-Year Master Joinery Warranty. For delivery
-            concierge, contact support@nordika.com.
+            concierge, contact support@kbfurniture.com.
           </p>
         </div>
       </div>

@@ -29,7 +29,7 @@ export async function GET(request) {
         status: 200,
         headers: {
           'Content-Type': 'text/csv; charset=utf-8',
-          'Content-Disposition': `attachment; filename="nordika-newsletter-subscribers-${Date.now()}.csv"`,
+          'Content-Disposition': `attachment; filename="kb-furniture-newsletter-subscribers-${Date.now()}.csv"`,
         },
       });
     }

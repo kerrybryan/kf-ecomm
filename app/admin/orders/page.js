@@ -110,7 +110,7 @@ export default function AdminOrdersPage() {
       key: 'total',
       sortable: true,
       render: (row) => (
-        <span className="font-bold text-zinc-900">${row.total?.toLocaleString()}</span>
+        <span className="font-bold text-zinc-900">ETB {row.total?.toLocaleString()}</span>
       ),
     },
     {

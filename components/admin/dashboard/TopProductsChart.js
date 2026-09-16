@@ -43,7 +43,7 @@ export default function TopProductsChart({ data = [], loading = false }) {
         <div className="bg-zinc-900 text-white px-3.5 py-2.5 rounded-xl text-xs shadow-xl border border-zinc-800 space-y-1">
           <p className="font-semibold text-zinc-200">{d.fullName}</p>
           <p className="text-[#A8875E] font-bold text-sm">{d.unitsSold} units sold</p>
-          <p className="text-zinc-400 text-[11px]">${d.revenue?.toLocaleString()} total revenue</p>
+          <p className="text-zinc-400 text-[11px]">ETB {d.revenue?.toLocaleString()} total revenue</p>
         </div>
       );
     }

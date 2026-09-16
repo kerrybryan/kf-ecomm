@@ -5,7 +5,7 @@ import { useAuth } from './AuthContext';
 import { useToast } from './ToastContext';
 
 const WishlistContext = createContext(null);
-const WISHLIST_STORAGE_KEY = 'nordika_guest_wishlist';
+const WISHLIST_STORAGE_KEY = 'kb_furniture_guest_wishlist';
 
 export function WishlistProvider({ children }) {
   const [wishlist, setWishlist] = useState([]);

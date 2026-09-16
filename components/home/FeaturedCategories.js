@@ -6,61 +6,70 @@ const CATEGORIES_DATA = [
   {
     name: 'Living Room',
     slug: 'living-room',
-    image: 'https://picsum.photos/seed/cat-living-room/800/800',
-    description: 'Sculptural sofas, bouclé armchairs & coffee tables',
-    span: 'col-span-1 md:col-span-2',
+    image: 'https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    description: 'Sofas, armchairs, and coffee tables crafted from solid hardwood.',
+    span: 'col-span-1 md:col-span-2 row-span-1',
   },
   {
-    name: 'Dining & Entertaining',
+    name: 'Dining Room',
     slug: 'dining-room',
-    image: 'https://picsum.photos/seed/cat-dining-room/800/800',
-    description: 'Extendable oak dining tables & cane chairs',
+    image: 'https://images.pexels.com/photos/1090638/pexels-photo-1090638.jpeg?auto=compress&cs=tinysrgb&w=800',
+    description: 'Solid wood dining tables and chairs for every family.',
     span: 'col-span-1',
   },
   {
-    name: 'Bedroom Sanctuary',
+    name: 'Bedroom',
     slug: 'bedroom',
-    image: 'https://picsum.photos/seed/cat-bedroom/800/800',
-    description: 'Floating platform beds & linen storage',
+    image: 'https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=800',
+    description: 'Strong wooden beds and bedside tables built to last.',
     span: 'col-span-1',
   },
   {
-    name: 'Executive Office',
+    name: 'Home Office',
     slug: 'home-office',
-    image: 'https://picsum.photos/seed/cat-home-office/800/800',
-    description: 'Solid walnut desks & ergonomic leather task seating',
+    image: 'https://images.pexels.com/photos/667838/pexels-photo-667838.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    description: 'Desks, bookcases, and work chairs for focused productivity.',
     span: 'col-span-1 md:col-span-2',
   },
 ];
 
+
 export default function FeaturedCategories() {
   return (
-    <section className="py-20 bg-stone-50">
+    <section
+      id="featured-categories"
+      className="py-14 sm:py-18 bg-[#FAF8F5] border-t border-[#E5DDD3]"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
           <div>
-            <span className="text-xs uppercase font-bold tracking-widest text-amber-700 block mb-2">
-              Curated Spaces
-            </span>
-            <h2 className="text-3xl font-serif-luxury font-bold text-stone-900">
-              Browse by Room & Collection
+            <div className="flex items-center gap-2 mb-2">
+              <span className="w-8 h-[2.5px] bg-[#B8551F] rounded-full" />
+              <span className="text-[11px] uppercase font-extrabold tracking-[0.2em] text-[#B8551F]">
+                ROOMS
+              </span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1F1A15] tracking-tight">
+              Shop by Room
             </h2>
           </div>
           <Link
             href="/shop"
-            className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-stone-900 hover:text-amber-700 transition-colors group"
+            className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#B8551F] hover:text-[#8F4116] transition-colors group"
           >
-            <span>View All Collections</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            <span>View All Furniture</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Bento-grid layout */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
           {CATEGORIES_DATA.map((cat) => (
             <Link
               key={cat.slug}
-              href={`/categories/${cat.slug}`}
-              className={`group relative h-80 rounded-2xl overflow-hidden shadow-sm ${cat.span}`}
+              href={`/shop?category=${cat.slug}`}
+              className={`group relative h-64 sm:h-72 rounded-2xl overflow-hidden border-2 border-[#E5DDD3] hover:border-[#D99A2B] transition-all duration-300 hover:shadow-xl ${cat.span}`}
             >
               {/* Background Image */}
               <img
@@ -68,18 +77,19 @@ export default function FeaturedCategories() {
                 alt={cat.name}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-950/20 to-transparent transition-opacity" />
+              {/* Gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1F1A15]/90 via-[#1F1A15]/25 to-transparent" />
 
-              {/* Overlay Content */}
+              {/* Overlay content */}
               <div className="absolute inset-0 p-6 sm:p-8 flex flex-col justify-end text-white">
-                <h3 className="text-xl sm:text-2xl font-serif-luxury font-bold tracking-wide">
+                <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight">
                   {cat.name}
                 </h3>
                 <p className="text-xs text-stone-300 mt-1 max-w-xs leading-relaxed">
                   {cat.description}
                 </p>
-                <div className="mt-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-amber-300 group-hover:translate-x-1 transition-transform">
-                  <span>Explore Pieces</span>
+                <div className="mt-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#D99A2B] group-hover:translate-x-1 transition-transform duration-200">
+                  <span>Shop Room</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </div>
               </div>

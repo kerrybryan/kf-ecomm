@@ -19,5 +19,5 @@ const req = http.request(
   }
 );
 
-req.write(JSON.stringify({ email: 'admin@nordika.com', password: 'password123' }));
+req.write(JSON.stringify({ email: 'admin@kbfurniture.com', password: 'password123' }));
 req.end();

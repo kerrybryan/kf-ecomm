@@ -4,32 +4,33 @@ import React, { useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Shield, Sparkles, ArrowRight, Lock, Mail, AlertCircle } from 'lucide-react';
+import BrandLogo from '@/components/ui/BrandLogo';
 
 const DEMO_ACCOUNTS = [
   {
     roleName: 'Super Admin',
-    email: 'admin@nordika.com',
+    email: 'admin@kbfurniture.com',
     password: 'password123',
     badge: 'Full Access',
     desc: 'Unrestricted system control, settings, user management, and financials.',
   },
   {
     roleName: 'Product Manager',
-    email: 'pm@nordika.com',
+    email: 'pm@kbfurniture.com',
     password: 'password123',
     badge: 'Catalog & Content',
     desc: 'Manage inventory, specs, categories, CSV bulk imports, and homepage.',
   },
   {
     roleName: 'Sales Director',
-    email: 'sales@nordika.com',
+    email: 'sales@kbfurniture.com',
     password: 'password123',
     badge: 'Orders & Agents',
     desc: 'Fulfill orders, approve trade agents, calculate commissions and payouts.',
   },
   {
     roleName: 'Customer Support',
-    email: 'support@nordika.com',
+    email: 'support@kbfurniture.com',
     password: 'password123',
     badge: 'Support & CRM',
     desc: 'Track customer orders, respond to quotes, and view CRM customer files.',
@@ -93,29 +94,33 @@ function AdminLoginForm() {
           <div className="relative">
             <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8E8475]" />
             <input
+              id="email"
               type="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="admin@nordika.com"
-              className="w-full pl-10 pr-4 py-2.5 bg-[#1A1613] border border-[#3A3127] rounded-xl text-xs text-white placeholder:text-[#6E6455] focus:outline-none focus:border-[#A8875E] focus:ring-1 focus:ring-[#A8875E] transition-all"
+              placeholder="admin@kbfurniture.com"
+              className="w-full bg-[#1A1613] border border-[#3A3127] rounded-xl px-4 py-3 pl-10 text-xs text-white placeholder:text-[#6E6356] focus:outline-none focus:border-[#A8875E] transition-colors"
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-[#D5CCC0] mb-1.5">
-            Access Password
+          <label className="block text-xs font-semibold uppercase tracking-wider text-[#D5CCC0] mb-2">
+            Password
           </label>
           <div className="relative">
-            <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8E8475]" />
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#A8875E]">
+              <Lock className="w-4 h-4" />
+            </div>
             <input
+              id="password"
               type="password"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••••••"
-              className="w-full pl-10 pr-4 py-2.5 bg-[#1A1613] border border-[#3A3127] rounded-xl text-xs text-white placeholder:text-[#6E6455] focus:outline-none focus:border-[#A8875E] focus:ring-1 focus:ring-[#A8875E] transition-all"
+              className="w-full bg-[#1A1613] border border-[#3A3127] rounded-xl px-4 py-3 pl-10 text-xs text-white placeholder:text-[#6E6356] focus:outline-none focus:border-[#A8875E] transition-colors"
             />
           </div>
         </div>
@@ -123,13 +128,13 @@ function AdminLoginForm() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-3 px-4 bg-[#A8875E] hover:bg-[#96764E] text-[#1A1613] font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-lg shadow-[#A8875E]/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+          className="w-full mt-2 bg-[#A8875E] hover:bg-[#96764E] disabled:opacity-50 text-[#1A1613] font-bold py-3.5 px-4 rounded-xl text-xs uppercase tracking-[0.18em] transition-all shadow-lg shadow-[#A8875E]/20 flex items-center justify-center gap-2 cursor-pointer disabled:cursor-not-allowed"
         >
           {loading ? (
-            <span>Verifying credentials...</span>
+            <span>Authenticating...</span>
           ) : (
             <>
-              <span>Sign In to Dashboard</span>
+              <span>Access Admin Portal</span>
               <ArrowRight className="w-4 h-4" />
             </>
           )}
@@ -176,15 +181,9 @@ export default function AdminLoginPage() {
       {/* Subtle Background Glows */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#A8875E]/10 blur-[120px] rounded-full pointer-events-none" />
 
-      <div className="sm:mx-auto sm:w-full sm:max-w-md text-center z-10">
-        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#A8875E] to-[#785E3B] mx-auto flex items-center justify-center shadow-xl shadow-[#A8875E]/20 mb-4">
-          <Shield className="w-6 h-6 text-white" />
-        </div>
-
-        <h1 className="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-white">
-          NORDIKA STUDIO
-        </h1>
-        <p className="mt-1 text-xs uppercase tracking-widest text-[#A8875E] font-medium">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md text-center z-10 flex flex-col items-center">
+        <BrandLogo variant="white" size="xl" className="justify-center mx-auto mb-2" href="/admin" />
+        <p className="mt-1 text-xs uppercase tracking-widest text-[#A8875E] font-bold">
           Operations Control Center
         </p>
       </div>
@@ -205,7 +204,7 @@ export default function AdminLoginPage() {
             href="/"
             className="text-xs text-[#A8875E] hover:text-[#C5A376] hover:underline underline-offset-4 transition-colors"
           >
-            ← Return to Nordika Storefront
+            ← Return to KB Furniture Storefront
           </Link>
         </div>
       </div>

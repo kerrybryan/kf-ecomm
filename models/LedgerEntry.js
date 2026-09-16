@@ -66,6 +66,5 @@ const LedgerEntrySchema = new mongoose.Schema(
 );
 
 LedgerEntrySchema.index({ date: -1, type: 1 });
-LedgerEntrySchema.index({ entryNumber: 1 });
 
 export default mongoose.models.LedgerEntry || mongoose.model('LedgerEntry', LedgerEntrySchema);

@@ -116,8 +116,8 @@ export default function ProductDetailClient({ product, reviews = [], relatedProd
             </div>
 
             {/* Price */}
-            <div className="flex items-baseline gap-3 pt-3 border-t border-stone-100">
-              <span className="text-3xl font-bold text-stone-900">
+            <div className="flex items-baseline gap-3 pt-3 border-t border-stone-200">
+              <span className="text-3xl sm:text-4xl font-extrabold text-[#B8551F]">
                 {formatPrice(product.price)}
               </span>
               {product.originalPrice && product.originalPrice > product.price && (
@@ -128,16 +128,16 @@ export default function ProductDetailClient({ product, reviews = [], relatedProd
             </div>
 
             {/* Short Description */}
-            <p className="text-xs sm:text-sm text-stone-600 leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#201C18] leading-relaxed font-normal">
               {product.description}
             </p>
 
             {/* Color Swatch Picker */}
             {product.colors && product.colors.length > 0 && (
               <div className="pt-2">
-                <label className="block text-xs font-semibold text-stone-900 uppercase tracking-wider mb-2.5">
-                  Select Finish / Color:{' '}
-                  <span className="font-normal text-stone-600">{selectedColor}</span>
+                <label className="block text-xs font-bold text-[#201C18] uppercase tracking-wider mb-2.5">
+                  Select Color:{' '}
+                  <span className="font-normal text-[#6B6459]">{selectedColor}</span>
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {product.colors.map((col) => (
@@ -145,10 +145,10 @@ export default function ProductDetailClient({ product, reviews = [], relatedProd
                       key={col}
                       type="button"
                       onClick={() => setSelectedColor(col)}
-                      className={`px-3.5 py-2 rounded-xl text-xs transition-all border ${
+                      className={`px-3.5 py-2 rounded-xl text-xs transition-all border-2 ${
                         selectedColor === col
-                          ? 'border-stone-900 bg-stone-900 text-white font-medium shadow-sm'
-                          : 'border-stone-200 bg-stone-50 text-stone-700 hover:border-stone-400'
+                          ? 'border-[#B8551F] bg-[#B8551F] text-white font-bold shadow-xs'
+                          : 'border-[#E5DDD3] bg-white text-[#201C18] hover:border-[#B8551F]'
                       }`}
                     >
                       {col}
@@ -161,9 +161,9 @@ export default function ProductDetailClient({ product, reviews = [], relatedProd
             {/* Material Picker */}
             {product.materials && product.materials.length > 0 && (
               <div>
-                <label className="block text-xs font-semibold text-stone-900 uppercase tracking-wider mb-2.5">
-                  Primary Material:{' '}
-                  <span className="font-normal text-stone-600">{selectedMaterial}</span>
+                <label className="block text-xs font-bold text-[#201C18] uppercase tracking-wider mb-2.5">
+                  Material:{' '}
+                  <span className="font-normal text-[#6B6459]">{selectedMaterial}</span>
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {product.materials.map((mat) => (
@@ -171,10 +171,10 @@ export default function ProductDetailClient({ product, reviews = [], relatedProd
                       key={mat}
                       type="button"
                       onClick={() => setSelectedMaterial(mat)}
-                      className={`px-3.5 py-2 rounded-xl text-xs transition-all border ${
+                      className={`px-3.5 py-2 rounded-xl text-xs transition-all border-2 ${
                         selectedMaterial === mat
-                          ? 'border-stone-900 bg-stone-900 text-white font-medium shadow-sm'
-                          : 'border-stone-200 bg-stone-50 text-stone-700 hover:border-stone-400'
+                          ? 'border-[#B8551F] bg-[#B8551F] text-white font-bold shadow-xs'
+                          : 'border-[#E5DDD3] bg-white text-[#201C18] hover:border-[#B8551F]'
                       }`}
                     >
                       {mat}
@@ -186,19 +186,19 @@ export default function ProductDetailClient({ product, reviews = [], relatedProd
 
             {/* Quantity Selector & Wishlist */}
             <div className="pt-2 flex items-center gap-4">
-              <div className="flex items-center border border-stone-300 rounded-xl bg-stone-50 p-1">
+              <div className="flex items-center border-2 border-[#E5DDD3] rounded-xl bg-white p-1">
                 <button
                   type="button"
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="p-2 hover:bg-stone-200 text-stone-700 rounded-lg transition-colors"
+                  className="p-2 hover:bg-[#F3EEE7] text-[#201C18] rounded-lg transition-colors"
                 >
                   <Minus className="w-3.5 h-3.5" />
                 </button>
-                <span className="px-4 text-xs font-bold text-stone-900">{quantity}</span>
+                <span className="px-4 text-xs font-bold text-[#201C18]">{quantity}</span>
                 <button
                   type="button"
                   onClick={() => setQuantity(quantity + 1)}
-                  className="p-2 hover:bg-stone-200 text-stone-700 rounded-lg transition-colors"
+                  className="p-2 hover:bg-[#F3EEE7] text-[#201C18] rounded-lg transition-colors"
                 >
                   <Plus className="w-3.5 h-3.5" />
                 </button>
@@ -207,14 +207,14 @@ export default function ProductDetailClient({ product, reviews = [], relatedProd
               <button
                 type="button"
                 onClick={() => toggleWishlist(product)}
-                className={`p-3 rounded-xl border transition-colors flex items-center justify-center ${
+                className={`p-3 rounded-xl border-2 transition-colors flex items-center justify-center ${
                   isFavorite
-                    ? 'border-rose-300 bg-rose-50 text-rose-600'
-                    : 'border-stone-300 bg-white text-stone-700 hover:bg-stone-50'
+                    ? 'border-[#B8551F] bg-white text-[#B8551F]'
+                    : 'border-[#E5DDD3] bg-white text-[#6B6459] hover:border-[#B8551F] hover:text-[#B8551F]'
                 }`}
                 title={isFavorite ? 'Saved in Wishlist' : 'Add to Wishlist'}
               >
-                <Heart className={`w-5 h-5 ${isFavorite ? 'fill-rose-500' : ''}`} />
+                <Heart className={`w-5 h-5 ${isFavorite ? 'fill-[#B8551F]' : ''}`} />
               </button>
             </div>
 
@@ -223,51 +223,51 @@ export default function ProductDetailClient({ product, reviews = [], relatedProd
               <button
                 type="button"
                 onClick={handleAddToCart}
-                className="w-full bg-stone-900 hover:bg-stone-800 text-white py-4 px-6 rounded-xl font-semibold text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all shadow-md active:scale-[0.99]"
+                className="w-full bg-[#4C7A3D] hover:bg-[#3E6532] text-white py-4 px-6 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md active:scale-[0.99] cursor-pointer"
               >
-                <ShoppingBag className="w-4 h-4 text-amber-300" />
-                <span>Add to Shopping Bag • {formatPrice(product.price * quantity)}</span>
+                <ShoppingBag className="w-4 h-4 text-white/90" />
+                <span>Add to Cart • {formatPrice(product.price * quantity)}</span>
               </button>
 
               <button
                 type="button"
                 onClick={handleBuyNow}
-                className="w-full bg-amber-400 hover:bg-amber-300 text-stone-950 py-3.5 px-6 rounded-xl font-semibold text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all shadow-xs"
+                className="w-full bg-[#B8551F] hover:bg-[#8F4116] text-white py-3.5 px-6 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md cursor-pointer"
               >
-                <span>Instant Checkout</span>
+                <span>Buy Now</span>
               </button>
             </div>
 
             {/* Trust Badges */}
-            <div className="pt-4 border-t border-stone-100 grid grid-cols-2 gap-3 text-xs text-stone-600">
+            <div className="pt-4 border-t border-[#E5DDD3] grid grid-cols-2 gap-3 text-xs text-[#6B6459]">
               <div className="flex items-center gap-2">
-                <Truck className="w-4 h-4 text-amber-600 shrink-0" />
-                <span>Free White-Glove over $1.5k</span>
+                <Truck className="w-4 h-4 text-[#B8551F] shrink-0" />
+                <span className="font-medium text-[#201C18]">Free Delivery over 50,000 Birr</span>
               </div>
               <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-amber-600 shrink-0" />
-                <span>10-Year Craft Guarantee</span>
+                <ShieldCheck className="w-4 h-4 text-[#B8551F] shrink-0" />
+                <span className="font-medium text-[#201C18]">10-Year Quality Guarantee</span>
               </div>
             </div>
 
             {/* Expandable Accordions */}
-            <div className="pt-4 border-t border-stone-100 divide-y divide-stone-100">
+            <div className="pt-4 border-t border-[#E5DDD3] divide-y divide-[#E5DDD3]">
               {/* Specs */}
               <div className="py-3">
                 <button
                   type="button"
                   onClick={() => toggleTab('specs')}
-                  className="w-full flex items-center justify-between text-xs font-bold uppercase tracking-wider text-stone-900"
+                  className="w-full flex items-center justify-between text-xs font-bold uppercase tracking-wider text-[#201C18]"
                 >
-                  <span>Dimensions & Specifications</span>
+                  <span>Size & Dimensions</span>
                   {openAccordion === 'specs' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                 </button>
                 {openAccordion === 'specs' && (
-                  <div className="mt-3 text-xs text-stone-600 space-y-1.5 leading-relaxed animate-in fade-in">
-                    <p><strong>Dimensions:</strong> {product.specs?.dimensions || 'Standard architectural proportions'}</p>
-                    <p><strong>Weight:</strong> {product.specs?.weight || 'Heavy solid core construction'}</p>
-                    <p><strong>Assembly:</strong> {product.specs?.assembly || 'Minimal assembly. Tools included.'}</p>
-                    <p><strong>Warranty:</strong> {product.specs?.warranty || '10-Year Manufacturer Guarantee'}</p>
+                  <div className="mt-3 text-xs text-[#6B6459] space-y-1.5 leading-relaxed animate-in fade-in">
+                    <p><strong>Dimensions:</strong> {product.specs?.dimensions || 'Standard size'}</p>
+                    <p><strong>Weight:</strong> {product.specs?.weight || 'Solid wood frame'}</p>
+                    <p><strong>Assembly:</strong> {product.specs?.assembly || 'Simple assembly. Easy to set up.'}</p>
+                    <p><strong>Warranty:</strong> {product.specs?.warranty || '10-Year Guarantee'}</p>
                   </div>
                 )}
               </div>
@@ -277,14 +277,14 @@ export default function ProductDetailClient({ product, reviews = [], relatedProd
                 <button
                   type="button"
                   onClick={() => toggleTab('materials')}
-                  className="w-full flex items-center justify-between text-xs font-bold uppercase tracking-wider text-stone-900"
+                  className="w-full flex items-center justify-between text-xs font-bold uppercase tracking-wider text-[#201C18]"
                 >
-                  <span>Materials & Joinery</span>
+                  <span>Materials & Craft</span>
                   {openAccordion === 'materials' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                 </button>
                 {openAccordion === 'materials' && (
-                  <div className="mt-3 text-xs text-stone-600 leading-relaxed animate-in fade-in">
-                    <p>{product.specs?.materialDetails || 'Handcrafted using sustainably sourced European hardwoods and organic zero-VOC matte finishes.'}</p>
+                  <div className="mt-3 text-xs text-[#6B6459] leading-relaxed animate-in fade-in">
+                    <p>{product.specs?.materialDetails || 'Made from natural solid wood and strong fabric.'}</p>
                   </div>
                 )}
               </div>
@@ -294,14 +294,14 @@ export default function ProductDetailClient({ product, reviews = [], relatedProd
                 <button
                   type="button"
                   onClick={() => toggleTab('care')}
-                  className="w-full flex items-center justify-between text-xs font-bold uppercase tracking-wider text-stone-900"
+                  className="w-full flex items-center justify-between text-xs font-bold uppercase tracking-wider text-[#201C18]"
                 >
-                  <span>Care & Maintenance</span>
+                  <span>Care & Cleaning</span>
                   {openAccordion === 'care' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                 </button>
                 {openAccordion === 'care' && (
-                  <div className="mt-3 text-xs text-stone-600 leading-relaxed animate-in fade-in">
-                    <p>{product.specs?.care || 'Dust regularly with a dry microfiber cloth. Spot clean upholstery with mild distilled water solution.'}</p>
+                  <div className="mt-3 text-xs text-[#6B6459] leading-relaxed animate-in fade-in">
+                    <p>{product.specs?.care || 'Wipe with a clean dry cloth. Keep away from water.'}</p>
                   </div>
                 )}
               </div>
@@ -319,13 +319,13 @@ export default function ProductDetailClient({ product, reviews = [], relatedProd
 
         {/* Related Recommendation Carousel */}
         {relatedProducts.length > 0 && (
-          <div className="py-16 border-t border-stone-200">
+          <div className="py-14 border-t border-[#E5DDD3]">
             <div className="mb-8">
-              <span className="text-xs uppercase font-bold tracking-widest text-amber-700 block mb-1">
-                Complete the Room
+              <span className="text-xs uppercase font-extrabold tracking-wider text-[#B8551F] block mb-1">
+                MORE FURNITURE
               </span>
-              <h2 className="text-2xl font-serif-luxury font-bold text-stone-900">
-                You May Also Admire
+              <h2 className="text-2xl font-heading font-extrabold text-[#201C18]">
+                Similar Pieces
               </h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

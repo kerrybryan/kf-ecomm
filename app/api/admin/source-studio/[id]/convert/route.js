@@ -58,7 +58,7 @@ export async function POST(request, { params }) {
       return NextResponse.json({ success: false, error: 'Sourced item not found' }, { status: 404 });
     }
 
-    const title = item.aiAnalysis?.furnitureType || 'Nordika Bespoke Furniture Piece';
+    const title = item.aiAnalysis?.furnitureType || 'KB Furniture Bespoke Piece';
     const category = determineCategory(title);
     const finalPrice = item.manualOverride?.finalPrice || item.aiAnalysis?.suggestedPriceMin || 950;
     const slug = generateSlug(title);

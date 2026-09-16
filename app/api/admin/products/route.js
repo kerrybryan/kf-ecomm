@@ -109,6 +109,34 @@ export async function POST(request) {
     body.slug = finalSlug;
 
     const product = await Product.create(body);
+
+    // Part G: Automatic Queue Suggestion (Rule-based, no AI)
+    if (product.status === 'published') {
+      try {
+        const CaptionTemplate = (await import('@/models/CaptionTemplate')).default;
+        const PublishingQueueItem = (await import('@/models/PublishingQueueItem')).default;
+        const { substitutePlaceholders, STARTER_TEMPLATES } = await import('@/lib/publishing');
+
+        const primaryImg = (product.images && product.images[0]) || 'https://picsum.photos/seed/kb-sofa/800/800';
+        const tpl = (await CaptionTemplate.findOne({ name: /New Arrival/i })) || STARTER_TEMPLATES[0];
+        const caption = substitutePlaceholders(tpl.template, product);
+
+        await PublishingQueueItem.create({
+          productId: product._id,
+          title: `New Arrival: ${product.name}`,
+          mediaUrl: primaryImg,
+          mediaType: 'image',
+          platform: 'instagram',
+          finalCaption: caption,
+          plannedDate: new Date(),
+          status: 'queued',
+          notes: 'Auto-suggested queue draft for newly published product',
+        });
+      } catch (qErr) {
+        console.warn('Auto queue creation notice:', qErr.message);
+      }
+    }
+
     return NextResponse.json({ success: true, data: product, message: 'Product created successfully' }, { status: 201 });
   } catch (error) {
     console.error('Admin create product error:', error);

@@ -14,26 +14,26 @@ export default function SectionHeader({
     <div className={`mb-8 sm:mb-10 ${className}`}>
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
         <div>
-          {/* Decorative Thin Rule Accent */}
+          {/* Decorative Rule Accent */}
           {eyebrow ? (
             <div className="flex items-center gap-2 mb-2">
-              <span className="w-6 h-[1.5px] bg-[#A8875E]" />
-              <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#A8875E]">
+              <span className="w-8 h-[2.5px] bg-[#B8551F] rounded-full" />
+              <span className="text-xs font-extrabold uppercase tracking-[0.18em] text-[#B8551F]">
                 {eyebrow}
               </span>
             </div>
           ) : (
-            <div className="w-8 h-[1.5px] bg-[#A8875E] mb-2" />
+            <div className="w-10 h-[2.5px] bg-[#B8551F] mb-2 rounded-full" />
           )}
 
           {/* Section Title */}
-          <h2 className="text-2xl sm:text-3xl font-serif-heading font-bold text-[#2B2620] tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-heading font-extrabold text-[#201C18] tracking-tight">
             {title}
           </h2>
 
           {/* Optional Short Subtitle */}
           {subtitle && (
-            <p className="text-xs sm:text-sm text-[#6B6459] mt-1.5 font-light">
+            <p className="text-xs sm:text-sm text-[#6B6459] mt-1 font-normal">
               {subtitle}
             </p>
           )}
@@ -43,10 +43,10 @@ export default function SectionHeader({
         {viewAllLink && (
           <Link
             href={viewAllLink}
-            className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-[0.14em] text-[#A8875E] hover:text-[#2B2620] transition-colors group self-start sm:self-end"
+            className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-[#B8551F] hover:text-[#8F4116] transition-colors group self-start sm:self-end"
           >
             <span>{viewAllText}</span>
-            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         )}
       </div>

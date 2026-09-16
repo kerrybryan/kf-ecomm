@@ -27,10 +27,10 @@ const MATERIALS = [
 
 const PRICE_PRESETS = [
   { label: 'All Prices', min: '', max: '' },
-  { label: 'Under $500', min: '0', max: '500' },
-  { label: '$500 - $1,000', min: '500', max: '1000' },
-  { label: '$1,000 - $2,000', min: '1000', max: '2000' },
-  { label: 'Over $2,000', min: '2000', max: '' },
+  { label: 'Under 15,000 Birr', min: '0', max: '15000' },
+  { label: '15,000 - 35,000 Birr', min: '15000', max: '35000' },
+  { label: '35,000 - 60,000 Birr', min: '35000', max: '60000' },
+  { label: 'Over 60,000 Birr', min: '60000', max: '' },
 ];
 
 export default function ProductFilters({

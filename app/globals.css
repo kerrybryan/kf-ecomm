@@ -2,14 +2,21 @@
 
 @layer base {
   :root {
-    --color-bg-page: #F3ECE1;
-    --color-bg-section: #EAE1D2;
+    --color-bg-page: #FAF8F5;
+    --color-bg-section: #F3EEE7;
     --color-card: #FFFFFF;
-    --color-dark: #1A1613;
-    --color-accent-gold: #A8875E;
-    --color-text: #2B2620;
+    --color-dark: #1F1A15;
+    --color-primary: #B8551F;
+    --color-primary-dark: #8F4116;
+    --color-accent-gold: #D99A2B;
+    --color-text: #201C18;
     --color-text-muted: #6B6459;
-    --color-border: #DCD1BE;
+    --color-border: #E5DDD3;
+    
+    /* Green Action & Confirmation Color System */
+    --color-green: #4C7A3D;
+    --color-green-hover: #3E6532;
+    --color-green-light: #E9F1E6;
   }
 
   body {
@@ -21,13 +28,16 @@
     overflow-x: hidden;
   }
 
-  h1, h2, h3, h4, .font-serif {
-    font-family: var(--font-serif), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  h1, h2, h3, h4, h5, h6, .font-heading, .font-serif, .font-serif-luxury, .font-serif-heading {
+    font-family: var(--font-heading), var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
   }
 }
 
-.font-serif-heading {
-  font-family: var(--font-serif), Georgia, serif;
+.font-heading-bold {
+  font-family: var(--font-heading), var(--font-sans), sans-serif;
+  font-weight: 800;
 }
 
 /* Hide scrollbar for smooth carousel browsing */
@@ -45,6 +55,22 @@
 }
 .snap-align-start {
   scroll-snap-align: start;
+}
+
+/* Hero entrance animations */
+@keyframes animate-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: animate-fade-in 0.55s ease both;
 }
 
 /* Auto-scroll marquee animation for category sliding row */
@@ -86,10 +112,10 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #DCD1BE;
+  background: #E5DDD3;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #A8875E;
+  background: #B8551F;
 }

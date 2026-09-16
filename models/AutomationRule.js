@@ -19,7 +19,7 @@ const AutomationRuleSchema = new mongoose.Schema(
     defaultCaptionTemplate: {
       type: String,
       default:
-        'Introducing the {productName} — masterfully crafted in {material}. Starting at ${price}.\n\nExplore our bespoke Scandinavian collection online at Nordika Studio. ✨\n\n#NordicDesign #ScandinavianLiving #BespokeFurniture #NordikaStudio #LuxuryInteriors',
+        'Introducing the {productName} — masterfully crafted in {material}. Starting at ${price}.\n\nExplore our bespoke Scandinavian collection online at KB Furniture. ✨\n\n#NordicDesign #ScandinavianLiving #BespokeFurniture #KBFurniture #LuxuryInteriors',
     },
     enabled: {
       type: Boolean,

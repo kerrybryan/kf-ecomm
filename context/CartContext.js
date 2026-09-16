@@ -4,9 +4,9 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useToast } from './ToastContext';
 
 const CartContext = createContext(null);
-const CART_STORAGE_KEY = 'nordika_cart_items';
-const FREE_SHIPPING_MIN = 1500;
-const STANDARD_SHIPPING = 120;
+const CART_STORAGE_KEY = 'kb_furniture_cart_items';
+const FREE_SHIPPING_MIN = 50000;
+const STANDARD_SHIPPING = 1500;
 
 export function CartProvider({ children }) {
   const [items, setItems] = useState([]);

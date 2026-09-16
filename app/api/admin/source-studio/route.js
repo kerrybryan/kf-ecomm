@@ -2,32 +2,32 @@ import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import SourcedItem from '@/models/SourcedItem';
 import Product from '@/models/Product';
-import { requireAdminAuth } from '@/lib/adminAuth';
 import { uploadImage } from '@/lib/cloudinary';
-import { analyzeFurnitureImage } from '@/lib/claudeVision';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET(request) {
-  const auth = await requireAdminAuth(request, ['super_admin', 'product_manager', 'admin']);
-  if (auth.error) return auth.error;
-
   try {
     await connectDB();
     const { searchParams } = new URL(request.url);
     const status = searchParams.get('status');
     const search = searchParams.get('search');
+    const category = searchParams.get('category');
     const page = parseInt(searchParams.get('page') || '1', 10);
-    const limit = parseInt(searchParams.get('limit') || '15', 10);
+    const limit = parseInt(searchParams.get('limit') || '20', 10);
     const skip = (page - 1) * limit;
 
     const query = {};
     if (status && status !== 'all') {
       query.status = status;
     }
+    if (category && category !== 'all') {
+      query.category = category;
+    }
     if (search) {
       query.$or = [
-        { 'aiAnalysis.furnitureType': { $regex: search, $options: 'i' } },
+        { name: { $regex: search, $options: 'i' } },
+        { category: { $regex: search, $options: 'i' } },
         { notes: { $regex: search, $options: 'i' } },
         { sourceUrl: { $regex: search, $options: 'i' } },
       ];
@@ -38,15 +38,16 @@ export async function GET(request) {
         .sort({ createdAt: -1 })
         .skip(skip)
         .limit(limit)
-        .populate('linkedProductId', 'name slug price status')
+        .populate('linkedProductId', 'name slug price status images')
         .lean(),
       SourcedItem.countDocuments(query),
     ]);
 
     const counts = {
       total: await SourcedItem.countDocuments(),
-      analyzing: await SourcedItem.countDocuments({ status: 'analyzing' }),
-      reviewed: await SourcedItem.countDocuments({ status: 'reviewed' }),
+      new: await SourcedItem.countDocuments({ status: 'new' }),
+      priced: await SourcedItem.countDocuments({ status: 'priced' }),
+      content_ready: await SourcedItem.countDocuments({ status: 'content_ready' }),
       converted: await SourcedItem.countDocuments({ status: 'converted_to_product' }),
       discarded: await SourcedItem.countDocuments({ status: 'discarded' }),
     };
@@ -72,12 +73,10 @@ export async function GET(request) {
 }
 
 export async function POST(request) {
-  const auth = await requireAdminAuth(request, ['super_admin', 'product_manager', 'admin']);
-  if (auth.error) return auth.error;
-
   try {
     await connectDB();
-    const { imageInput, sourceUrl, notes } = await request.json();
+    const body = await request.json();
+    const { imageInput, sourceUrl, name, category, notes } = body;
 
     if (!imageInput) {
       return NextResponse.json(
@@ -86,58 +85,32 @@ export async function POST(request) {
       );
     }
 
-    // 1. Upload to Cloudinary / storage
-    const uploadResult = await uploadImage(imageInput, 'nordika-source-studio');
-    const stableImageUrl = uploadResult.secureUrl || uploadResult.url;
+    // 1. Upload/store image safely
+    let stableImageUrl = imageInput;
+    try {
+      if (imageInput.startsWith('data:') || imageInput.startsWith('http')) {
+        const uploadResult = await uploadImage(imageInput, 'kb-furniture-source-studio');
+        stableImageUrl = uploadResult.secureUrl || uploadResult.url || imageInput;
+      }
+    } catch (e) {
+      console.warn('Image storage fallback to raw url:', e.message);
+    }
 
-    // 2. Create SourcedItem document with initial 'analyzing' state
+    // 2. Create SourcedItem document with initial 'new' state (No AI)
     const sourcedItem = await SourcedItem.create({
+      name: name?.trim() || 'Untitled Sourced Piece',
+      category: category || 'Sofas & Couches',
       sourceImageUrl: stableImageUrl,
       sourceUrl: sourceUrl || '',
       isReferenceOnly: true,
-      status: 'analyzing',
+      status: 'new',
       notes: notes || '',
     });
-
-    // 3. Trigger Claude Vision Analysis
-    try {
-      const aiResult = await analyzeFurnitureImage(stableImageUrl);
-
-      // Compute initial default manufacturing costs
-      const materialCost = Math.round((aiResult.suggestedPriceMin || 500) * 0.35);
-      const laborHours = aiResult.complexityRating === 'high' ? 12 : aiResult.complexityRating === 'low' ? 5 : 8;
-      const laborRate = 45;
-      const overheadPercent = 15;
-      const laborCost = laborHours * laborRate;
-      const subtotalCost = materialCost + laborCost;
-      const overheadCost = subtotalCost * (overheadPercent / 100);
-      const calculatedCost = Math.round(subtotalCost + overheadCost);
-      const markupMultiplier = 2.2;
-      const finalPrice = Math.round(calculatedCost * markupMultiplier);
-
-      sourcedItem.aiAnalysis = aiResult;
-      sourcedItem.manualOverride = {
-        materialCost,
-        laborHours,
-        laborRate,
-        overheadPercent,
-        markupMultiplier,
-        calculatedCost,
-        finalPrice,
-      };
-      sourcedItem.status = 'reviewed';
-      await sourcedItem.save();
-    } catch (aiErr) {
-      console.error('Initial AI analysis error:', aiErr);
-      // Keep item in 'analyzing' or 'reviewed' with retry flag
-      sourcedItem.status = 'analyzing';
-      await sourcedItem.save();
-    }
 
     return NextResponse.json({
       success: true,
       data: sourcedItem,
-      message: 'Inspiration image imported and analyzed successfully',
+      message: 'Inspiration piece added successfully',
     });
   } catch (error) {
     console.error('Import sourced item error:', error);

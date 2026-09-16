@@ -70,7 +70,7 @@ export default function ImageCanvas({
 
   // Watermark
   const [enableWatermark, setEnableWatermark] = useState(true);
-  const [watermarkText, setWatermarkText] = useState('NORDIKA STUDIO');
+  const [watermarkText, setWatermarkText] = useState('KB FURNITURE');
   const [watermarkPos, setWatermarkPos] = useState('bottom-right');
   const [watermarkOpacity, setWatermarkOpacity] = useState(40); // 0 to 100
   const [watermarkScale, setWatermarkScale] = useState(24); // 10 to 50 (% of width)

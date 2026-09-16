@@ -18,6 +18,14 @@ import Shipment from './Shipment';
 import WarrantyClaim from './WarrantyClaim';
 import LedgerEntry from './LedgerEntry';
 import Expense from './Expense';
+import MaterialRate from './MaterialRate';
+import CategoryPricingTemplate from './CategoryPricingTemplate';
+import ContentAsset from './ContentAsset';
+import ContentExport from './ContentExport';
+import AiVideoJob from './AiVideoJob';
+import AiUsageLog from './AiUsageLog';
+import CaptionTemplate from './CaptionTemplate';
+import PublishingQueueItem from './PublishingQueueItem';
 
 export {
   Product,
@@ -40,8 +48,16 @@ export {
   WarrantyClaim,
   LedgerEntry,
   Expense,
+  MaterialRate,
+  CategoryPricingTemplate,
+  ContentAsset,
+  ContentExport,
+  AiVideoJob,
+  AiUsageLog,
+  CaptionTemplate,
+  PublishingQueueItem,
 };
-export default {
+const models = {
   Product,
   Category,
   Order,
@@ -62,4 +78,14 @@ export default {
   WarrantyClaim,
   LedgerEntry,
   Expense,
+  MaterialRate,
+  CategoryPricingTemplate,
+  ContentAsset,
+  ContentExport,
+  AiVideoJob,
+  AiUsageLog,
+  CaptionTemplate,
+  PublishingQueueItem,
 };
+
+export default models;

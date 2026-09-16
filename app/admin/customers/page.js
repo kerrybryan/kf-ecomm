@@ -72,7 +72,7 @@ export default function AdminCustomersPage() {
       label: 'Lifetime Spend',
       key: 'totalSpent',
       render: (row) => (
-        <span className="font-bold text-zinc-900">${(row.totalSpent || 0).toLocaleString()}</span>
+        <span className="font-bold text-zinc-900">ETB {(row.totalSpent || 0).toLocaleString()}</span>
       ),
     },
     {

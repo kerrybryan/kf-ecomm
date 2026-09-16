@@ -70,7 +70,7 @@ async function runTests() {
     // 1. Admin Authentication
     console.log('--- 1. Admin Authentication & Session ---');
     const loginRes = await makeRequest('POST', '/api/admin/auth/login', {
-      email: 'admin@nordika.com',
+      email: 'admin@kbfurniture.com',
       password: 'password123',
     });
     assert(loginRes.status === 200 && loginRes.data.success, 'Super Admin login successful');
@@ -193,7 +193,7 @@ async function runTests() {
       '/api/admin/fulfillment/shipments',
       {
         orderId: sampleOrder._id,
-        carrier: 'Nordika White-Glove Fleet',
+        carrier: 'KB Furniture White-Glove Fleet',
         driverName: 'Erik Holmgren',
         driverPhone: '+1 (206) 555-0144',
         vehicleId: 'Van #4 (Sprinter EV)',

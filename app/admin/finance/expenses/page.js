@@ -99,7 +99,7 @@ export default function ExpensesPage() {
       <div className="bg-white rounded-2xl border border-[#EBE5DF] p-4 flex items-center justify-between shadow-sm">
         <div>
           <span className="text-xs text-[#7C7265]">Total Recorded Expenses:</span>
-          <h3 className="text-xl font-bold text-[#1A1613]">${totalExpenses.toLocaleString()}</h3>
+          <h3 className="text-xl font-bold text-[#1A1613]">ETB {totalExpenses.toLocaleString()}</h3>
         </div>
 
         <button
@@ -120,41 +120,43 @@ export default function ExpensesPage() {
         </div>
       ) : (
         <div className="bg-white rounded-2xl border border-[#EBE5DF] overflow-hidden shadow-sm">
-          <table className="w-full text-left text-xs">
-            <thead className="bg-[#FAF8F5] border-b border-[#EBE5DF] text-[10px] font-bold uppercase tracking-wider text-[#7C7265]">
-              <tr>
-                <th className="px-5 py-3.5">Title & Vendor</th>
-                <th className="px-5 py-3.5">Category</th>
-                <th className="px-5 py-3.5">Payment Method</th>
-                <th className="px-5 py-3.5">Date</th>
-                <th className="px-5 py-3.5 text-right">Amount ($)</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[#EBE5DF]">
-              {expenses.map((exp) => (
-                <tr key={exp._id} className="hover:bg-[#FAF8F5]/60 transition-colors">
-                  <td className="px-5 py-4">
-                    <p className="font-bold text-[#1A1613]">{exp.title}</p>
-                    <p className="text-[11px] text-[#7C7265]">{exp.vendor}</p>
-                  </td>
-                  <td className="px-5 py-4 whitespace-nowrap">
-                    <span className="px-2 py-0.5 rounded bg-gray-100 text-[10px] font-bold uppercase text-gray-700">
-                      {exp.category.replace(/_/g, ' ')}
-                    </span>
-                  </td>
-                  <td className="px-5 py-4 whitespace-nowrap capitalize text-[#7C7265]">
-                    {exp.paymentMethod.replace(/_/g, ' ')}
-                  </td>
-                  <td className="px-5 py-4 whitespace-nowrap text-[#7C7265]">
-                    {new Date(exp.date).toLocaleDateString()}
-                  </td>
-                  <td className="px-5 py-4 whitespace-nowrap text-right font-bold text-red-600">
-                    -${exp.amount.toLocaleString()}
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs">
+              <thead className="bg-[#FAF8F5] border-b border-[#EBE5DF] text-[10px] font-bold uppercase tracking-wider text-[#7C7265]">
+                <tr>
+                  <th className="px-5 py-3.5">Title & Vendor</th>
+                  <th className="px-5 py-3.5">Category</th>
+                  <th className="px-5 py-3.5">Payment Method</th>
+                  <th className="px-5 py-3.5">Date</th>
+                  <th className="px-5 py-3.5 text-right">Amount (ETB)</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-[#EBE5DF]">
+                {expenses.map((exp) => (
+                  <tr key={exp._id} className="hover:bg-[#FAF8F5]/60 transition-colors">
+                    <td className="px-5 py-4">
+                      <p className="font-bold text-[#1A1613]">{exp.title}</p>
+                      <p className="text-[11px] text-[#7C7265]">{exp.vendor}</p>
+                    </td>
+                    <td className="px-5 py-4 whitespace-nowrap">
+                      <span className="px-2 py-0.5 rounded bg-gray-100 text-[10px] font-bold uppercase text-gray-700">
+                        {exp.category.replace(/_/g, ' ')}
+                      </span>
+                    </td>
+                    <td className="px-5 py-4 whitespace-nowrap capitalize text-[#7C7265]">
+                      {exp.paymentMethod.replace(/_/g, ' ')}
+                    </td>
+                    <td className="px-5 py-4 whitespace-nowrap text-[#7C7265]">
+                      {new Date(exp.date).toLocaleDateString()}
+                    </td>
+                    <td className="px-5 py-4 whitespace-nowrap text-right font-bold text-red-600">
+                      -ETB {exp.amount.toLocaleString()}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
 

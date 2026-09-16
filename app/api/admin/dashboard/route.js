@@ -153,7 +153,7 @@ export async function GET(request) {
         kpis: {
           totalSales: {
             value: thisMonthRevenue,
-            formatted: `$${thisMonthRevenue.toLocaleString()}`,
+            formatted: `ETB ${thisMonthRevenue.toLocaleString()}`,
             ordersCount: thisMonthOrdersCount,
             trendPercent: revenueGrowth,
             trendDirection: revenueGrowth >= 0 ? 'up' : 'down',

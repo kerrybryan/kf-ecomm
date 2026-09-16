@@ -77,7 +77,7 @@ export default function CostCalculator({
           </div>
           <div>
             <h3 className="text-sm font-bold text-[#1A1613]">Manufacturing Cost & Pricing Calculator</h3>
-            <p className="text-xs text-[#7C7265]">Nordika workshop cost algorithm with configurable margin</p>
+            <p className="text-xs text-[#7C7265]">KB Furniture workshop cost algorithm with configurable margin</p>
           </div>
         </div>
         <span className="text-[11px] font-semibold text-[#A8875E] bg-[#A8875E]/10 px-2.5 py-1 rounded-full border border-[#A8875E]/20">
@@ -161,15 +161,15 @@ export default function CostCalculator({
       <div className="bg-[#FAF8F5] rounded-xl p-4 border border-[#EBE5DF] grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
         <div>
           <p className="text-[10px] uppercase font-bold text-[#7C7265] tracking-wider">Labor Subtotal</p>
-          <p className="text-sm font-bold text-[#1A1613] mt-0.5">${laborSubtotal.toLocaleString()}</p>
+          <p className="text-sm font-bold text-[#1A1613] mt-0.5">ETB {laborSubtotal.toLocaleString()}</p>
         </div>
         <div>
           <p className="text-[10px] uppercase font-bold text-[#7C7265] tracking-wider">Overhead Cost</p>
-          <p className="text-sm font-bold text-[#1A1613] mt-0.5">${Math.round(overheadAmount).toLocaleString()}</p>
+          <p className="text-sm font-bold text-[#1A1613] mt-0.5">ETB {Math.round(overheadAmount).toLocaleString()}</p>
         </div>
         <div>
           <p className="text-[10px] uppercase font-bold text-[#7C7265] tracking-wider">Total Mfg Cost</p>
-          <p className="text-sm font-extrabold text-[#943F24] mt-0.5">${totalCost.toLocaleString()}</p>
+          <p className="text-sm font-extrabold text-[#943F24] mt-0.5">ETB {totalCost.toLocaleString()}</p>
         </div>
         <div>
           <p className="text-[10px] uppercase font-bold text-[#7C7265] tracking-wider">Markup Multiplier</p>
@@ -210,7 +210,7 @@ export default function CostCalculator({
           </div>
           <div className="flex items-baseline gap-2">
             <p className="text-lg font-serif font-bold text-[#1A1613]">
-              ${aiSuggestedMin.toLocaleString()} – ${aiSuggestedMax.toLocaleString()}
+              ETB {aiSuggestedMin.toLocaleString()} – ETB {aiSuggestedMax.toLocaleString()}
             </p>
             <span className="text-[11px] text-[#7C7265]">Estimated Market Retail</span>
           </div>
@@ -225,7 +225,7 @@ export default function CostCalculator({
           <div className="flex items-center justify-between">
             <label className="text-xs font-bold text-[#1A1613] uppercase tracking-wider flex items-center gap-1.5">
               <TrendingUp className="w-4 h-4 text-[#A8875E]" />
-              Final Retail Price ($)
+              Final Retail Price (ETB)
             </label>
             {isManualOverride && (
               <button
@@ -233,20 +233,20 @@ export default function CostCalculator({
                 onClick={resetToFormula}
                 className="text-[10px] font-bold text-[#A8875E] hover:underline"
               >
-                Reset to formula (${suggestedFormulaPrice})
+                Reset to formula (ETB {suggestedFormulaPrice})
               </button>
             )}
           </div>
           <div className="flex items-center gap-3">
             <div className="relative flex-1">
-              <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-lg font-bold text-[#7C7265]">$</span>
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-[#7C7265]">ETB</span>
               <input
                 type="number"
                 min="0"
-                step="25"
+                step="500"
                 value={finalPrice}
                 onChange={(e) => handleFinalPriceChange(Number(e.target.value))}
-                className="w-full pl-8 pr-4 py-2.5 bg-white rounded-xl border border-[#A8875E] text-xl font-bold text-[#1A1613] focus:outline-none focus:ring-2 focus:ring-[#A8875E]"
+                className="w-full pl-12 pr-4 py-2.5 bg-white rounded-xl border border-[#A8875E] text-xl font-bold text-[#1A1613] focus:outline-none focus:ring-2 focus:ring-[#A8875E]"
               />
             </div>
             <div className="text-right">

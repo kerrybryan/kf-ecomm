@@ -16,7 +16,7 @@ if (fs.existsSync(envPath)) {
   });
 }
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/nordika_furniture';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/kb_furniture';
 
 // 2. Define Mongoose Schemas directly to allow standalone CLI execution
 const CategorySchema = new mongoose.Schema(
@@ -255,10 +255,10 @@ const ReviewSchema = new mongoose.Schema(
 
 const SettingSchema = new mongoose.Schema(
   {
-    storeName: { type: String, default: 'Nordika Scandinavian Studio' },
-    storeEmail: { type: String, default: 'concierge@nordika.com' },
-    storePhone: { type: String, default: '+1 (206) 555-0199' },
-    storeAddress: { type: String, default: '440 Westlake Ave N, Suite 300, Seattle, WA 98109' },
+    storeName: { type: String, default: 'KB Furniture Scandinavian Studio' },
+    storeEmail: { type: String, default: 'concierge@kbfurniture.com' },
+    storePhone: { type: String, default: '+251 911 234 567' },
+    storeAddress: { type: String, default: 'Bole Sub-City, Addis Ababa, Ethiopia' },
     currency: {
       code: { type: String, default: 'USD' },
       symbol: { type: String, default: '$' },
@@ -436,7 +436,7 @@ const ShipmentSchema = new mongoose.Schema(
   {
     orderId: { type: mongoose.Schema.Types.ObjectId, ref: 'Order' },
     trackingNumber: { type: String, required: true, unique: true },
-    carrier: { type: String, default: 'Nordika White-Glove Fleet' },
+    carrier: { type: String, default: 'KB Furniture White-Glove Fleet' },
     driverName: { type: String, default: 'Erik Holmgren' },
     driverPhone: { type: String, default: '+1 (206) 555-0144' },
     vehicleId: { type: String, default: 'Van #4 (Sprinter EV)' },
@@ -539,7 +539,7 @@ const SEED_CATEGORIES = [
     slug: 'living-room',
     image: 'https://picsum.photos/seed/cat-living-room/800/800',
     icon: 'Armchair',
-    description: 'Sculptural modular bouclé sectionals, ergonomic armchairs, and minimalist oak benches.',
+    description: 'Comfortable sofas, armchairs, and living room chairs.',
     itemCount: 6,
   },
   {
@@ -547,7 +547,7 @@ const SEED_CATEGORIES = [
     slug: 'dining-room',
     image: 'https://picsum.photos/seed/cat-dining-room/800/800',
     icon: 'Layers',
-    description: 'Extendable European oak dining tables, sculptural travertine cocktail tables, and slim console desks.',
+    description: 'Solid wood dining tables, coffee tables, and side tables.',
     itemCount: 5,
   },
   {
@@ -555,7 +555,7 @@ const SEED_CATEGORIES = [
     slug: 'storage',
     image: 'https://picsum.photos/seed/cat-storage/800/800',
     icon: 'Archive',
-    description: 'Fluted wood sideboards, floating bookshelves, architectural wardrobes, and media credenzas.',
+    description: 'Wooden wardrobes, TV stands, and storage cabinets.',
     itemCount: 4,
   },
   {
@@ -563,7 +563,7 @@ const SEED_CATEGORIES = [
     slug: 'bedroom',
     image: 'https://picsum.photos/seed/cat-bedroom/800/800',
     icon: 'Bed',
-    description: 'Solid walnut platform bed frames, floating nightstands, and organic linen dressers.',
+    description: 'Solid wood beds, modern frames, and bedside tables.',
     itemCount: 4,
   },
   {
@@ -571,7 +571,7 @@ const SEED_CATEGORIES = [
     slug: 'doors',
     image: 'https://picsum.photos/seed/cat-doors/800/800',
     icon: 'DoorClosed',
-    description: 'Solid core interior wooden doors, slatted barn doors, and brushed brass architectural hardware.',
+    description: 'Solid wood interior doors and door fittings.',
     itemCount: 4,
   },
   {
@@ -579,7 +579,7 @@ const SEED_CATEGORIES = [
     slug: 'kitchen',
     image: 'https://picsum.photos/seed/cat-kitchen/800/800',
     icon: 'UtensilsCrossed',
-    description: 'Custom island counters, fluted timber pantry cabinets, and counter-height leather stools.',
+    description: 'Kitchen cabinets, islands, and high bar stools.',
     itemCount: 3,
   },
   {
@@ -587,7 +587,7 @@ const SEED_CATEGORIES = [
     slug: 'outdoor',
     image: 'https://picsum.photos/seed/cat-outdoor/800/800',
     icon: 'Sun',
-    description: 'Sustainably harvested teak loungers, concrete dining sets, and water-repellent lounge sofas.',
+    description: 'Weather-resistant patio chairs, tables, and benches.',
     itemCount: 3,
   },
   {
@@ -595,7 +595,7 @@ const SEED_CATEGORIES = [
     slug: 'home-office',
     image: 'https://picsum.photos/seed/cat-home-office/800/800',
     icon: 'Briefcase',
-    description: 'Executive solid oak work desks, ergonomic task chairs, and minimal credenzas.',
+    description: 'Strong wooden desks and comfortable office chairs.',
     itemCount: 3,
   },
   {
@@ -603,7 +603,7 @@ const SEED_CATEGORIES = [
     slug: 'lighting-decor',
     image: 'https://picsum.photos/seed/cat-lighting-decor/800/800',
     icon: 'Lamp',
-    description: 'Brushed brass floor lamps, hand-blown glass pendants, and organic travertine sculptures.',
+    description: 'Ceiling lights, floor lamps, and home decor.',
     itemCount: 3,
   },
   {
@@ -611,7 +611,7 @@ const SEED_CATEGORIES = [
     slug: 'custom-order',
     image: 'https://picsum.photos/seed/cat-custom-order/800/800',
     icon: 'Hammer',
-    description: 'Bespoke architectural woodwork, customized dimensions, and exclusive trade commissions.',
+    description: 'Custom made wood furniture built to your measurements.',
     itemCount: 2,
   },
 ];
@@ -619,19 +619,19 @@ const SEED_CATEGORIES = [
 const RAW_PRODUCTS = [
   // SEATING
   {
-    name: 'Nordika Haven Modular Bouclé Sofa',
-    slug: 'nordika-haven-modular-boucle-sofa',
+    name: 'KB Furniture Haven Modular Bouclé Sofa',
+    slug: 'kb-furniture-haven-modular-boucle-sofa',
     category: 'living-room',
-    price: 2450,
-    originalPrice: 2850,
+    price: 68000,
+    originalPrice: 78000,
     images: [
-      'https://picsum.photos/seed/nordika-haven-modular-boucle-sofa/800/800',
-      'https://picsum.photos/seed/nordika-haven-modular-boucle-sofa-2/800/800',
+      'https://picsum.photos/seed/kb-furniture-haven-modular-boucle-sofa/800/800',
+      'https://picsum.photos/seed/kb-furniture-haven-modular-boucle-sofa-2/800/800',
     ],
     colors: ['Oatmeal Cream', 'Charcoal', 'Walnut'],
-    materials: ['Textured Bouclé', 'FSC Solid Pine', 'Memory Foam'],
-    description: 'An architectural statement piece combining cloud-like comfort with clean Scandinavian proportions.',
-    specs: { dimensions: '112" W x 42" D x 29" H', weight: '165 lbs', materialDetails: 'Wool-blend bouclé', assembly: 'Minimal' },
+    materials: ['Solid Pine Wood', 'Cotton Fabric', 'High Density Foam'],
+    description: 'Made of solid wood with soft fabric. Fits 3 to 4 people comfortably. Easy to clean.',
+    specs: { dimensions: '112" W x 42" D x 29" H', weight: '165 lbs', materialDetails: 'Solid wood frame with fabric', assembly: 'Simple assembly' },
     rating: 4.9,
     reviewCount: 42,
     inStock: true,
@@ -644,15 +644,15 @@ const RAW_PRODUCTS = [
     name: 'Stockholm Curved Lounge Armchair',
     slug: 'stockholm-curved-lounge-armchair',
     category: 'living-room',
-    price: 890,
-    originalPrice: 1050,
+    price: 24500,
+    originalPrice: 29000,
     images: [
       'https://picsum.photos/seed/stockholm-curved-lounge-armchair/800/800',
       'https://picsum.photos/seed/stockholm-curved-lounge-armchair-2/800/800',
     ],
     colors: ['Warm Sand', 'Olive Velvet', 'Charcoal'],
     materials: ['Bouclé', 'Solid Oak Legs'],
-    description: 'Sculptural reading armchair with wrap-around ergonomic barrel curve.',
+    description: 'Comfortable reading armchair with solid oak legs and soft fabric cushion.',
     specs: { dimensions: '34" W x 32" D x 30" H', weight: '45 lbs' },
     rating: 4.8,
     reviewCount: 28,
@@ -666,15 +666,15 @@ const RAW_PRODUCTS = [
     name: 'Oslo Minimalist 3-Seater Leather Sofa',
     slug: 'oslo-minimalist-3-seater-leather-sofa',
     category: 'living-room',
-    price: 2150,
-    originalPrice: 2400,
+    price: 59000,
+    originalPrice: 66000,
     images: [
       'https://picsum.photos/seed/oslo-minimalist-3-seater-leather-sofa/800/800',
       'https://picsum.photos/seed/oslo-minimalist-3-seater-leather-sofa-2/800/800',
     ],
     colors: ['Cognac Leather', 'Dark Espresso'],
     materials: ['Full-Grain Leather', 'Solid Ash'],
-    description: 'Butter-soft Italian full-grain leather tailored over clean Scandinavian exposed wood rails.',
+    description: 'Solid ash wood frame with genuine leather seating. Seats 3 people.',
     specs: { dimensions: '88" W x 36" D x 31" H', weight: '130 lbs' },
     rating: 4.9,
     reviewCount: 19,
@@ -688,14 +688,14 @@ const RAW_PRODUCTS = [
     name: 'Bergen Upholstered Dining Bench',
     slug: 'bergen-upholstered-dining-bench',
     category: 'living-room',
-    price: 520,
+    price: 14500,
     images: [
       'https://picsum.photos/seed/bergen-upholstered-dining-bench/800/800',
       'https://picsum.photos/seed/bergen-upholstered-dining-bench-2/800/800',
     ],
     colors: ['Oatmeal', 'Charcoal'],
     materials: ['Solid Oak', 'Wool Weave'],
-    description: 'Solid European oak frame with high-density padded bench cushion.',
+    description: 'Solid oak bench with padded seat cushion. Fits 2 to 3 people.',
     specs: { dimensions: '60" W x 16" D x 18" H', weight: '32 lbs' },
     rating: 4.7,
     reviewCount: 12,
@@ -711,15 +711,15 @@ const RAW_PRODUCTS = [
     name: 'Aura Travertine & Walnut Coffee Table',
     slug: 'aura-travertine-walnut-coffee-table',
     category: 'dining-room',
-    price: 980,
-    originalPrice: 1180,
+    price: 28000,
+    originalPrice: 33000,
     images: [
       'https://picsum.photos/seed/aura-travertine-walnut-coffee-table/800/800',
       'https://picsum.photos/seed/aura-travertine-walnut-coffee-table-2/800/800',
     ],
     colors: ['Ivory Travertine', 'Honed Black Marble'],
     materials: ['Italian Travertine Stone', 'Solid American Walnut'],
-    description: 'Solid Roman travertine stone resting atop intersecting solid walnut pedestal pillars.',
+    description: 'Natural travertine stone top with strong solid walnut legs.',
     specs: { dimensions: '48" W x 28" D x 16" H', weight: '95 lbs' },
     rating: 5.0,
     reviewCount: 34,
@@ -733,15 +733,15 @@ const RAW_PRODUCTS = [
     name: 'Stockholm Extendable Oak Dining Table',
     slug: 'stockholm-extendable-oak-dining-table',
     category: 'dining-room',
-    price: 1850,
-    originalPrice: 2200,
+    price: 52000,
+    originalPrice: 62000,
     images: [
       'https://picsum.photos/seed/stockholm-extendable-oak-dining-table/800/800',
       'https://picsum.photos/seed/stockholm-extendable-oak-dining-table-2/800/800',
     ],
     colors: ['Natural White Oak', 'Smoked Oak'],
     materials: ['Solid European White Oak'],
-    description: 'Seamless German butterfly leaf mechanism extends from 6 to 10 dinner guests effortlessly.',
+    description: 'Solid white oak dining table. Extends easily from 6 to 10 seats.',
     specs: { dimensions: '78"-108" L x 38" W x 30" H', weight: '145 lbs' },
     rating: 4.9,
     reviewCount: 52,
@@ -755,14 +755,14 @@ const RAW_PRODUCTS = [
     name: 'Koben Minimalist Side Table',
     slug: 'koben-minimalist-side-table',
     category: 'dining-room',
-    price: 280,
+    price: 8500,
     images: [
       'https://picsum.photos/seed/koben-minimalist-side-table/800/800',
       'https://picsum.photos/seed/koben-minimalist-side-table-2/800/800',
     ],
     colors: ['Oak', 'Walnut', 'Black Ash'],
     materials: ['Solid Oak'],
-    description: 'Cylindrical tripod side table crafted with concealed screwless joints.',
+    description: 'Solid oak side table. Sturdy and easy to move around.',
     specs: { dimensions: '18" Dia x 20" H', weight: '14 lbs' },
     rating: 4.6,
     reviewCount: 16,
@@ -778,15 +778,15 @@ const RAW_PRODUCTS = [
     name: 'Malmö Fluted Solid Oak Sideboard',
     slug: 'malmo-fluted-solid-oak-sideboard',
     category: 'storage',
-    price: 1650,
-    originalPrice: 1950,
+    price: 46000,
+    originalPrice: 54000,
     images: [
       'https://picsum.photos/seed/malmo-fluted-solid-oak-sideboard/800/800',
       'https://picsum.photos/seed/malmo-fluted-solid-oak-sideboard-2/800/800',
     ],
     colors: ['Natural Oak', 'Smoked Walnut'],
     materials: ['Solid White Oak', 'Soft-Close German Hinges'],
-    description: 'Precision CNC-fluted door fronts with push-to-open concealed acoustic dampeners.',
+    description: 'Solid oak storage cabinet with push-to-open doors and spacious shelves.',
     specs: { dimensions: '72" W x 18" D x 30" H', weight: '125 lbs' },
     rating: 4.9,
     reviewCount: 23,
@@ -800,14 +800,14 @@ const RAW_PRODUCTS = [
     name: 'Gothenburg Modular Oak Wall Bookshelf',
     slug: 'gothenburg-modular-oak-wall-bookshelf',
     category: 'storage',
-    price: 1120,
+    price: 32000,
     images: [
       'https://picsum.photos/seed/gothenburg-modular-oak-wall-bookshelf/800/800',
       'https://picsum.photos/seed/gothenburg-modular-oak-wall-bookshelf-2/800/800',
     ],
     colors: ['Oak', 'Walnut'],
     materials: ['FSC White Oak'],
-    description: 'Architectural modular shelving unit designed for open floor plans and modern studios.',
+    description: 'Solid wood wall bookshelf with open shelves for books and decor.',
     specs: { dimensions: '64" W x 14" D x 78" H', weight: '110 lbs' },
     rating: 4.8,
     reviewCount: 14,
@@ -823,15 +823,15 @@ const RAW_PRODUCTS = [
     name: 'Nordic Floating Platform Bed',
     slug: 'nordic-floating-platform-bed',
     category: 'bedroom',
-    price: 1950,
-    originalPrice: 2300,
+    price: 54000,
+    originalPrice: 64000,
     images: [
       'https://picsum.photos/seed/nordic-floating-platform-bed/800/800',
       'https://picsum.photos/seed/nordic-floating-platform-bed-2/800/800',
     ],
     colors: ['American Walnut', 'White Oak'],
     materials: ['Solid American Walnut', 'Solid Slats'],
-    description: 'Concealed cantilever base creates a weightless floating illusion in the master sanctuary.',
+    description: 'Solid walnut platform bed with wooden slats. Fits standard king mattress.',
     specs: { dimensions: '84" L x 76" W x 38" H (King)', weight: '180 lbs' },
     rating: 5.0,
     reviewCount: 39,
@@ -845,14 +845,14 @@ const RAW_PRODUCTS = [
     name: 'Visby Minimalist Nightstand Set',
     slug: 'visby-minimalist-nightstand-set',
     category: 'bedroom',
-    price: 540,
+    price: 15500,
     images: [
       'https://picsum.photos/seed/visby-minimalist-nightstand-set/800/800',
       'https://picsum.photos/seed/visby-minimalist-nightstand-set-2/800/800',
     ],
     colors: ['Natural Oak', 'Smoked Oak'],
     materials: ['Solid Oak', 'Felt Lining'],
-    description: 'Pair of compact bedside drawer tables with soft-closing Blum slides.',
+    description: 'Set of two solid oak bedside tables with smooth-closing drawers.',
     specs: { dimensions: '20" W x 16" D x 19" H (each)', weight: '38 lbs' },
     rating: 4.7,
     reviewCount: 21,
@@ -868,15 +868,15 @@ const RAW_PRODUCTS = [
     name: 'Vanguard Slatted Solid Oak Interior Door',
     slug: 'vanguard-slatted-solid-oak-interior-door',
     category: 'doors',
-    price: 680,
-    originalPrice: 820,
+    price: 18500,
+    originalPrice: 22000,
     images: [
       'https://picsum.photos/seed/vanguard-slatted-solid-oak-interior-door/800/800',
       'https://picsum.photos/seed/vanguard-slatted-solid-oak-interior-door-2/800/800',
     ],
     colors: ['Natural Oak', 'Blackened Timber', 'Smoked Walnut'],
     materials: ['Solid Core Hardwood', 'Concealed Pivot Hinges'],
-    description: 'Vertical acoustic timber slats with solid sound-dampening core and magnetic latch.',
+    description: 'Solid wood interior door with clean vertical wood design.',
     specs: { dimensions: '36" W x 84" H x 1.75" D', weight: '85 lbs' },
     rating: 4.9,
     reviewCount: 17,
@@ -890,14 +890,14 @@ const RAW_PRODUCTS = [
     name: 'Architectural Modern Barn Door with Hardware',
     slug: 'architectural-modern-barn-door-hardware',
     category: 'doors',
-    price: 790,
+    price: 21500,
     images: [
       'https://picsum.photos/seed/architectural-modern-barn-door-hardware/800/800',
       'https://picsum.photos/seed/architectural-modern-barn-door-hardware-2/800/800',
     ],
     colors: ['Raw European Oak', 'Charcoal Stained'],
     materials: ['Solid Oak', 'Matte Black Steel Rail'],
-    description: 'Whisper-quiet sliding barn door with precision ball-bearing top rail system.',
+    description: 'Smooth sliding barn door with strong steel rail hardware.',
     specs: { dimensions: '40" W x 84" H', weight: '90 lbs' },
     rating: 4.8,
     reviewCount: 15,
@@ -910,17 +910,17 @@ const RAW_PRODUCTS = [
 
   // KITCHEN & CABINETRY
   {
-    name: 'Nordika Custom Kitchen Island with Travertine',
-    slug: 'nordika-custom-kitchen-island-travertine',
+    name: 'KB Furniture Custom Kitchen Island with Travertine',
+    slug: 'kb-furniture-custom-kitchen-island-travertine',
     category: 'kitchen',
-    price: 3200,
+    price: 89000,
     images: [
-      'https://picsum.photos/seed/nordika-custom-kitchen-island-travertine/800/800',
-      'https://picsum.photos/seed/nordika-custom-kitchen-island-travertine-2/800/800',
+      'https://picsum.photos/seed/kb-furniture-custom-kitchen-island-travertine/800/800',
+      'https://picsum.photos/seed/kb-furniture-custom-kitchen-island-travertine-2/800/800',
     ],
     colors: ['Oatmeal Oak', 'Charcoal Timber'],
     materials: ['Solid Oak', 'Honed Roman Travertine'],
-    description: 'Freestanding kitchen island unit with fluted bar counter overhang and cutlery drawers.',
+    description: 'Freestanding kitchen island with stone counter and storage drawers.',
     specs: { dimensions: '84" W x 36" D x 36" H', weight: '260 lbs' },
     rating: 5.0,
     reviewCount: 8,
@@ -934,14 +934,14 @@ const RAW_PRODUCTS = [
     name: 'Copenhagen Leather Counter Stool Set (2)',
     slug: 'copenhagen-leather-counter-stool-set',
     category: 'kitchen',
-    price: 640,
+    price: 17500,
     images: [
       'https://picsum.photos/seed/copenhagen-leather-counter-stool-set/800/800',
       'https://picsum.photos/seed/copenhagen-leather-counter-stool-set-2/800/800',
     ],
     colors: ['Cognac', 'Black Leather'],
     materials: ['Solid Oak', 'Top-Grain Leather'],
-    description: 'Set of two counter-height stools with ergonomic contoured seat pan.',
+    description: 'Set of two counter stools with real leather seats and solid wood legs.',
     specs: { dimensions: '19" W x 20" D x 36" H (Seat: 26")', weight: '22 lbs each' },
     rating: 4.8,
     reviewCount: 29,
@@ -957,14 +957,14 @@ const RAW_PRODUCTS = [
     name: 'Solvorn Teak Outdoor Lounge Chair Set',
     slug: 'solvorn-teak-outdoor-lounge-chair-set',
     category: 'outdoor',
-    price: 1350,
+    price: 38000,
     images: [
       'https://picsum.photos/seed/solvorn-teak-outdoor-lounge-chair-set/800/800',
       'https://picsum.photos/seed/solvorn-teak-outdoor-lounge-chair-set-2/800/800',
     ],
     colors: ['Natural Teak / Sand Upholstery'],
     materials: ['Grade-A Teak', 'Sunbrella Performance Fabric'],
-    description: 'Weatherproof high-oil plantation teak that weathers gracefully to silver patina.',
+    description: 'Set of two outdoor lounge chairs made from weather-resistant solid teak wood.',
     specs: { dimensions: '32" W x 34" D x 28" H', weight: '42 lbs each' },
     rating: 4.9,
     reviewCount: 18,
@@ -980,15 +980,15 @@ const RAW_PRODUCTS = [
     name: 'Kobenhavn Executive Oak Desk',
     slug: 'kobenhavn-executive-oak-desk',
     category: 'home-office',
-    price: 1450,
-    originalPrice: 1680,
+    price: 41000,
+    originalPrice: 48000,
     images: [
       'https://picsum.photos/seed/kobenhavn-executive-oak-desk/800/800',
       'https://picsum.photos/seed/kobenhavn-executive-oak-desk-2/800/800',
     ],
     colors: ['White Oak', 'American Walnut'],
     materials: ['Solid Oak', 'Concealed Cable Channel'],
-    description: 'Clean floating tabletop with discreet magnetic cable organizer and soft-close drawers.',
+    description: 'Solid oak office desk with storage drawers and cable organizer.',
     specs: { dimensions: '64" W x 30" D x 30" H', weight: '95 lbs' },
     rating: 4.9,
     reviewCount: 31,
@@ -1004,14 +1004,14 @@ const RAW_PRODUCTS = [
     name: 'Aalto Sculptural Brass Pendant Lamp',
     slug: 'aalto-sculptural-brass-pendant-lamp',
     category: 'lighting-decor',
-    price: 380,
+    price: 9500,
     images: [
       'https://picsum.photos/seed/aalto-sculptural-brass-pendant-lamp/800/800',
       'https://picsum.photos/seed/aalto-sculptural-brass-pendant-lamp-2/800/800',
     ],
     colors: ['Brushed Brass', 'Matte Black', 'Brushed Nickel'],
     materials: ['Solid Spun Brass', 'Mouth-Blown Opal Glass'],
-    description: 'Warm ambient glow with architectural tiered spun brass reflectors.',
+    description: 'Modern brass hanging light fixture for dining room or living room.',
     specs: { dimensions: '16" Dia x 12" H (6ft adjustable cord)', weight: '8 lbs' },
     rating: 4.9,
     reviewCount: 44,
@@ -1024,12 +1024,12 @@ const RAW_PRODUCTS = [
 
   // DRAFT PRODUCTS (FOR ADMIN WORKFLOW TESTING)
   {
-    name: 'Nordika Prototype Travertine Pedestal [DRAFT]',
-    slug: 'nordika-prototype-travertine-pedestal-draft',
+    name: 'KB Furniture Prototype Travertine Pedestal [DRAFT]',
+    slug: 'kb-furniture-prototype-travertine-pedestal-draft',
     category: 'lighting-decor',
-    price: 620,
+    price: 16500,
     images: [
-      'https://picsum.photos/seed/nordika-prototype-travertine-pedestal-draft/800/800',
+      'https://picsum.photos/seed/kb-furniture-prototype-travertine-pedestal-draft/800/800',
     ],
     colors: ['Honed Travertine'],
     materials: ['Raw Travertine'],
@@ -1045,7 +1045,7 @@ const RAW_PRODUCTS = [
     name: 'Oslo Minimalist Daybed Prototype [DRAFT]',
     slug: 'oslo-minimalist-daybed-prototype-draft',
     category: 'living-room',
-    price: 1890,
+    price: 49000,
     images: [
       'https://picsum.photos/seed/oslo-minimalist-daybed-prototype-draft/800/800',
     ],
@@ -1064,7 +1064,7 @@ const RAW_PRODUCTS = [
 const SAMPLE_USERS = [
   {
     name: 'Astrid Lindgren',
-    email: 'admin@nordika.com',
+    email: 'admin@kbfurniture.com',
     role: 'super_admin',
     phone: '+1 (206) 555-0100',
     notes: 'Primary executive administrator with unrestricted platform privileges.',
@@ -1082,28 +1082,28 @@ const SAMPLE_USERS = [
   },
   {
     name: 'Henrik Vanger',
-    email: 'pm@nordika.com',
+    email: 'pm@kbfurniture.com',
     role: 'product_manager',
     phone: '+1 (206) 555-0101',
     notes: 'Lead product catalog manager and visual merchandiser.',
   },
   {
     name: 'Elin Blomqvist',
-    email: 'sales@nordika.com',
+    email: 'sales@kbfurniture.com',
     role: 'sales_manager',
     phone: '+1 (206) 555-0102',
     notes: 'Directs wholesale accounts, trade commissions, and concierge quotes.',
   },
   {
     name: 'Linnea Holm',
-    email: 'support@nordika.com',
+    email: 'support@kbfurniture.com',
     role: 'support',
     phone: '+1 (206) 555-0103',
     notes: 'Handles client support tickets, shipping inquiries, and order notes.',
   },
   {
     name: 'Freja Lind',
-    email: 'demo@nordika.com',
+    email: 'demo@kbfurniture.com',
     role: 'customer',
     addresses: [
       {
@@ -1314,7 +1314,7 @@ const SAMPLE_REVIEWS_TEMPLATES = [
 // 4. Main Seed Function
 async function seed() {
   console.log('\n=========================================');
-  console.log('🌱 NORDIKA LUXURY FURNITURE — SEED SCRIPT');
+  console.log('🌱 KB FURNITURE LUXURY FURNITURE — SEED SCRIPT');
   console.log('=========================================');
   console.log(`Connecting to: ${MONGODB_URI.replace(/\/\/([^:]+):([^@]+)@/, '//$1:****@')}...`);
 
@@ -1352,27 +1352,26 @@ async function seed() {
     // 1.1 Seed Store Settings
     console.log('⚙️ Seeding Store Settings & Configuration...');
     const defaultSetting = await Setting.create({
-      storeName: 'Nordika Scandinavian Studio',
-      storeEmail: 'concierge@nordika.com',
-      storePhone: '+1 (206) 555-0199',
-      storeAddress: '440 Westlake Ave N, Suite 300, Seattle, WA 98109',
-      currency: { code: 'USD', symbol: '$' },
+      storeName: 'KB Furniture Scandinavian Studio',
+      storeEmail: 'concierge@kbfurniture.com',
+      storePhone: '+251 911 234 567',
+      storeAddress: 'Bole Sub-City, Addis Ababa, Ethiopia',
+      currency: { code: 'ETB', symbol: 'Birr' },
       shippingRules: {
-        flatRate: 150,
-        freeShippingThreshold: 2000,
-        expeditedRate: 350,
-        whiteGloveRate: 450,
+        flatRate: 1500,
+        freeShippingThreshold: 50000,
+        expeditedRate: 3500,
+        whiteGloveRate: 4500,
       },
       taxRates: [
-        { region: 'Washington (WA)', rate: 8.5 },
-        { region: 'California (CA)', rate: 7.25 },
-        { region: 'New York (NY)', rate: 8.875 },
+        { region: 'Addis Ababa', rate: 15.0 },
+        { region: 'Regional Cities', rate: 15.0 },
       ],
       paymentMethods: {
         creditCard: true,
         applePay: true,
         bankTransfer: true,
-        cashOnDelivery: false,
+        cashOnDelivery: true,
       },
       globalCommissionRate: 10,
       homepageSections: {
@@ -1420,7 +1419,7 @@ async function seed() {
       createdAt: getRandomPastDate(30),
     }));
     const createdUsers = await User.insertMany(userDocs);
-    console.log(`✅ Seeded ${createdUsers.length} users (Super Admin: admin@nordika.com / PW: password123).`);
+    console.log(`✅ Seeded ${createdUsers.length} users (Super Admin: admin@kbfurniture.com / PW: password123).`);
 
     // 5. Seed Orders (18 orders with audit timeline)
     console.log('📑 Seeding Realistic Orders across last 30 days with Audit Timelines...');
@@ -1435,8 +1434,8 @@ async function seed() {
       const qty1 = 1;
       const qty2 = i % 3 === 0 ? 2 : 1;
       const subtotal = prod1.price * qty1 + (i % 2 === 0 ? prod2.price * qty2 : 0);
-      const tax = Math.round(subtotal * 0.085);
-      const shipping = subtotal > 2000 ? 0 : 150;
+      const tax = Math.round(subtotal * 0.15);
+      const shipping = subtotal > 50000 ? 0 : 1500;
       const total = subtotal + tax + shipping;
       const currentStatus = orderStatuses[i % orderStatuses.length];
       const orderDate = getRandomPastDate(28);
@@ -1509,7 +1508,7 @@ async function seed() {
         customer: {
           name: orderUser.name,
           email: orderUser.email,
-          phone: orderUser.phone || '+1 (206) 555-0199',
+          phone: orderUser.phone || '+251 911 234 567',
           address: orderUser.addresses?.[0] || {
             street: '440 Westlake Ave',
             city: 'Seattle',
@@ -1590,7 +1589,7 @@ async function seed() {
     console.log('🎨 Seeding Source Studio Inspiration Items...');
     const sourcedItemDocs = [
       {
-        sourceImageUrl: 'https://picsum.photos/seed/nordika-armchair-insp/800/800',
+        sourceImageUrl: 'https://picsum.photos/seed/kb-furniture-armchair-insp/800/800',
         sourceUrl: 'https://pinterest.com/pin/nordic-curved-boucle-chair',
         isReferenceOnly: true,
         aiAnalysis: {
@@ -1677,40 +1676,40 @@ async function seed() {
     const socialAccountDocs = [
       {
         platform: 'instagram',
-        accountName: 'Nordika Scandinavian Studio',
-        accountHandle: '@nordika.studio',
-        accountAvatarUrl: 'https://picsum.photos/seed/nordika-avatar/200/200',
-        profileUrl: 'https://instagram.com/nordika.studio',
+        accountName: 'KB Furniture Scandinavian Studio',
+        accountHandle: '@kbfurniture.studio',
+        accountAvatarUrl: 'https://picsum.photos/seed/kb-furniture-avatar/200/200',
+        profileUrl: 'https://instagram.com/kbfurniture.studio',
         status: 'connected',
         followerCount: 24800,
         connectedAt: getRandomPastDate(60),
       },
       {
         platform: 'pinterest',
-        accountName: 'Nordika Scandinavian Living',
-        accountHandle: '@nordikahome',
-        accountAvatarUrl: 'https://picsum.photos/seed/nordika-avatar/200/200',
-        profileUrl: 'https://pinterest.com/nordikahome',
+        accountName: 'KB Furniture Living',
+        accountHandle: '@kbfurniturehome',
+        accountAvatarUrl: 'https://picsum.photos/seed/kb-furniture-avatar/200/200',
+        profileUrl: 'https://pinterest.com/kbfurniturehome',
         status: 'connected',
         followerCount: 41200,
         connectedAt: getRandomPastDate(50),
       },
       {
         platform: 'facebook',
-        accountName: 'Nordika Studio Official Page',
-        accountHandle: 'Nordika Scandinavian Furniture',
-        accountAvatarUrl: 'https://picsum.photos/seed/nordika-avatar/200/200',
-        profileUrl: 'https://facebook.com/nordikastudio',
+        accountName: 'KB Furniture Official Page',
+        accountHandle: 'KB Furniture',
+        accountAvatarUrl: 'https://picsum.photos/seed/kb-furniture-avatar/200/200',
+        profileUrl: 'https://facebook.com/kbfurniture',
         status: 'connected',
         followerCount: 18200,
         connectedAt: getRandomPastDate(45),
       },
       {
         platform: 'tiktok',
-        accountName: 'Nordika Studio Workshop',
-        accountHandle: '@nordikadesign',
-        accountAvatarUrl: 'https://picsum.photos/seed/nordika-avatar/200/200',
-        profileUrl: 'https://tiktok.com/@nordikadesign',
+        accountName: 'KB Furniture Workshop',
+        accountHandle: '@kbfurnituredesign',
+        accountAvatarUrl: 'https://picsum.photos/seed/kb-furniture-avatar/200/200',
+        profileUrl: 'https://tiktok.com/@kbfurnituredesign',
         status: 'connected',
         followerCount: 52400,
         connectedAt: getRandomPastDate(30),
@@ -1726,7 +1725,7 @@ async function seed() {
       mode: 'review_queue',
       defaultPlatforms: ['instagram', 'pinterest', 'facebook'],
       defaultCaptionTemplate:
-        'Introducing the {productName} — masterfully crafted in {material}. Starting at ${price}.\n\nExplore our bespoke Scandinavian collection online at Nordika Studio. ✨\n\n#NordicDesign #ScandinavianLiving #BespokeFurniture #NordikaStudio #LuxuryInteriors',
+        'Introducing the {productName} — masterfully crafted in {material}. Starting at ${price}.\n\nExplore our bespoke Scandinavian collection online at KB Furniture Studio. ✨\n\n#NordicDesign #ScandinavianLiving #BespokeFurniture #KBFurniture #LuxuryInteriors',
       enabled: true,
     });
     console.log('✅ Seeded social automation rules.');
@@ -1744,8 +1743,8 @@ async function seed() {
         mediaUrl: createdProducts[0].images[0],
         platforms: ['instagram', 'pinterest', 'facebook'],
         captions: {
-          default: `Sculptural serenity for intentional spaces. The ${createdProducts[0].name} balances clean Nordic proportions with tactile bouclé.\n\nHandcrafted for those who find beauty in restraint.\n\nDiscover the studio collection at nordika.com ✨\n\n#NordicDesign #ScandinavianModern #ArchitecturalFurniture #QuietLuxury`,
-          instagram: `Sculptural serenity for intentional spaces. The ${createdProducts[0].name} balances clean Nordic proportions with tactile bouclé.\n\nDiscover the studio collection at nordika.com ✨\n\n#NordicDesign #ScandinavianModern #ArchitecturalFurniture #QuietLuxury`,
+          default: `Sculptural serenity for intentional spaces. The ${createdProducts[0].name} balances clean Nordic proportions with tactile bouclé.\n\nHandcrafted for those who find beauty in restraint.\n\nDiscover the studio collection at kbfurniture.com ✨\n\n#NordicDesign #ScandinavianModern #ArchitecturalFurniture #QuietLuxury`,
+          instagram: `Sculptural serenity for intentional spaces. The ${createdProducts[0].name} balances clean Nordic proportions with tactile bouclé.\n\nDiscover the studio collection at kbfurniture.com ✨\n\n#NordicDesign #ScandinavianModern #ArchitecturalFurniture #QuietLuxury`,
         },
         status: 'posted',
         publishedAt: getRandomPastDate(3),
@@ -1809,7 +1808,7 @@ async function seed() {
         mediaUrl: createdProducts[4].images[0],
         platforms: ['instagram'],
         captions: {
-          default: `Draft social copy for ${createdProducts[4].name}.\n\n#NordikaStudio`,
+          default: `Draft social copy for ${createdProducts[4].name}.\n\n#KBFurniture`,
         },
         status: 'draft',
         createdBy: createdUsers[0]._id,
@@ -2083,7 +2082,7 @@ async function seed() {
         code: 'ZONE-SEATTLE',
         regionCodes: ['WA-981', 'WA-980', 'WA-982', 'WA-983', 'WA-984'],
         baseCost: 150,
-        freeShippingThreshold: 2000,
+        freeShippingThreshold: 50000,
         whiteGloveSurcharge: 250,
         active: true,
       },
@@ -2124,7 +2123,7 @@ async function seed() {
       {
         orderId: createdOrders[0]._id,
         trackingNumber: 'NORD-LOG-982144',
-        carrier: 'Nordika White-Glove Fleet',
+        carrier: 'KB Furniture White-Glove Fleet',
         driverName: 'Erik Holmgren',
         driverPhone: '+1 (206) 555-0144',
         vehicleId: 'Van #4 (Sprinter EV)',
@@ -2144,7 +2143,7 @@ async function seed() {
       {
         orderId: createdOrders[1]._id,
         trackingNumber: 'NORD-LOG-871239',
-        carrier: 'Nordika White-Glove Fleet',
+        carrier: 'KB Furniture White-Glove Fleet',
         driverName: 'Erik Holmgren',
         driverPhone: '+1 (206) 555-0144',
         vehicleId: 'Van #4 (Sprinter EV)',

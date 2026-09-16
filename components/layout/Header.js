@@ -7,16 +7,59 @@ import {
   Search,
   Heart,
   ShoppingBag,
-  ChevronDown,
   Menu,
   X,
   User as UserIcon,
   LogOut,
   Package,
+  ChevronDown,
+  ArrowRight,
 } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import { useAuth } from '@/context/AuthContext';
+import BrandLogo from '@/components/ui/BrandLogo';
+
+// Mega-menu data: rooms with image + description
+const MEGA_MENU_ROOMS = [
+  {
+    name: 'Living Room',
+    slug: 'living-room',
+    image: 'https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=400',
+    desc: 'Sofas & Armchairs',
+  },
+  {
+    name: 'Bedroom',
+    slug: 'bedroom',
+    image: 'https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=400',
+    desc: 'Beds & Nightstands',
+  },
+  {
+    name: 'Dining Room',
+    slug: 'dining-room',
+    image: 'https://images.pexels.com/photos/1090638/pexels-photo-1090638.jpeg?auto=compress&cs=tinysrgb&w=400',
+    desc: 'Tables & Chairs',
+  },
+  {
+    name: 'Home Office',
+    slug: 'home-office',
+    image: 'https://images.pexels.com/photos/667838/pexels-photo-667838.jpeg?auto=compress&cs=tinysrgb&w=400',
+    desc: 'Desks & Task Chairs',
+  },
+  {
+    name: 'Outdoor',
+    slug: 'outdoor',
+    image: 'https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=400',
+    desc: 'Patio & Lounge',
+  },
+  {
+    name: 'Lighting & Decor',
+    slug: 'lighting-decor',
+    image: 'https://images.pexels.com/photos/1148955/pexels-photo-1148955.jpeg?auto=compress&cs=tinysrgb&w=400',
+    desc: 'Pendants & Accents',
+  },
+];
+
 
 export default function Header() {
   const pathname = usePathname();
@@ -27,7 +70,7 @@ export default function Header() {
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
@@ -42,7 +85,7 @@ export default function Header() {
 
   useEffect(() => {
     setMobileMenuOpen(false);
-    setSearchOpen(false);
+    setMobileSearchOpen(false);
     setActiveDropdown(null);
     setUserDropdownOpen(false);
   }, [pathname]);
@@ -51,7 +94,7 @@ export default function Header() {
     e.preventDefault();
     if (searchQuery.trim()) {
       router.push(`/shop?search=${encodeURIComponent(searchQuery.trim())}`);
-      setSearchOpen(false);
+      setMobileSearchOpen(false);
       setSearchQuery('');
     }
   };
@@ -59,261 +102,259 @@ export default function Header() {
   return (
     <>
       <header
-        className={`w-full bg-[#F3ECE1] transition-all duration-300 z-40 sticky top-0 ${
+        id="site-header"
+        className={`w-full bg-white transition-all duration-200 z-40 sticky top-0 ${
           isScrolled
-            ? 'shadow-xs border-b border-[#DCD1BE] py-3 bg-[#F3ECE1]/95 backdrop-blur-xs'
-            : 'py-4'
+            ? 'shadow-sm border-b border-stone-200 py-2.5 bg-white/97 backdrop-blur-md'
+            : 'border-b border-stone-100 py-3'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between gap-6">
-            {/* Left: Logo Placeholder (130x40px, subtle dashed border, blends into page) */}
-            <div className="flex items-center gap-3">
+          <div className="flex items-center justify-between gap-4 lg:gap-6">
+
+            {/* 1. Left Group: Hamburger + Logo + Nav */}
+            <div className="flex items-center gap-4 lg:gap-7 shrink-0">
+              {/* Mobile Hamburger */}
               <button
+                id="mobile-menu-button"
                 onClick={() => setMobileMenuOpen(true)}
-                className="lg:hidden p-1.5 text-[#2B2620] hover:text-[#A8875E] -ml-1.5"
+                className="lg:hidden p-2 text-stone-800 hover:text-stone-900 hover:bg-stone-100 rounded-full transition-colors -ml-2"
                 aria-label="Open navigation menu"
               >
                 <Menu className="w-5 h-5" />
               </button>
 
-              <Link
-                href="/"
-                className="w-[130px] h-[40px] border border-dashed border-[#DCD1BE] hover:border-[#A8875E] rounded-md bg-[#EAE1D2]/40 flex items-center justify-center transition-colors shrink-0"
-                title="Logo Placeholder"
-                aria-label="Homepage"
+              {/* Brand Logo with Official Icon Mark */}
+              <BrandLogo variant="terracotta" size="md" />
+
+              {/* Primary Nav */}
+              <nav
+                id="primary-nav"
+                className="hidden lg:flex items-center gap-6 xl:gap-7 text-sm font-medium text-stone-800"
               >
-                <span className="sr-only">Homepage</span>
-              </Link>
+                {/* Shop Dropdown */}
+                <div
+                  className="relative"
+                  onMouseEnter={() => setActiveDropdown('shop')}
+                  onMouseLeave={() => setActiveDropdown(null)}
+                >
+                  <Link
+                    href="/shop"
+                    id="nav-shop"
+                    className={`py-1.5 flex items-center gap-1 transition-colors hover:text-[#B8551F] group/link relative ${
+                      pathname === '/shop' ? 'text-[#B8551F] font-semibold' : 'text-stone-800'
+                    }`}
+                  >
+                    <span>Shop</span>
+                    <ChevronDown
+                      className={`w-3.5 h-3.5 text-stone-400 transition-transform duration-200 ${
+                        activeDropdown === 'shop' ? 'rotate-180 text-[#B8551F]' : ''
+                      }`}
+                    />
+                    {/* Active underline */}
+                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#B8551F] scale-x-0 group-hover/link:scale-x-100 transition-transform origin-left duration-200 rounded-full" />
+                  </Link>
+
+                  {/* Simple shop dropdown */}
+                  {activeDropdown === 'shop' && (
+                    <div className="absolute top-full left-0 w-48 bg-white rounded-xl shadow-xl border border-stone-200 py-2 z-50">
+                      {[
+                        { label: 'All Furniture', href: '/shop' },
+                        { label: 'Best Sellers', href: '/shop?sort=featured' },
+                        { label: 'New Arrivals', href: '/shop?sort=newest' },
+                        { label: 'Deals & Offers', href: '/shop?sort=featured' },
+                      ].map((item) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          className="block px-4 py-2 text-xs text-stone-700 hover:bg-stone-50 hover:text-[#B8551F] transition-colors"
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Rooms Mega-Menu */}
+                <div
+                  className="relative"
+                  onMouseEnter={() => setActiveDropdown('rooms')}
+                  onMouseLeave={() => setActiveDropdown(null)}
+                >
+                  <button
+                    id="nav-rooms"
+                    type="button"
+                    className={`py-1.5 flex items-center gap-1 transition-colors hover:text-[#B8551F] relative group/link ${
+                      activeDropdown === 'rooms' ? 'text-[#B8551F]' : 'text-stone-800'
+                    }`}
+                  >
+                    <span>Rooms</span>
+                    <ChevronDown
+                      className={`w-3.5 h-3.5 text-stone-400 transition-transform duration-200 ${
+                        activeDropdown === 'rooms' ? 'rotate-180 text-[#B8551F]' : ''
+                      }`}
+                    />
+                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#B8551F] scale-x-0 group-hover/link:scale-x-100 transition-transform origin-left duration-200 rounded-full" />
+                  </button>
+
+                  {/* MEGA MENU PANEL */}
+                  {activeDropdown === 'rooms' && (
+                    <div
+                      id="rooms-mega-menu"
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-0 w-[640px] bg-white rounded-2xl shadow-2xl border border-stone-200 p-6 z-50"
+                    >
+                      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-400 mb-4">
+                        Shop by Room
+                      </p>
+                      <div className="grid grid-cols-3 gap-3">
+                        {MEGA_MENU_ROOMS.map((room) => (
+                          <Link
+                            key={room.slug}
+                            href={`/shop?category=${encodeURIComponent(room.slug)}`}
+                            className="group/room flex flex-col rounded-xl overflow-hidden border border-stone-100 hover:border-[#B8551F]/40 hover:shadow-md transition-all duration-200"
+                          >
+                            <div className="relative h-24 overflow-hidden bg-stone-100">
+                              <img
+                                src={room.image}
+                                alt={room.name}
+                                className="w-full h-full object-cover object-center group-hover/room:scale-105 transition-transform duration-400"
+                              />
+                            </div>
+                            <div className="px-3 py-2">
+                              <p className="text-xs font-bold text-stone-900 group-hover/room:text-[#B8551F] transition-colors">
+                                {room.name}
+                              </p>
+                              <p className="text-[10px] text-stone-500 mt-0.5">{room.desc}</p>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                      <div className="mt-4 pt-3 border-t border-stone-100 flex justify-between items-center">
+                        <span className="text-[11px] text-stone-500">
+                          All handcrafted in Addis Ababa
+                        </span>
+                        <Link
+                          href="/shop"
+                          className="inline-flex items-center gap-1.5 text-xs font-bold text-[#B8551F] hover:text-[#8F4116] transition-colors"
+                        >
+                          View All Furniture
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {[
+                  { label: 'Deals', href: '/shop?sort=featured', id: 'nav-deals' },
+                  { label: 'Custom Order', href: '/custom-order', id: 'nav-custom' },
+                  { label: 'Contact', href: '/contact', id: 'nav-contact' },
+                ].map((link) => (
+                  <Link
+                    key={link.id}
+                    id={link.id}
+                    href={link.href}
+                    className="py-1.5 transition-colors hover:text-[#B8551F] text-stone-800 relative group/link"
+                  >
+                    {link.label}
+                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#B8551F] scale-x-0 group-hover/link:scale-x-100 transition-transform origin-left duration-200 rounded-full" />
+                  </Link>
+                ))}
+              </nav>
             </div>
 
-            {/* Center: Primary Navigation Links */}
-            <nav className="hidden lg:flex items-center gap-8">
-              <Link
-                href="/"
-                className={`text-[12px] uppercase tracking-[0.14em] font-medium transition-colors hover:text-[#A8875E] ${
-                  pathname === '/' ? 'text-[#A8875E] font-semibold' : 'text-[#2B2620]'
-                }`}
-              >
-                Home
-              </Link>
+            {/* 2. Center: Search Bar */}
+            <div className="hidden md:flex flex-1 max-w-lg lg:max-w-xl mx-2">
+              <form onSubmit={handleSearchSubmit} className="w-full relative">
+                <div className="w-full flex items-center bg-[#F2F2F2] hover:bg-[#EBEBEB] focus-within:bg-white focus-within:ring-2 focus-within:ring-stone-900 border border-transparent rounded-full px-4 py-2.5 transition-all">
+                  <Search className="w-4 h-4 text-stone-500 mr-2.5 shrink-0" />
+                  <input
+                    id="desktop-search"
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="What are you looking for?"
+                    className="w-full bg-transparent text-xs sm:text-sm text-stone-900 placeholder:text-stone-500 focus:outline-none"
+                  />
+                  {searchQuery && (
+                    <button
+                      type="button"
+                      onClick={() => setSearchQuery('')}
+                      className="p-1 text-stone-400 hover:text-stone-600 ml-1"
+                    >
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  )}
+                </div>
+              </form>
+            </div>
 
-              {/* Shop Dropdown */}
-              <div
-                className="relative"
-                onMouseEnter={() => setActiveDropdown('shop')}
-                onMouseLeave={() => setActiveDropdown(null)}
-              >
-                <Link
-                  href="/shop"
-                  className="flex items-center gap-1 text-[12px] uppercase tracking-[0.14em] font-medium text-[#2B2620] hover:text-[#A8875E] py-1.5 transition-colors"
-                >
-                  <span>Shop</span>
-                  <ChevronDown className="w-3 h-3 text-[#6B6459]" />
-                </Link>
-
-                {activeDropdown === 'shop' && (
-                  <div className="absolute top-full left-0 w-52 bg-white rounded-xl shadow-xl border border-[#DCD1BE] py-2 z-50 animate-in fade-in slide-in-from-top-1">
-                    <Link
-                      href="/shop"
-                      className="block px-4 py-2 text-xs font-medium text-[#2B2620] hover:bg-[#F3ECE1] hover:text-[#A8875E]"
-                    >
-                      All Furniture
-                    </Link>
-                    <Link
-                      href="/shop?sort=featured"
-                      className="block px-4 py-2 text-xs text-[#2B2620] hover:bg-[#F3ECE1] hover:text-[#A8875E]"
-                    >
-                      Best Sellers
-                    </Link>
-                    <Link
-                      href="/shop?sort=newest"
-                      className="block px-4 py-2 text-xs text-[#2B2620] hover:bg-[#F3ECE1] hover:text-[#A8875E]"
-                    >
-                      New Arrivals
-                    </Link>
-                  </div>
-                )}
-              </div>
-
-              {/* Rooms Dropdown */}
-              <div
-                className="relative"
-                onMouseEnter={() => setActiveDropdown('rooms')}
-                onMouseLeave={() => setActiveDropdown(null)}
-              >
-                <button
-                  type="button"
-                  className="flex items-center gap-1 text-[12px] uppercase tracking-[0.14em] font-medium text-[#2B2620] hover:text-[#A8875E] py-1.5 transition-colors cursor-pointer"
-                >
-                  <span>Rooms</span>
-                  <ChevronDown className="w-3 h-3 text-[#6B6459]" />
-                </button>
-
-                {activeDropdown === 'rooms' && (
-                  <div className="absolute top-full left-0 w-56 bg-white rounded-xl shadow-xl border border-[#DCD1BE] py-2 z-50 animate-in fade-in slide-in-from-top-1">
-                    <Link
-                      href="/categories/living-room"
-                      className="block px-4 py-2 text-xs text-[#2B2620] hover:bg-[#F3ECE1] hover:text-[#A8875E]"
-                    >
-                      Living Room
-                    </Link>
-                    <Link
-                      href="/categories/bedroom"
-                      className="block px-4 py-2 text-xs text-[#2B2620] hover:bg-[#F3ECE1] hover:text-[#A8875E]"
-                    >
-                      Bedroom
-                    </Link>
-                    <Link
-                      href="/categories/dining-room"
-                      className="block px-4 py-2 text-xs text-[#2B2620] hover:bg-[#F3ECE1] hover:text-[#A8875E]"
-                    >
-                      Dining Room
-                    </Link>
-                    <Link
-                      href="/categories/home-office"
-                      className="block px-4 py-2 text-xs text-[#2B2620] hover:bg-[#F3ECE1] hover:text-[#A8875E]"
-                    >
-                      Home Office
-                    </Link>
-                    <Link
-                      href="/categories/lighting-decor"
-                      className="block px-4 py-2 text-xs text-[#2B2620] hover:bg-[#F3ECE1] hover:text-[#A8875E]"
-                    >
-                      Lighting & Decor
-                    </Link>
-                    <Link
-                      href="/categories/outdoor"
-                      className="block px-4 py-2 text-xs text-[#2B2620] hover:bg-[#F3ECE1] hover:text-[#A8875E]"
-                    >
-                      Outdoor
-                    </Link>
-                  </div>
-                )}
-              </div>
-
-              {/* Collections Dropdown */}
-              <div
-                className="relative"
-                onMouseEnter={() => setActiveDropdown('collections')}
-                onMouseLeave={() => setActiveDropdown(null)}
-              >
-                <button
-                  type="button"
-                  className="flex items-center gap-1 text-[12px] uppercase tracking-[0.14em] font-medium text-[#2B2620] hover:text-[#A8875E] py-1.5 transition-colors cursor-pointer"
-                >
-                  <span>Collections</span>
-                  <ChevronDown className="w-3 h-3 text-[#6B6459]" />
-                </button>
-
-                {activeDropdown === 'collections' && (
-                  <div className="absolute top-full left-0 w-60 bg-white rounded-xl shadow-xl border border-[#DCD1BE] py-2 z-50 animate-in fade-in slide-in-from-top-1">
-                    <Link
-                      href="/shop?material=Solid Oak"
-                      className="block px-4 py-2 text-xs text-[#2B2620] hover:bg-[#F3ECE1] hover:text-[#A8875E]"
-                    >
-                      Solid White Oak Series
-                    </Link>
-                    <Link
-                      href="/shop?material=Bouclé"
-                      className="block px-4 py-2 text-xs text-[#2B2620] hover:bg-[#F3ECE1] hover:text-[#A8875E]"
-                    >
-                      Bouclé Sculptural Seating
-                    </Link>
-                    <Link
-                      href="/shop?material=Travertine Stone"
-                      className="block px-4 py-2 text-xs text-[#2B2620] hover:bg-[#F3ECE1] hover:text-[#A8875E]"
-                    >
-                      Italian Travertine Tables
-                    </Link>
-                  </div>
-                )}
-              </div>
-
-              <Link
-                href="/become-an-agent"
-                className="text-[12px] uppercase tracking-[0.14em] font-medium text-[#2B2620] hover:text-[#A8875E] transition-colors"
-              >
-                About Us
-              </Link>
-
-              <Link
-                href="/custom-order"
-                className="text-[12px] uppercase tracking-[0.14em] font-medium text-[#2B2620] hover:text-[#A8875E] transition-colors"
-              >
-                Contact
-              </Link>
-            </nav>
-
-            {/* Right: Utility Icons */}
-            <div className="flex items-center gap-3">
-              {/* Search */}
+            {/* 3. Right: Utility Icons */}
+            <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+              {/* Mobile Search */}
               <button
-                onClick={() => setSearchOpen(true)}
-                className="p-2 text-[#2B2620] hover:text-[#A8875E] hover:bg-[#EAE1D2]/50 rounded-full transition-colors"
+                id="mobile-search-button"
+                onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
+                className="md:hidden p-2 text-stone-800 hover:text-stone-900 hover:bg-stone-100 rounded-full transition-colors"
                 aria-label="Search"
               >
                 <Search className="w-5 h-5" />
               </button>
 
-              {/* Wishlist */}
-              <Link
-                href="/wishlist"
-                className="relative p-2 text-[#2B2620] hover:text-[#A8875E] hover:bg-[#EAE1D2]/50 rounded-full transition-colors hidden sm:flex"
-                aria-label="Wishlist"
-              >
-                <Heart className="w-5 h-5" />
-                {wishlistCount > 0 && (
-                  <span className="absolute top-1 right-1 bg-[#1A1613] text-[#F3ECE1] text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
-                    {wishlistCount}
-                  </span>
-                )}
-              </Link>
-
-              {/* User Sign In */}
+              {/* Account */}
               <div className="relative">
                 {isAuthenticated ? (
                   <button
+                    id="user-account-button"
                     onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                    className="flex items-center gap-1.5 p-1 rounded-full hover:bg-[#EAE1D2]/50 transition-colors"
+                    className="flex items-center gap-2 py-1.5 px-2 rounded-full hover:bg-stone-100 transition-colors text-xs font-medium text-stone-800"
                   >
-                    <div className="w-7 h-7 rounded-full bg-[#1A1613] text-[#F3ECE1] flex items-center justify-center text-xs font-semibold">
+                    <div className="w-7 h-7 rounded-full bg-[#B8551F] text-white flex items-center justify-center text-xs font-bold">
                       {user?.name ? user.name[0].toUpperCase() : 'U'}
                     </div>
+                    <span className="hidden lg:inline font-medium max-w-[110px] truncate">
+                      Hi, {user?.name?.split(' ')[0] || 'User'}
+                    </span>
                   </button>
                 ) : (
                   <Link
+                    id="login-link"
                     href="/login"
-                    className="p-2 text-[#2B2620] hover:text-[#A8875E] hover:bg-[#EAE1D2]/50 rounded-full transition-colors flex items-center"
+                    className="flex items-center gap-2 py-1.5 px-2.5 rounded-full hover:bg-stone-100 transition-colors text-xs font-medium text-stone-800"
                     aria-label="Sign in"
                   >
-                    <UserIcon className="w-5 h-5" />
+                    <UserIcon className="w-5 h-5 text-stone-700 shrink-0" />
+                    <span className="hidden lg:inline">Hi! Log in or sign up</span>
                   </Link>
                 )}
 
                 {userDropdownOpen && isAuthenticated && (
-                  <div className="absolute right-0 mt-2 w-52 bg-white rounded-xl shadow-xl border border-[#DCD1BE] py-2 z-50 animate-in fade-in slide-in-from-top-1">
-                    <div className="px-4 py-2 border-b border-[#DCD1BE]">
-                      <p className="text-xs text-[#6B6459]">Signed in as</p>
-                      <p className="text-sm font-semibold text-[#1A1613] truncate">{user?.name}</p>
+                  <div
+                    id="user-dropdown"
+                    className="absolute right-0 mt-2 w-52 bg-white rounded-xl shadow-xl border border-stone-200 py-2 z-50"
+                  >
+                    <div className="px-4 py-2 border-b border-stone-100">
+                      <p className="text-[11px] text-stone-500">Signed in as</p>
+                      <p className="text-xs font-semibold text-stone-900 truncate">{user?.name}</p>
                     </div>
                     <Link
                       href="/account"
-                      className="flex items-center gap-2 px-4 py-2 text-xs text-[#2B2620] hover:bg-[#F3ECE1]"
+                      className="flex items-center gap-2 px-4 py-2 text-xs text-stone-700 hover:bg-stone-50 hover:text-stone-900"
                       onClick={() => setUserDropdownOpen(false)}
                     >
-                      <UserIcon className="w-4 h-4 text-[#6B6459]" />
+                      <UserIcon className="w-4 h-4 text-stone-400" />
                       <span>Account Dashboard</span>
                     </Link>
                     <Link
                       href="/account#orders"
-                      className="flex items-center gap-2 px-4 py-2 text-xs text-[#2B2620] hover:bg-[#F3ECE1]"
+                      className="flex items-center gap-2 px-4 py-2 text-xs text-stone-700 hover:bg-stone-50 hover:text-stone-900"
                       onClick={() => setUserDropdownOpen(false)}
                     >
-                      <Package className="w-4 h-4 text-[#6B6459]" />
+                      <Package className="w-4 h-4 text-stone-400" />
                       <span>Order History</span>
                     </Link>
-                    <div className="border-t border-[#DCD1BE] mt-1 pt-1">
+                    <div className="border-t border-stone-100 mt-1 pt-1">
                       <button
                         onClick={() => {
                           setUserDropdownOpen(false);
@@ -329,108 +370,136 @@ export default function Header() {
                 )}
               </div>
 
-              {/* Cart Bag */}
+              {/* Wishlist */}
+              <Link
+                id="wishlist-link"
+                href="/wishlist"
+                className="relative p-2 text-stone-800 hover:text-[#B8551F] hover:bg-stone-100 rounded-full transition-colors hidden sm:flex"
+                aria-label="Wishlist"
+              >
+                <Heart className="w-5 h-5" />
+                {wishlistCount > 0 && (
+                  <span className="absolute top-1 right-1 bg-[#B8551F] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                    {wishlistCount}
+                  </span>
+                )}
+              </Link>
+
+              {/* Cart — amber badge */}
               <button
+                id="cart-button"
                 onClick={openCart}
-                className="relative p-2 text-[#2B2620] hover:text-[#A8875E] hover:bg-[#EAE1D2]/50 rounded-full transition-colors"
+                className="relative p-2 text-stone-800 hover:text-[#B8551F] hover:bg-stone-100 rounded-full transition-colors cursor-pointer"
                 aria-label="Shopping Bag"
               >
                 <ShoppingBag className="w-5 h-5" />
                 {itemsCount > 0 && (
-                  <span className="absolute top-1 right-0.5 bg-[#1A1613] text-[#F3ECE1] text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-xs">
+                  <span className="absolute top-1 right-0.5 bg-[#D99A2B] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-sm">
                     {itemsCount}
                   </span>
                 )}
               </button>
             </div>
           </div>
+
+          {/* Mobile Expandable Search Bar */}
+          {mobileSearchOpen && (
+            <div className="mt-3 pt-3 border-t border-stone-100 md:hidden">
+              <form onSubmit={handleSearchSubmit} className="relative">
+                <div className="w-full flex items-center bg-[#F2F2F2] rounded-full px-4 py-2">
+                  <Search className="w-4 h-4 text-stone-500 mr-2 shrink-0" />
+                  <input
+                    id="mobile-search"
+                    type="text"
+                    autoFocus
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="What are you looking for?"
+                    className="w-full bg-transparent text-xs text-stone-900 placeholder:text-stone-500 focus:outline-none"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setMobileSearchOpen(false)}
+                    className="p-1 text-stone-500"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              </form>
+            </div>
+          )}
         </div>
       </header>
-
-      {/* Search Overlay */}
-      {searchOpen && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-start justify-center pt-24 px-4 animate-in fade-in">
-          <div className="bg-white w-full max-w-2xl rounded-2xl p-6 shadow-2xl border border-[#DCD1BE] relative">
-            <button
-              onClick={() => setSearchOpen(false)}
-              className="absolute top-5 right-5 text-stone-400 hover:text-stone-700 p-1"
-            >
-              <X className="w-5 h-5" />
-            </button>
-            <h3 className="text-xs font-semibold uppercase tracking-widest text-[#6B6459] mb-3">
-              Search Furniture Catalog
-            </h3>
-            <form onSubmit={handleSearchSubmit} className="relative">
-              <input
-                type="text"
-                autoFocus
-                placeholder="Search sofas, oak dining tables, travertine stone, armchairs..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-[#F3ECE1] border border-[#DCD1BE] rounded-xl px-4 py-3.5 pl-11 text-[#2B2620] placeholder:text-[#6B6459] focus:outline-none focus:ring-2 focus:ring-[#1A1613] focus:bg-white text-sm"
-              />
-              <Search className="w-5 h-5 text-[#6B6459] absolute left-3.5 top-3.5" />
-              <button
-                type="submit"
-                className="absolute right-2.5 top-2 bg-[#1A1613] text-white px-4 py-2 rounded-lg text-xs font-semibold uppercase tracking-wider hover:bg-[#332c26]"
-              >
-                Search
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div
-            className="fixed inset-0 bg-black/50 backdrop-blur-xs"
+            className="fixed inset-0 bg-black/40 backdrop-blur-sm"
             onClick={() => setMobileMenuOpen(false)}
           />
-          <div className="fixed inset-y-0 left-0 max-w-xs w-full bg-[#F3ECE1] p-6 shadow-2xl z-10 flex flex-col justify-between overflow-y-auto">
+          <div
+            id="mobile-drawer"
+            className="fixed inset-y-0 left-0 max-w-xs w-full bg-white p-6 shadow-2xl z-10 flex flex-col justify-between overflow-y-auto"
+          >
             <div>
-              <div className="flex items-center justify-between pb-4 border-b border-[#DCD1BE]">
-                <div className="w-[110px] h-[36px] border border-dashed border-[#DCD1BE] rounded-md bg-[#EAE1D2]" />
+              <div className="flex items-center justify-between pb-4 border-b border-stone-200">
+                {/* Mobile logo */}
+                <BrandLogo variant="terracotta" size="sm" />
                 <button
                   onClick={() => setMobileMenuOpen(false)}
-                  className="p-1.5 text-[#2B2620]"
+                  className="p-1.5 text-stone-700 hover:text-stone-900 rounded-md"
+                  aria-label="Close menu"
                 >
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
-              <div className="mt-6 flex flex-col gap-3 text-xs font-semibold uppercase tracking-wider text-[#2B2620]">
-                <Link href="/" className="py-2 border-b border-[#DCD1BE]/50">Home</Link>
-                <Link href="/shop" className="py-2 border-b border-[#DCD1BE]/50">Shop All</Link>
-                <Link href="/categories/living-room" className="py-2 border-b border-[#DCD1BE]/50">Living Room</Link>
-                <Link href="/categories/bedroom" className="py-2 border-b border-[#DCD1BE]/50">Bedroom</Link>
-                <Link href="/categories/dining-room" className="py-2 border-b border-[#DCD1BE]/50">Dining Room</Link>
-                <Link href="/categories/home-office" className="py-2 border-b border-[#DCD1BE]/50">Home Office</Link>
-                <Link href="/categories/lighting-decor" className="py-2 border-b border-[#DCD1BE]/50">Lighting & Decor</Link>
-                <Link href="/categories/outdoor" className="py-2 border-b border-[#DCD1BE]/50">Outdoor</Link>
-                <Link href="/become-an-agent" className="py-2 border-b border-[#DCD1BE]/50">About Us</Link>
-                <Link href="/custom-order" className="py-2 border-b border-[#DCD1BE]/50">Contact</Link>
+              <div className="mt-6 flex flex-col gap-1 text-sm font-medium text-stone-800">
+                {[
+                  { label: 'Home', href: '/' },
+                  { label: 'Shop All', href: '/shop' },
+                  { label: 'Living Room', href: '/shop?category=living-room' },
+                  { label: 'Bedroom', href: '/shop?category=bedroom' },
+                  { label: 'Dining Room', href: '/shop?category=dining-room' },
+                  { label: 'Home Office', href: '/shop?category=home-office' },
+                  { label: 'Lighting & Decor', href: '/shop?category=lighting-decor' },
+                  { label: 'Outdoor', href: '/shop?category=outdoor' },
+                  { label: 'Custom Order', href: '/custom-order' },
+                  { label: 'Contact', href: '/contact' },
+                  { label: 'Trade & Agents', href: '/become-an-agent' },
+                ].map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="py-2.5 px-3 rounded-lg hover:bg-[#FAF8F5] hover:text-[#B8551F] transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
               </div>
             </div>
 
-            <div className="pt-6 border-t border-[#DCD1BE]">
+            <div className="pt-6 border-t border-stone-200">
               {isAuthenticated ? (
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-xs font-bold text-[#1A1613]">{user?.name}</p>
-                    <p className="text-[11px] text-[#6B6459]">{user?.email}</p>
+                    <p className="text-xs font-bold text-stone-900">{user?.name}</p>
+                    <p className="text-[11px] text-stone-500">{user?.email}</p>
                   </div>
-                  <button onClick={logout} className="text-xs text-rose-600 font-medium">
+                  <button
+                    onClick={logout}
+                    className="text-xs text-rose-600 font-medium"
+                  >
                     Sign Out
                   </button>
                 </div>
               ) : (
                 <Link
                   href="/login"
-                  className="block w-full text-center bg-[#1A1613] text-white py-3 rounded-xl text-xs font-semibold uppercase tracking-widest hover:bg-[#332c26]"
+                  className="block w-full text-center bg-[#B8551F] hover:bg-[#8F4116] text-white py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors"
                 >
-                  Sign In
+                  Log In / Sign Up
                 </Link>
               )}
             </div>

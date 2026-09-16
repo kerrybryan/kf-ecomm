@@ -18,14 +18,45 @@ export async function generateMetadata({ params }) {
   }
 
   if (!product) {
-    return { title: 'Product Not Found | NÖRDIKA' };
+    return {
+      title: 'Product Not Found',
+      description: 'The requested furniture piece could not be found.',
+    };
   }
 
+  const title = `${product.name} | KB Furniture`;
+  const description =
+    product.description?.slice(0, 155) ||
+    `Buy ${product.name} at KB Furniture in Addis Ababa, Ethiopia. Solid wood craftsmanship and fast delivery.`;
+  const primaryImage = product.images?.[0] || 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80';
+  const siteUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://kbfurniture.et';
+  const productUrl = `${siteUrl}/products/${product.slug || slug}`;
+
   return {
-    title: `${product.name} | NÖRDIKA Scandinavian Furniture`,
-    description: product.description?.slice(0, 160) || 'Handcrafted luxury Scandinavian furniture.',
+    title,
+    description,
+    alternates: {
+      canonical: productUrl,
+    },
     openGraph: {
-      images: product.images?.[0] ? [{ url: product.images[0] }] : [],
+      title,
+      description,
+      url: productUrl,
+      type: 'website',
+      images: [
+        {
+          url: primaryImage,
+          width: 800,
+          height: 800,
+          alt: product.name,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [primaryImage],
     },
   };
 }
@@ -59,11 +90,53 @@ export default async function ProductDetailPage({ params }) {
   const serializedReviews = JSON.parse(JSON.stringify(reviews));
   const serializedRelated = JSON.parse(JSON.stringify(relatedProducts));
 
+  const siteUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://kbfurniture.et';
+  const productStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    image: product.images || [],
+    description: product.description || `Solid wood ${product.name} from KB Furniture Addis Ababa.`,
+    sku: product.slug || product._id.toString(),
+    brand: {
+      '@type': 'Brand',
+      name: 'KB Furniture',
+    },
+    offers: {
+      '@type': 'Offer',
+      url: `${siteUrl}/products/${product.slug || slug}`,
+      priceCurrency: 'ETB',
+      price: product.price,
+      priceValidUntil: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+      itemCondition: 'https://schema.org/NewCondition',
+      availability: product.inStock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+      seller: {
+        '@type': 'Organization',
+        name: 'KB Furniture',
+      },
+    },
+    ...(product.reviewCount > 0
+      ? {
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: product.rating || 5,
+            reviewCount: product.reviewCount,
+          },
+        }
+      : {}),
+  };
+
   return (
-    <ProductDetailClient
-      product={serializedProduct}
-      reviews={serializedReviews}
-      relatedProducts={serializedRelated}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productStructuredData) }}
+      />
+      <ProductDetailClient
+        product={serializedProduct}
+        reviews={serializedReviews}
+        relatedProducts={serializedRelated}
+      />
+    </>
   );
 }

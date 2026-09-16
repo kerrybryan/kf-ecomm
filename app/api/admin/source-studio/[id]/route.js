@@ -2,14 +2,10 @@ import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import SourcedItem from '@/models/SourcedItem';
 import Product from '@/models/Product';
-import { requireAdminAuth } from '@/lib/adminAuth';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET(request, { params }) {
-  const auth = await requireAdminAuth(request, ['super_admin', 'product_manager', 'admin']);
-  if (auth.error) return auth.error;
-
   try {
     await connectDB();
     const { id } = await params;
@@ -33,9 +29,6 @@ export async function GET(request, { params }) {
 }
 
 export async function PUT(request, { params }) {
-  const auth = await requireAdminAuth(request, ['super_admin', 'product_manager', 'admin']);
-  if (auth.error) return auth.error;
-
   try {
     await connectDB();
     const { id } = await params;
@@ -46,43 +39,13 @@ export async function PUT(request, { params }) {
       return NextResponse.json({ success: false, error: 'Sourced item not found' }, { status: 404 });
     }
 
-    // Update manual override / cost calculator values
-    if (updates.manualOverride) {
-      const {
-        materialCost = item.manualOverride.materialCost,
-        laborHours = item.manualOverride.laborHours,
-        laborRate = item.manualOverride.laborRate,
-        overheadPercent = item.manualOverride.overheadPercent,
-        markupMultiplier = item.manualOverride.markupMultiplier,
-        finalPrice,
-      } = updates.manualOverride;
-
-      const laborCost = Number(laborHours) * Number(laborRate);
-      const subtotalCost = Number(materialCost) + laborCost;
-      const overheadCost = subtotalCost * (Number(overheadPercent) / 100);
-      const calculatedCost = Math.round(subtotalCost + overheadCost);
-      const autoPrice = Math.round(calculatedCost * Number(markupMultiplier));
-
-      item.manualOverride = {
-        materialCost: Number(materialCost),
-        laborHours: Number(laborHours),
-        laborRate: Number(laborRate),
-        overheadPercent: Number(overheadPercent),
-        markupMultiplier: Number(markupMultiplier),
-        calculatedCost,
-        finalPrice: finalPrice !== undefined ? Number(finalPrice) : autoPrice,
-      };
-    }
-
-    if (updates.status) {
-      item.status = updates.status;
-    }
-    if (updates.notes !== undefined) {
-      item.notes = updates.notes;
-    }
-    if (updates.isReferenceOnly !== undefined) {
-      item.isReferenceOnly = updates.isReferenceOnly;
-    }
+    if (updates.name !== undefined) item.name = updates.name.trim();
+    if (updates.category !== undefined) item.category = updates.category;
+    if (updates.notes !== undefined) item.notes = updates.notes;
+    if (updates.price !== undefined) item.price = Number(updates.price);
+    if (updates.costBreakdown !== undefined) item.costBreakdown = updates.costBreakdown;
+    if (updates.status !== undefined) item.status = updates.status;
+    if (updates.linkedProductId !== undefined) item.linkedProductId = updates.linkedProductId;
 
     await item.save();
 
@@ -101,14 +64,10 @@ export async function PUT(request, { params }) {
 }
 
 export async function DELETE(request, { params }) {
-  const auth = await requireAdminAuth(request, ['super_admin', 'product_manager', 'admin']);
-  if (auth.error) return auth.error;
-
   try {
-    await connectDB();
     const { id } = await params;
+    await connectDB();
 
-    // Discard rather than hard delete to preserve historical sourcing record
     const item = await SourcedItem.findByIdAndUpdate(
       id,
       { status: 'discarded' },

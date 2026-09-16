@@ -68,7 +68,7 @@ export function AuthProvider({ children }) {
       }
 
       setUser(data.data);
-      addToast(`Welcome to Nordika, ${data.data.name}!`, 'success');
+      addToast(`Welcome to KB Furniture, ${data.data.name}!`, 'success');
       return { success: true, user: data.data };
     } catch (error) {
       addToast(error.message, 'error');

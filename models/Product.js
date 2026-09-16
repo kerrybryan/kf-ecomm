@@ -102,6 +102,28 @@ const ProductSchema = new mongoose.Schema(
       ref: 'SourcedItem',
       default: null,
     },
+    costBreakdown: {
+      materialCost: { type: Number, default: 0 },
+      laborCost: { type: Number, default: 0 },
+      subtotal: { type: Number, default: 0 },
+      overhead: { type: Number, default: 0 },
+      overheadPercent: { type: Number, default: 15 },
+      totalCost: { type: Number, default: 0 },
+      markupMultiplier: { type: Number, default: 2.0 },
+      finalPrice: { type: Number, default: 0 },
+      items: [
+        {
+          materialName: String,
+          quantity: Number,
+          unit: String,
+          costPerUnit: Number,
+          total: Number,
+        },
+      ],
+      laborHours: { type: Number, default: 0 },
+      laborRatePerHour: { type: Number, default: 0 },
+      calculatedAt: { type: Date, default: null },
+    },
   },
   {
     timestamps: true,
@@ -111,4 +133,8 @@ const ProductSchema = new mongoose.Schema(
 // Helpful text index for search functionality
 ProductSchema.index({ name: 'text', description: 'text', category: 'text' });
 
-export default mongoose.models.Product || mongoose.model('Product', ProductSchema);
+if (mongoose.models.Product) {
+  delete mongoose.models.Product;
+}
+
+export default mongoose.model('Product', ProductSchema);

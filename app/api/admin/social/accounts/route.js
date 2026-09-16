@@ -7,31 +7,31 @@ export const dynamic = 'force-dynamic';
 
 const PLATFORM_DEFAULTS = {
   instagram: {
-    accountName: 'Nordika Scandinavian Studio',
-    accountHandle: '@nordika.studio',
-    accountAvatarUrl: 'https://picsum.photos/seed/nordika-avatar/200/200',
-    profileUrl: 'https://instagram.com/nordika.studio',
+    accountName: 'KB Furniture Studio',
+    accountHandle: '@kbfurniture.studio',
+    accountAvatarUrl: 'https://picsum.photos/seed/kb-furniture-avatar/200/200',
+    profileUrl: 'https://instagram.com/kbfurniture.studio',
     followerCount: 24800,
   },
   facebook: {
-    accountName: 'Nordika Studio Official Page',
-    accountHandle: 'Nordika Scandinavian Furniture',
-    accountAvatarUrl: 'https://picsum.photos/seed/nordika-avatar/200/200',
-    profileUrl: 'https://facebook.com/nordikastudio',
+    accountName: 'KB Furniture Official Page',
+    accountHandle: 'KB Furniture',
+    accountAvatarUrl: 'https://picsum.photos/seed/kb-furniture-avatar/200/200',
+    profileUrl: 'https://facebook.com/kbfurniture',
     followerCount: 18200,
   },
   tiktok: {
-    accountName: 'Nordika Studio Workshop',
-    accountHandle: '@nordikadesign',
-    accountAvatarUrl: 'https://picsum.photos/seed/nordika-avatar/200/200',
-    profileUrl: 'https://tiktok.com/@nordikadesign',
+    accountName: 'KB Furniture Workshop',
+    accountHandle: '@kbfurnituredesign',
+    accountAvatarUrl: 'https://picsum.photos/seed/kb-furniture-avatar/200/200',
+    profileUrl: 'https://tiktok.com/@kbfurnituredesign',
     followerCount: 52400,
   },
   pinterest: {
-    accountName: 'Nordika Scandinavian Living',
-    accountHandle: '@nordikahome',
-    accountAvatarUrl: 'https://picsum.photos/seed/nordika-avatar/200/200',
-    profileUrl: 'https://pinterest.com/nordikahome',
+    accountName: 'KB Furniture Living',
+    accountHandle: '@kbfurniturehome',
+    accountAvatarUrl: 'https://picsum.photos/seed/kb-furniture-avatar/200/200',
+    profileUrl: 'https://pinterest.com/kbfurniturehome',
     followerCount: 41200,
   },
 };
@@ -73,9 +73,9 @@ export async function POST(request) {
 
     const defaults = PLATFORM_DEFAULTS[platform] || {
       accountName: `${platform.toUpperCase()} Official Account`,
-      accountHandle: `@nordika_${platform}`,
-      accountAvatarUrl: 'https://picsum.photos/seed/nordika-avatar/200/200',
-      profileUrl: `https://${platform}.com/nordika`,
+      accountHandle: `@kbfurniture_${platform}`,
+      accountAvatarUrl: 'https://picsum.photos/seed/kb-furniture-avatar/200/200',
+      profileUrl: `https://${platform}.com/kbfurniture`,
       followerCount: 12000,
     };
 

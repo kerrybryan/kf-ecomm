@@ -16,7 +16,7 @@ if (fs.existsSync(envPath)) {
   });
 }
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/nordika_furniture';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/kb_furniture';
 
 const UserSchema = new mongoose.Schema(
   {
@@ -41,28 +41,28 @@ const User = mongoose.models.User || mongoose.model('User', UserSchema);
 const ADMIN_USERS = [
   {
     name: 'Astrid Lindgren (Super Admin)',
-    email: 'admin@nordika.com',
+    email: 'admin@kbfurniture.com',
     role: 'super_admin',
     phone: '+1 (206) 555-0100',
     notes: 'Primary executive administrator with unrestricted platform privileges.',
   },
   {
     name: 'Henrik Vanger (Product Lead)',
-    email: 'pm@nordika.com',
+    email: 'pm@kbfurniture.com',
     role: 'product_manager',
     phone: '+1 (206) 555-0101',
     notes: 'Manages catalog inventory, category tree, supplier specs, and promotional banners.',
   },
   {
     name: 'Elin Blomqvist (Sales Director)',
-    email: 'sales@nordika.com',
+    email: 'sales@kbfurniture.com',
     role: 'sales_manager',
     phone: '+1 (206) 555-0102',
     notes: 'Oversees trade accounts, custom order pipeline, agent network, and order fulfillment.',
   },
   {
     name: 'Linnea Holm (Customer Concierge)',
-    email: 'support@nordika.com',
+    email: 'support@kbfurniture.com',
     role: 'support',
     phone: '+1 (206) 555-0103',
     notes: 'Handles order tracking questions, return inquiries, and customer care CRM notes.',

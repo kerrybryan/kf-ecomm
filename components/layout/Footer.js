@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { ShieldCheck } from 'lucide-react';
+import BrandLogo from '@/components/ui/BrandLogo';
 
 export default function Footer() {
   const [email, setEmail] = useState('');
@@ -26,32 +27,24 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#201B15] text-[#F3ECE1] border-t border-[#3A3127] transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <footer className="bg-[#1A1613] text-[#F3ECE1] border-t border-[#352D26]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         {/* 5-Column Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8">
-          {/* Column 1: Logo Placeholder & Studio Bio */}
+          {/* Column 1: Brand Logo & Studio Bio */}
           <div className="space-y-4">
-            {/* Logo Image Placeholder (130x40px, subtle dashed border, warm timber tone) */}
-            <Link
-              href="/"
-              className="w-[130px] h-[40px] border border-dashed border-[#4E4336] hover:border-[#A8875E] rounded-md bg-[#2A231B] flex items-center justify-center transition-colors shrink-0"
-              title="Logo Placeholder"
-              aria-label="Homepage"
-            >
-              <span className="sr-only">Homepage</span>
-            </Link>
+            <BrandLogo variant="white" size="lg" />
 
-            <p className="text-xs text-[#D5CCC0] font-light leading-relaxed max-w-xs">
-              Handcrafted Scandinavian luxury furniture designed for life. Honest natural materials,
-              traditional European wood joinery, and enduring silhouettes.
+            <p className="text-xs text-[#D5CCC0] font-normal leading-relaxed max-w-xs">
+              KB Furniture makes solid wood tables, sofas, and beds in Addis Ababa.
+              Strong materials, fair prices, and reliable delivery.
             </p>
 
-            {/* Social Circle Icons (Inline SVG with warm timber borders) */}
+            {/* Social Circle Icons */}
             <div className="flex items-center gap-2.5 pt-2">
               <a
                 href="#"
-                className="w-8 h-8 rounded-full border border-[#4E4336] hover:border-[#A8875E] flex items-center justify-center text-[#D5CCC0] hover:text-[#A8875E] transition-colors bg-[#2A231B]/50"
+                className="w-8 h-8 rounded-lg border border-[#4E4336] hover:border-[#B8551F] flex items-center justify-center text-[#D5CCC0] hover:text-[#B8551F] transition-colors bg-[#2A231B]/60"
                 aria-label="Instagram"
               >
                 <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -60,7 +53,7 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="w-8 h-8 rounded-full border border-[#4E4336] hover:border-[#A8875E] flex items-center justify-center text-[#D5CCC0] hover:text-[#A8875E] transition-colors bg-[#2A231B]/50"
+                className="w-8 h-8 rounded-lg border border-[#4E4336] hover:border-[#B8551F] flex items-center justify-center text-[#D5CCC0] hover:text-[#B8551F] transition-colors bg-[#2A231B]/60"
                 aria-label="Facebook"
               >
                 <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -69,7 +62,7 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="w-8 h-8 rounded-full border border-[#4E4336] hover:border-[#A8875E] flex items-center justify-center text-[#D5CCC0] hover:text-[#A8875E] transition-colors bg-[#2A231B]/50"
+                className="w-8 h-8 rounded-lg border border-[#4E4336] hover:border-[#B8551F] flex items-center justify-center text-[#D5CCC0] hover:text-[#B8551F] transition-colors bg-[#2A231B]/60"
                 aria-label="Twitter / X"
               >
                 <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -78,7 +71,7 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="w-8 h-8 rounded-full border border-[#4E4336] hover:border-[#A8875E] flex items-center justify-center text-[#D5CCC0] hover:text-[#A8875E] transition-colors bg-[#2A231B]/50"
+                className="w-8 h-8 rounded-lg border border-[#4E4336] hover:border-[#B8551F] flex items-center justify-center text-[#D5CCC0] hover:text-[#B8551F] transition-colors bg-[#2A231B]/60"
                 aria-label="LinkedIn"
               >
                 <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -90,38 +83,38 @@ export default function Footer() {
 
           {/* Column 2: Shop Collections */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-[0.18em] text-[#A8875E] mb-4">
-              Shop Collections
+            <h4 className="text-xs font-bold uppercase tracking-[0.18em] text-[#D99A2B] mb-4">
+              Shop Furniture
             </h4>
             <ul className="space-y-2.5 text-xs text-[#D5CCC0]">
               <li>
-                <Link href="/categories/living-room" className="hover:text-[#F3ECE1] hover:underline underline-offset-4 transition-colors">
+                <Link href="/categories/living-room" className="hover:text-[#FAF8F5] hover:underline underline-offset-4 transition-colors">
                   Living Room
                 </Link>
               </li>
               <li>
-                <Link href="/categories/bedroom" className="hover:text-[#F3ECE1] hover:underline underline-offset-4 transition-colors">
-                  Bedroom Sanctuary
+                <Link href="/categories/bedroom" className="hover:text-[#FAF8F5] hover:underline underline-offset-4 transition-colors">
+                  Bedroom
                 </Link>
               </li>
               <li>
-                <Link href="/categories/dining-room" className="hover:text-[#F3ECE1] hover:underline underline-offset-4 transition-colors">
-                  Dining & Tables
+                <Link href="/categories/dining-room" className="hover:text-[#FAF8F5] hover:underline underline-offset-4 transition-colors">
+                  Dining Room
                 </Link>
               </li>
               <li>
-                <Link href="/categories/home-office" className="hover:text-[#F3ECE1] hover:underline underline-offset-4 transition-colors">
-                  Executive Home Office
+                <Link href="/categories/home-office" className="hover:text-[#FAF8F5] hover:underline underline-offset-4 transition-colors">
+                  Home Office
                 </Link>
               </li>
               <li>
-                <Link href="/categories/lighting-decor" className="hover:text-[#F3ECE1] hover:underline underline-offset-4 transition-colors">
+                <Link href="/categories/lighting-decor" className="hover:text-[#FAF8F5] hover:underline underline-offset-4 transition-colors">
                   Lighting & Decor
                 </Link>
               </li>
               <li>
-                <Link href="/categories/outdoor" className="hover:text-[#F3ECE1] hover:underline underline-offset-4 transition-colors">
-                  Outdoor & Lounge
+                <Link href="/categories/outdoor" className="hover:text-[#FAF8F5] hover:underline underline-offset-4 transition-colors">
+                  Outdoor Furniture
                 </Link>
               </li>
             </ul>
@@ -129,67 +122,62 @@ export default function Footer() {
 
           {/* Column 3: Customer Service */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-[0.18em] text-[#A8875E] mb-4">
-              Customer Care
+            <h4 className="text-xs font-bold uppercase tracking-[0.18em] text-[#D99A2B] mb-4">
+              Customer Help
             </h4>
             <ul className="space-y-2.5 text-xs text-[#D5CCC0]">
               <li>
-                <Link href="/account#orders" className="hover:text-[#F3ECE1] hover:underline underline-offset-4 transition-colors">
-                  Track Order Status
+                <Link href="/account#orders" className="hover:text-[#FAF8F5] hover:underline underline-offset-4 transition-colors">
+                  Track Order
                 </Link>
               </li>
               <li>
-                <Link href="/custom-order" className="hover:text-[#F3ECE1] hover:underline underline-offset-4 transition-colors">
-                  White-Glove Delivery
+                <Link href="/contact" className="hover:text-[#FAF8F5] hover:underline underline-offset-4 transition-colors">
+                  Delivery Info
                 </Link>
               </li>
               <li>
-                <Link href="/custom-order" className="hover:text-[#F3ECE1] hover:underline underline-offset-4 transition-colors">
-                  30-Day Returns Policy
+                <Link href="/contact" className="hover:text-[#FAF8F5] hover:underline underline-offset-4 transition-colors">
+                  10-Year Guarantee
                 </Link>
               </li>
               <li>
-                <Link href="/custom-order" className="hover:text-[#F3ECE1] hover:underline underline-offset-4 transition-colors">
-                  10-Year Craft Warranty
+                <Link href="/contact" className="hover:text-[#FAF8F5] hover:underline underline-offset-4 transition-colors">
+                  Help & FAQs
                 </Link>
               </li>
               <li>
-                <Link href="/custom-order" className="hover:text-[#F3ECE1] hover:underline underline-offset-4 transition-colors">
-                  Help Center & FAQs
+                <Link href="/contact" className="hover:text-[#FAF8F5] hover:underline underline-offset-4 transition-colors">
+                  Contact Us
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Column 4: About Studio */}
+          {/* Column 4: Our Workshop */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-[0.18em] text-[#A8875E] mb-4">
-              The Studio
+            <h4 className="text-xs font-bold uppercase tracking-[0.18em] text-[#D99A2B] mb-4">
+              Our Workshop
             </h4>
             <ul className="space-y-2.5 text-xs text-[#D5CCC0]">
               <li>
-                <Link href="/become-an-agent" className="hover:text-[#F3ECE1] hover:underline underline-offset-4 transition-colors">
-                  Our Craft Philosophy
+                <Link href="/become-an-agent" className="hover:text-[#FAF8F5] hover:underline underline-offset-4 transition-colors">
+                  About Our Workshop
                 </Link>
               </li>
               <li>
-                <Link href="/become-an-agent" className="hover:text-[#F3ECE1] hover:underline underline-offset-4 transition-colors">
-                  Sustainable Hardwoods
+                <Link href="/custom-order" className="hover:text-[#FAF8F5] hover:underline underline-offset-4 transition-colors">
+                  Custom Orders
                 </Link>
               </li>
               <li>
-                <Link href="/become-an-agent" className="hover:text-[#F3ECE1] hover:underline underline-offset-4 transition-colors">
-                  Trade & Architect Program
+                <Link href="/become-an-agent" className="hover:text-[#FAF8F5] hover:underline underline-offset-4 transition-colors">
+                  Trade & Agents
                 </Link>
               </li>
               <li>
-                <Link href="/custom-order" className="hover:text-[#F3ECE1] hover:underline underline-offset-4 transition-colors">
-                  Custom Studio Concierge
-                </Link>
-              </li>
-              <li>
-                <Link href="/account" className="hover:text-[#F3ECE1] hover:underline underline-offset-4 transition-colors">
-                  Client Portal
+                <Link href="/contact" className="hover:text-[#FAF8F5] hover:underline underline-offset-4 transition-colors">
+                  Addis Ababa Showroom
                 </Link>
               </li>
             </ul>
@@ -197,16 +185,16 @@ export default function Footer() {
 
           {/* Column 5: Newsletter */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-[0.18em] text-[#A8875E] mb-2">
-              Nordic Journal
+            <h4 className="text-xs font-bold uppercase tracking-[0.18em] text-[#D99A2B] mb-2">
+              Newsletter
             </h4>
-            <p className="text-xs text-[#D5CCC0] font-light leading-relaxed mb-3">
-              Subscribe for private collection previews, seasonal material releases, and interior styling essays.
+            <p className="text-xs text-[#D5CCC0] font-normal leading-relaxed mb-3">
+              Get furniture updates and special discount news.
             </p>
 
             {subscribed ? (
-              <p className="text-xs text-[#A8875E] font-medium bg-[#2A231B] p-3 rounded-xl border border-[#4E4336]">
-                ✓ Thank you for subscribing to Nordic Journal!
+              <p className="text-xs text-[#4C7A3D] font-bold bg-[#E9F1E6] p-3 rounded-xl border border-[#4C7A3D]/30">
+                ✓ Thank you for joining our newsletter!
               </p>
             ) : (
               <form onSubmit={handleNewsletterSubmit} className="space-y-2">
@@ -216,11 +204,11 @@ export default function Footer() {
                   placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-[#2A231B] border border-[#4E4336] rounded-xl px-3.5 py-3 text-xs text-[#F3ECE1] placeholder:text-[#8E8475] focus:outline-none focus:border-[#A8875E] transition-colors"
+                  className="w-full bg-[#2A231B] border border-[#4E4336] rounded-xl px-3.5 py-3 text-xs text-[#FAF8F5] placeholder:text-[#8E8475] focus:outline-none focus:border-[#B8551F] transition-colors"
                 />
                 <button
                   type="submit"
-                  className="w-full bg-[#A8875E] hover:bg-[#96764e] text-[#1A1613] font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-[0.15em] transition-colors shadow-sm cursor-pointer"
+                  className="w-full bg-[#B8551F] hover:bg-[#8F4116] text-white font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-[0.15em] transition-colors shadow-sm cursor-pointer"
                 >
                   SUBSCRIBE
                 </button>
@@ -231,17 +219,17 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="border-t border-[#332B22] mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#9C9283]">
-          <p>© {new Date().getFullYear()} NORDIKA / KB Furniture Studio. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} KB Furniture. All Rights Reserved.</p>
 
           <div className="flex items-center gap-6 text-[11px]">
-            <span className="hover:text-[#F3ECE1] cursor-pointer transition-colors">Privacy Policy</span>
-            <span className="hover:text-[#F3ECE1] cursor-pointer transition-colors">Terms of Service</span>
-            <span className="hover:text-[#F3ECE1] cursor-pointer transition-colors">Sustainable Sourcing</span>
+            <span className="hover:text-[#FAF8F5] cursor-pointer transition-colors">Privacy Policy</span>
+            <span className="hover:text-[#FAF8F5] cursor-pointer transition-colors">Terms of Service</span>
+            <span className="hover:text-[#FAF8F5] cursor-pointer transition-colors">Delivery Terms</span>
           </div>
 
           <div className="flex items-center gap-2 text-[#9C9283] text-[11px]">
-            <ShieldCheck className="w-3.5 h-3.5 text-[#A8875E]" />
-            <span>256-Bit SSL Encrypted</span>
+            <ShieldCheck className="w-3.5 h-3.5 text-[#D99A2B]" />
+            <span>Secure Order System</span>
           </div>
         </div>
       </div>

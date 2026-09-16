@@ -86,13 +86,13 @@ function SocialComposerContent() {
 
   const handleSelectProduct = (prod) => {
     setSelectedProduct(prod);
-    const img = prod.images?.[0] || 'https://picsum.photos/seed/nordika-sofa/800/800';
+    const img = prod.images?.[0] || 'https://picsum.photos/seed/kb-furniture-sofa/800/800';
     setMediaUrl(img);
 
     // Initial default caption
     const defaultText = `Introducing the ${prod.name} — handcrafted from ${
       prod.materials?.join(', ') || 'solid European timber'
-    }. Starting at $${prod.price?.toLocaleString()}.\n\nExplore our bespoke Scandinavian collection online at Nordika Studio. ✨\n\n#NordicDesign #ScandinavianLiving #BespokeFurniture #NordikaStudio`;
+    }. Starting at $${prod.price?.toLocaleString()}.\n\nExplore our bespoke Scandinavian collection online at KB Furniture. ✨\n\n#NordicDesign #ScandinavianLiving #BespokeFurniture #KBFurniture`;
 
     setCaptions((prev) => ({
       ...prev,
@@ -135,7 +135,7 @@ function SocialComposerContent() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          productName: selectedProduct?.name || 'Nordika Studio Furniture Piece',
+          productName: selectedProduct?.name || 'KB Furniture Studio Piece',
           category: selectedProduct?.category || 'living-room',
           materials: selectedProduct?.materials || ['Solid European Oak', 'Bouclé'],
           price: selectedProduct?.price || 950,

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import AdminSidebar from '@/components/admin/layout/AdminSidebar';
 import AdminTopBar from '@/components/admin/layout/AdminTopBar';
+import QuickCalcAssistant from '@/components/admin/ai/QuickCalcAssistant';
 
 export default function AdminLayout({ children }) {
   const pathname = usePathname();
@@ -29,9 +30,7 @@ export default function AdminLayout({ children }) {
     } catch (err) {
       console.error('Failed to fetch admin session:', err);
       setAdminUser(null);
-      if (!isLoginPage) {
-        router.push('/admin/login');
-      }
+      if (!isLoginPage) router.push('/admin/login');
     } finally {
       setLoading(false);
     }
@@ -47,19 +46,23 @@ export default function AdminLayout({ children }) {
       setAdminUser(null);
       router.push('/admin/login');
     } catch (err) {
-      console.error('Logout error:', err);
       window.location.href = '/admin/login';
     }
   };
 
-  // If on login page, render children directly without admin layout chrome
   if (isLoginPage) {
-    return <div className="min-h-screen bg-[#1A1613] text-white flex flex-col">{children}</div>;
+    return (
+      <div className="min-h-screen bg-[#111009] text-white flex flex-col">{children}</div>
+    );
   }
 
   return (
-    <div className="min-h-screen bg-[#F8F9FA] flex flex-col lg:flex-row antialiased font-sans text-zinc-900 selection:bg-[#A8875E]/20">
-      {/* Dark persistent sidebar */}
+    <div
+      id="admin-shell"
+      className="min-h-screen flex antialiased font-sans text-zinc-900"
+      style={{ background: 'linear-gradient(135deg, #F8F7F4 0%, #F2EFE9 100%)' }}
+    >
+      {/* Sidebar */}
       <AdminSidebar
         user={adminUser}
         onLogout={handleLogout}
@@ -67,18 +70,20 @@ export default function AdminLayout({ children }) {
         setIsMobileOpen={setIsMobileOpen}
       />
 
-      {/* Main Admin Area */}
-      <div className="flex-1 flex flex-col min-w-0">
+      {/* Main */}
+      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         <AdminTopBar
           user={adminUser}
           onLogout={handleLogout}
           onToggleMobileMenu={() => setIsMobileOpen(!isMobileOpen)}
         />
-
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-[1400px] w-full mx-auto">
           {children}
         </main>
       </div>
+
+      {/* Floating Gemini AI Quick Calculation Assistant */}
+      <QuickCalcAssistant />
     </div>
   );
 }

@@ -80,7 +80,7 @@ export default function InvoicePrintPage() {
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6 border-b border-[#EBE5DF] pb-8">
           <div>
             <span className="text-[11px] uppercase tracking-widest font-serif font-bold text-[#A8875E]">
-              Nordika Scandinavian Studio
+              KB Furniture Studio
             </span>
             <h1 className="text-3xl font-serif font-bold text-[#1A1613] mt-1">INVOICE</h1>
             <p className="text-xs text-[#7C7265] mt-1">
@@ -112,7 +112,7 @@ export default function InvoicePrintPage() {
             <p className="text-[#4A4036]">Date: <strong>{new Date(invoice.date).toLocaleDateString()}</strong></p>
             <p className="text-[#4A4036]">Payment: <strong>Credit Card / Verified</strong></p>
             <div className="pt-2">
-              <span className="text-xs font-bold uppercase tracking-widest bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1 rounded-full">
+              <span className="text-xs font-bold uppercase tracking-widest bg-[#E8ECE3] text-[#6B7A5E] border border-[#6B7A5E]/30 px-3 py-1 rounded-full">
                 ✓ {invoice.status}
               </span>
             </div>
@@ -142,8 +142,8 @@ export default function InvoicePrintPage() {
                     )}
                   </td>
                   <td className="px-5 py-4 text-center font-bold text-[#1A1613]">{item.quantity}</td>
-                  <td className="px-5 py-4 text-right text-[#4A4036]">${item.price?.toLocaleString()}</td>
-                  <td className="px-5 py-4 text-right font-bold text-[#1A1613]">${item.total?.toLocaleString()}</td>
+                  <td className="px-5 py-4 text-right text-[#4A4036]">ETB {item.price?.toLocaleString()}</td>
+                  <td className="px-5 py-4 text-right font-bold text-[#1A1613]">ETB {item.total?.toLocaleString()}</td>
                 </tr>
               ))}
             </tbody>
@@ -155,19 +155,19 @@ export default function InvoicePrintPage() {
           <div className="w-64 space-y-2 text-xs">
             <div className="flex justify-between text-[#7C7265]">
               <span>Subtotal:</span>
-              <span className="font-semibold text-[#1A1613]">${invoice.subtotal?.toLocaleString()}</span>
+              <span className="font-semibold text-[#1A1613]">ETB {invoice.subtotal?.toLocaleString()}</span>
             </div>
             <div className="flex justify-between text-[#7C7265]">
-              <span>White-Glove Delivery:</span>
-              <span className="font-semibold text-[#1A1613]">${invoice.shipping?.toLocaleString()}</span>
+              <span>Delivery:</span>
+              <span className="font-semibold text-[#1A1613]">ETB {invoice.shipping?.toLocaleString()}</span>
             </div>
             <div className="flex justify-between text-[#7C7265]">
-              <span>Sales Tax:</span>
-              <span className="font-semibold text-[#1A1613]">${invoice.tax?.toLocaleString()}</span>
+              <span>15% VAT:</span>
+              <span className="font-semibold text-[#1A1613]">ETB {invoice.tax?.toLocaleString()}</span>
             </div>
             <div className="flex justify-between font-bold text-base text-[#1A1613] border-t border-[#EBE5DF] pt-2">
               <span>Total:</span>
-              <span className="text-[#A8875E]">${invoice.total?.toLocaleString()}</span>
+              <span className="text-[#A8875E]">ETB {invoice.total?.toLocaleString()}</span>
             </div>
           </div>
         </div>
@@ -175,7 +175,7 @@ export default function InvoicePrintPage() {
         {/* Guarantee Footer */}
         <div className="border-t border-[#EBE5DF] pt-6 text-center text-xs text-[#7C7265] space-y-1">
           <p className="font-bold text-[#1A1613]">5-Year Structural Joinery & Craftsmanship Guarantee Included</p>
-          <p>Thank you for choosing Nordika Scandinavian Studio. For care guidelines and bespoke commissions, visit nordika.com</p>
+          <p>Thank you for choosing KB Furniture Studio. For care guidelines and bespoke commissions, visit kbfurniture.com</p>
         </div>
       </div>
     </div>

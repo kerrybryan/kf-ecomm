@@ -149,7 +149,7 @@ export default function AdminAgentsPage() {
       label: 'Total Attributed Sales',
       key: 'totalSales',
       render: (row) => (
-        <span className="font-bold text-zinc-900">${row.totalSales?.toLocaleString()}</span>
+        <span className="font-bold text-zinc-900">ETB {row.totalSales?.toLocaleString()}</span>
       ),
     },
     {
@@ -158,7 +158,7 @@ export default function AdminAgentsPage() {
       render: (row) => (
         <div>
           <span className={`font-bold ${row.commissionOwed > 0 ? 'text-amber-700 font-mono' : 'text-zinc-400'}`}>
-            ${row.commissionOwed?.toLocaleString()}
+            ETB {row.commissionOwed?.toLocaleString()}
           </span>
           <span className="text-[10px] text-zinc-400 block font-normal">
             ({row.commissionRate || 10}% rate)
@@ -252,7 +252,7 @@ export default function AdminAgentsPage() {
           <button
             onClick={() => handleAgentAction(row._id, 'approve')}
             disabled={actionLoading}
-            className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#A8875E] hover:bg-[#96764E] text-[#1A1613] rounded-lg text-xs font-bold transition-colors cursor-pointer disabled:opacity-50"
+            className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#6B7A5E] hover:bg-[#5A6850] text-white rounded-lg text-xs font-bold transition-colors cursor-pointer disabled:opacity-50"
           >
             <CheckCircle className="w-3.5 h-3.5" />
             <span>Approve</span>
@@ -370,15 +370,15 @@ export default function AdminAgentsPage() {
             <div className="p-4 rounded-xl bg-zinc-50 border border-zinc-200 grid grid-cols-2 gap-3 text-xs">
               <div>
                 <p className="text-[10px] uppercase font-bold text-zinc-400">Total Attributed Sales</p>
-                <p className="font-bold text-zinc-900 mt-0.5">${payoutAgent.totalSales?.toLocaleString()}</p>
+                <p className="font-bold text-zinc-900 mt-0.5">ETB {payoutAgent.totalSales?.toLocaleString()}</p>
               </div>
               <div>
                 <p className="text-[10px] uppercase font-bold text-zinc-400">Currently Owed</p>
-                <p className="font-bold text-amber-700 mt-0.5">${payoutAgent.commissionOwed?.toLocaleString()}</p>
+                <p className="font-bold text-amber-700 mt-0.5">ETB {payoutAgent.commissionOwed?.toLocaleString()}</p>
               </div>
             </div>
 
-            <FormField label="Payout Amount ($ USD)" required>
+            <FormField label="Payout Amount (ETB / Birr)" required>
               <TextInput
                 type="number"
                 min="1"

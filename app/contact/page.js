@@ -80,98 +80,95 @@ function ContactForm() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F3ECE1] py-14 sm:py-20">
+    <div className="min-h-screen bg-[#FAF8F5] py-12 sm:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 mb-3">
-            <span className="w-6 h-[1.5px] bg-[#A8875E]" />
-            <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#A8875E]">
-              CONCIERGE & INQUIRIES
+        <div className="text-center max-w-2xl mx-auto mb-14">
+          <div className="inline-flex items-center gap-2 mb-2">
+            <span className="w-8 h-[2.5px] bg-[#B8551F] rounded-full" />
+            <span className="text-xs font-extrabold uppercase tracking-wider text-[#B8551F]">
+              CONTACT US
             </span>
-            <span className="w-6 h-[1.5px] bg-[#A8875E]" />
+            <span className="w-8 h-[2.5px] bg-[#B8551F] rounded-full" />
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif-heading font-bold text-[#2B2620]">
-            Connect With Our Studio
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-[#201C18]">
+            Contact KB Furniture
           </h1>
-          <p className="mt-4 text-sm text-[#6B6459] font-light leading-relaxed">
-            Whether inquiring about custom dimensions, architectural trade pricing, or an existing order,
-            our craft team is dedicated to assisting you.
+          <p className="mt-3 text-sm text-[#6B6459] font-normal leading-relaxed">
+            Have questions about furniture, custom orders, or delivery in Addis Ababa? Call or message our team.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-          {/* Left: Contact Info & Studio Details */}
-          <div className="lg:col-span-5 space-y-8">
-            <div className="bg-white rounded-3xl p-8 border border-[#DCD1BE] shadow-xs space-y-6">
-              <h3 className="text-lg font-serif-heading font-bold text-[#2B2620]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+          {/* Left: Contact Info & Details */}
+          <div className="lg:col-span-5 space-y-6">
+            <div className="bg-white rounded-2xl p-6 sm:p-8 border-2 border-[#E5DDD3] shadow-xs space-y-6">
+              <h3 className="text-lg font-heading font-extrabold text-[#201C18] border-b border-[#E5DDD3] pb-3">
                 Showroom & Workshop
               </h3>
 
               <div className="flex items-start gap-4">
-                <div className="p-3 bg-[#F3ECE1] rounded-2xl text-[#A8875E] shrink-0">
+                <div className="p-3 bg-[#FAF8F5] rounded-xl text-[#B8551F] shrink-0 border border-[#E5DDD3]">
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#2B2620]">
-                    Seattle Design Studio
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#201C18]">
+                    Addis Ababa Showroom
                   </h4>
                   <p className="text-xs text-[#6B6459] mt-1 leading-relaxed">
-                    440 Westlake Ave N, Suite 300<br />
-                    Seattle, WA 98109
+                    Bole Sub-City, Cameroon Street<br />
+                    Near Edna Mall, Addis Ababa, Ethiopia
                   </p>
                 </div>
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="p-3 bg-[#F3ECE1] rounded-2xl text-[#A8875E] shrink-0">
+                <div className="p-3 bg-[#FAF8F5] rounded-xl text-[#B8551F] shrink-0 border border-[#E5DDD3]">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#2B2620]">
-                    Email Inquiries
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#201C18]">
+                    Email
                   </h4>
                   <p className="text-xs text-[#6B6459] mt-1 leading-relaxed">
-                    concierge@nordika-furniture.com<br />
-                    trade@nordika-furniture.com
+                    info@kbfurniture.com<br />
+                    orders@kbfurniture.com
                   </p>
                 </div>
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="p-3 bg-[#F3ECE1] rounded-2xl text-[#A8875E] shrink-0">
+                <div className="p-3 bg-[#FAF8F5] rounded-xl text-[#B8551F] shrink-0 border border-[#E5DDD3]">
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#2B2620]">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#201C18]">
                     Phone & WhatsApp
                   </h4>
                   <p className="text-xs text-[#6B6459] mt-1 leading-relaxed">
-                    +1 (206) 880-4920<br />
-                    Mon–Sat: 9:00 AM – 6:00 PM PST
+                    +251 911 234 567<br />
+                    Mon–Sat: 8:30 AM – 6:30 PM EAT
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* FAQ Mini Accordion */}
-            <div className="bg-[#EAE1D2] rounded-3xl p-8 border border-[#DCD1BE] space-y-4">
-              <div className="flex items-center gap-2 text-[#A8875E]">
+            {/* FAQ Mini Box */}
+            <div className="bg-[#F3EEE7] rounded-2xl p-6 sm:p-8 border-2 border-[#E5DDD3] space-y-4">
+              <div className="flex items-center gap-2 text-[#B8551F]">
                 <HelpCircle className="w-4 h-4" />
-                <span className="text-xs font-bold uppercase tracking-wider">Quick Answers</span>
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#201C18]">
+                  Quick Questions
+                </h4>
               </div>
-              <div className="space-y-3 text-xs text-[#2B2620]">
+              <div className="space-y-3 text-xs">
                 <div>
-                  <h5 className="font-semibold">What is the lead time for bespoke pieces?</h5>
-                  <p className="text-[#6B6459] mt-0.5 font-light">Custom furniture is handcrafted in 4–6 weeks.</p>
+                  <h5 className="font-bold text-[#201C18]">Can I customize sofa or table sizes?</h5>
+                  <p className="text-[#6B6459] mt-0.5 font-normal">Yes, our workshop makes furniture to your exact room size.</p>
                 </div>
-                <div className="border-t border-[#DCD1BE] pt-2.5">
-                  <h5 className="font-semibold">Do you provide wood & fabric swatches?</h5>
-                  <p className="text-[#6B6459] mt-0.5 font-light">Yes, complimentary swatch kits ship within 48 hours.</p>
-                </div>
-                <div className="border-t border-[#DCD1BE] pt-2.5">
-                  <h5 className="font-semibold">Do you work with architects & interior designers?</h5>
-                  <p className="text-[#6B6459] mt-0.5 font-light">We offer tiered trade discounts and 3D CAD files for projects.</p>
+                <div className="border-t border-[#E5DDD3] pt-2.5">
+                  <h5 className="font-bold text-[#201C18]">Do you deliver and assemble at home?</h5>
+                  <p className="text-[#6B6459] mt-0.5 font-normal">Yes, we deliver and assemble across Addis Ababa and major cities.</p>
                 </div>
               </div>
             </div>
@@ -179,38 +176,37 @@ function ContactForm() {
 
           {/* Right: Interactive Form */}
           <div className="lg:col-span-7">
-            <div className="bg-white rounded-3xl p-8 sm:p-12 border border-[#DCD1BE] shadow-lg">
+            <div className="bg-white rounded-2xl p-6 sm:p-10 border-2 border-[#E5DDD3] shadow-xs">
               {submitted ? (
-                <div className="py-16 text-center space-y-4">
-                  <div className="w-16 h-16 bg-[#F3ECE1] text-[#A8875E] rounded-full flex items-center justify-center mx-auto">
+                <div className="py-14 text-center space-y-4">
+                  <div className="w-16 h-16 bg-[#E9F1E6] text-[#4C7A3D] rounded-full flex items-center justify-center mx-auto">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
-                  <h3 className="text-2xl font-serif-heading font-bold text-[#2B2620]">
-                    Inquiry Received
+                  <h3 className="text-2xl font-heading font-extrabold text-[#201C18]">
+                    Message Received!
                   </h3>
-                  <p className="text-xs sm:text-sm text-[#6B6459] max-w-md mx-auto font-light leading-relaxed">
-                    Thank you, {formData.name}. Our master joiners and concierge have received your details
-                    and will reply to <span className="font-medium text-[#2B2620]">{formData.email}</span> shortly.
+                  <p className="text-xs sm:text-sm text-[#6B6459] max-w-md mx-auto font-normal leading-relaxed">
+                    Thank you, {formData.name}. We received your message and will call or email you shortly.
                   </p>
                   <div className="pt-4">
                     <button
                       onClick={() => setSubmitted(false)}
-                      className="bg-[#1A1613] hover:bg-[#332c26] text-white px-8 py-3.5 rounded-xl text-xs font-semibold uppercase tracking-wider transition-colors"
+                      className="bg-[#B8551F] hover:bg-[#8F4116] text-white px-8 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors"
                     >
-                      Submit Another Message
+                      Send Another Message
                     </button>
                   </div>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <h3 className="text-xl font-serif-heading font-bold text-[#2B2620]">
-                    Send a Message or Request Quote
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <h3 className="text-xl font-heading font-extrabold text-[#201C18] border-b border-[#E5DDD3] pb-3">
+                    Send Us a Message
                   </h3>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-[#2B2620] mb-1.5">
-                        Your Full Name *
+                      <label className="block text-xs font-bold text-[#201C18] mb-1">
+                        Full Name *
                       </label>
                       <input
                         type="text"
@@ -218,13 +214,13 @@ function ContactForm() {
                         required
                         value={formData.name}
                         onChange={handleChange}
-                        placeholder="Freja Lind"
-                        className="w-full bg-[#F3ECE1]/50 border border-[#DCD1BE] rounded-xl px-4 py-3 text-xs text-[#2B2620] focus:outline-none focus:ring-2 focus:ring-[#A8875E] focus:bg-white"
+                        placeholder="Abebe Kebede"
+                        className="w-full bg-[#FAF8F5] border border-[#E5DDD3] rounded-xl px-4 py-3 text-xs text-[#201C18] focus:outline-none focus:border-[#B8551F]"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-[#2B2620] mb-1.5">
+                      <label className="block text-xs font-bold text-[#201C18] mb-1">
                         Email Address *
                       </label>
                       <input
@@ -233,15 +229,15 @@ function ContactForm() {
                         required
                         value={formData.email}
                         onChange={handleChange}
-                        placeholder="freja@studio.com"
-                        className="w-full bg-[#F3ECE1]/50 border border-[#DCD1BE] rounded-xl px-4 py-3 text-xs text-[#2B2620] focus:outline-none focus:ring-2 focus:ring-[#A8875E] focus:bg-white"
+                        placeholder="abebe@example.com"
+                        className="w-full bg-[#FAF8F5] border border-[#E5DDD3] rounded-xl px-4 py-3 text-xs text-[#201C18] focus:outline-none focus:border-[#B8551F]"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-[#2B2620] mb-1.5">
+                      <label className="block text-xs font-bold text-[#201C18] mb-1">
                         Phone Number *
                       </label>
                       <input
@@ -250,66 +246,66 @@ function ContactForm() {
                         required
                         value={formData.phone}
                         onChange={handleChange}
-                        placeholder="+1 (206) 555-0199"
-                        className="w-full bg-[#F3ECE1]/50 border border-[#DCD1BE] rounded-xl px-4 py-3 text-xs text-[#2B2620] focus:outline-none focus:ring-2 focus:ring-[#A8875E] focus:bg-white"
+                        placeholder="+251 911 234 567"
+                        className="w-full bg-[#FAF8F5] border border-[#E5DDD3] rounded-xl px-4 py-3 text-xs text-[#201C18] focus:outline-none focus:border-[#B8551F]"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-[#2B2620] mb-1.5">
-                        Inquiry Type
+                      <label className="block text-xs font-bold text-[#201C18] mb-1">
+                        Topic
                       </label>
                       <select
                         name="type"
                         value={formData.type}
                         onChange={handleChange}
-                        className="w-full bg-[#F3ECE1]/50 border border-[#DCD1BE] rounded-xl px-4 py-3 text-xs text-[#2B2620] focus:outline-none focus:ring-2 focus:ring-[#A8875E] focus:bg-white"
+                        className="w-full bg-[#FAF8F5] border border-[#E5DDD3] rounded-xl px-4 py-3 text-xs text-[#201C18] focus:outline-none focus:border-[#B8551F] cursor-pointer"
                       >
-                        <option value="general">General Inquiry</option>
-                        <option value="custom">Custom Made-to-Order Piece</option>
-                        <option value="wholesale">Architect & Trade Program</option>
-                        <option value="support">Order Support & Delivery</option>
+                        <option value="general">General Question</option>
+                        <option value="custom">Custom Furniture Order</option>
+                        <option value="wholesale">Trade & Bulk Order</option>
+                        <option value="support">Delivery & Order Status</option>
                       </select>
                     </div>
                   </div>
 
                   {formData.productContext && (
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-[#2B2620] mb-1.5">
-                        Referenced Product
+                      <label className="block text-xs font-bold text-[#201C18] mb-1">
+                        Furniture Item
                       </label>
                       <input
                         type="text"
                         name="productContext"
                         value={formData.productContext}
                         onChange={handleChange}
-                        className="w-full bg-[#F3ECE1]/50 border border-[#DCD1BE] rounded-xl px-4 py-3 text-xs text-[#2B2620]"
+                        className="w-full bg-[#FAF8F5] border border-[#E5DDD3] rounded-xl px-4 py-3 text-xs text-[#201C18]"
                       />
                     </div>
                   )}
 
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-[#2B2620] mb-1.5">
-                      Message / Project Details *
+                    <label className="block text-xs font-bold text-[#201C18] mb-1">
+                      Your Message *
                     </label>
                     <textarea
                       name="message"
-                      rows={5}
+                      rows={4}
                       required
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="Please specify dimensions, wood preferences (White Oak, Walnut), fabric choices, or delivery address..."
-                      className="w-full bg-[#F3ECE1]/50 border border-[#DCD1BE] rounded-xl px-4 py-3 text-xs text-[#2B2620] focus:outline-none focus:ring-2 focus:ring-[#A8875E] focus:bg-white resize-none"
+                      placeholder="Tell us what furniture piece you need, preferred size, wood type, or delivery address..."
+                      className="w-full bg-[#FAF8F5] border border-[#E5DDD3] rounded-xl px-4 py-3 text-xs text-[#201C18] focus:outline-none focus:border-[#B8551F] resize-none"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="w-full bg-[#1A1613] hover:bg-[#332c26] disabled:bg-stone-400 text-white py-4 rounded-xl text-xs font-semibold uppercase tracking-[0.16em] flex items-center justify-center gap-2 transition-all shadow-md active:scale-[0.99] cursor-pointer"
+                    className="w-full bg-[#B8551F] hover:bg-[#8F4116] disabled:bg-stone-400 text-white py-4 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md active:scale-[0.99] cursor-pointer"
                   >
-                    <Send className="w-4 h-4 text-[#A8875E]" />
-                    <span>{submitting ? 'Transmitting Details...' : 'Send Inquiry To Studio'}</span>
+                    <Send className="w-4 h-4 text-white" />
+                    <span>{submitting ? 'Sending Message...' : 'Send Message'}</span>
                   </button>
                 </form>
               )}

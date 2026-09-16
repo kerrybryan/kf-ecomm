@@ -97,7 +97,7 @@ export async function PUT(request, { params }) {
         if (rule) {
           const captionTemplate =
             rule.defaultCaptionTemplate ||
-            'Introducing the {productName} — handcrafted in {material}. Starting at ${price}.\n\nExplore our bespoke Scandinavian collection online at Nordika Studio. ✨\n\n#NordicDesign #ScandinavianLiving #BespokeFurniture';
+            'Introducing the {productName} — handcrafted in {material}. Starting at ${price}.\n\nExplore our bespoke Scandinavian collection online at KB Furniture. ✨\n\n#NordicDesign #ScandinavianLiving #BespokeFurniture #KBFurniture';
 
           const renderedCaption = captionTemplate
             .replace(/\{productName\}/g, product.name)
@@ -126,7 +126,33 @@ export async function PUT(request, { params }) {
         }
       } catch (autoErr) {
         console.error('Social auto-publish trigger error:', autoErr);
-        // Non-blocking for product save
+      }
+    }
+
+    // Part G: Automatic Queue Suggestion (Rule-based, no AI)
+    if (previousStatus !== 'published' && body.status === 'published') {
+      try {
+        const CaptionTemplate = (await import('@/models/CaptionTemplate')).default;
+        const PublishingQueueItem = (await import('@/models/PublishingQueueItem')).default;
+        const { substitutePlaceholders, STARTER_TEMPLATES } = await import('@/lib/publishing');
+
+        const primaryImg = (product.images && product.images[0]) || 'https://picsum.photos/seed/kb-sofa/800/800';
+        const tpl = (await CaptionTemplate.findOne({ name: /New Arrival/i })) || STARTER_TEMPLATES[0];
+        const caption = substitutePlaceholders(tpl.template, product);
+
+        await PublishingQueueItem.create({
+          productId: product._id,
+          title: `New Arrival: ${product.name}`,
+          mediaUrl: primaryImg,
+          mediaType: 'image',
+          platform: 'instagram',
+          finalCaption: caption,
+          plannedDate: new Date(),
+          status: 'queued',
+          notes: 'Auto-suggested queue draft for newly published product',
+        });
+      } catch (qErr) {
+        console.warn('Auto queue creation notice:', qErr.message);
       }
     }
 

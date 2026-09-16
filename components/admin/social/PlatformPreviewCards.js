@@ -29,11 +29,11 @@ export default function PlatformPreviewCards({
   const currentCaption =
     captions[activePlatformTab] ||
     captions.default ||
-    'Nordika Scandinavian Luxury Furniture Piece. Handcrafted for intentional modern living. ✨\n\n#NordicDesign #ScandinavianLiving #NordikaStudio';
+    'KB Furniture Scandinavian Luxury Furniture Piece. Handcrafted for intentional modern living. ✨\n\n#NordicDesign #ScandinavianLiving #KBFurniture';
 
-  const defaultAvatar = 'https://picsum.photos/seed/nordika-avatar/200/200';
+  const defaultAvatar = 'https://picsum.photos/seed/kb-furniture-avatar/200/200';
   const displayMedia =
-    mediaUrl || 'https://picsum.photos/seed/nordika-haven-modular-boucle-sofa/800/800';
+    mediaUrl || 'https://picsum.photos/seed/kb-furniture-sofa/800/800';
 
   return (
     <div className="bg-white rounded-2xl border border-[#EBE5DF] shadow-sm overflow-hidden flex flex-col">
@@ -75,11 +75,11 @@ export default function PlatformPreviewCards({
               <div className="flex items-center gap-2.5">
                 <div className="w-7 h-7 rounded-full overflow-hidden border border-amber-600/30 p-0.5 ring-1 ring-amber-500">
                   <div className="relative w-full h-full rounded-full overflow-hidden">
-                    <Image src={defaultAvatar} alt="Nordika" fill className="object-cover" />
+                    <Image src={defaultAvatar} alt="KB Furniture" fill className="object-cover" />
                   </div>
                 </div>
                 <div>
-                  <p className="font-bold text-[11px] leading-tight">nordika.studio</p>
+                  <p className="font-bold text-[11px] leading-tight">kbfurniture.studio</p>
                   <p className="text-[9px] text-gray-500">Seattle, Washington</p>
                 </div>
               </div>
@@ -105,11 +105,11 @@ export default function PlatformPreviewCards({
             <div className="px-3.5 pb-3.5 space-y-1">
               <p className="font-bold text-[11px]">1,284 likes</p>
               <p className="text-[11px] leading-relaxed whitespace-pre-line">
-                <span className="font-bold mr-1.5">nordika.studio</span>
+                <span className="font-bold mr-1.5">kbfurniture.studio</span>
                 {currentCaption}
               </p>
               <p className="text-[9px] uppercase tracking-wider text-gray-400 pt-1">
-                2 hours ago • Nordika Studio Original
+                2 hours ago • KB Furniture Studio Original
               </p>
             </div>
           </div>
@@ -129,20 +129,20 @@ export default function PlatformPreviewCards({
             {/* Pin Metadata */}
             <div className="p-4 space-y-2 text-xs">
               <div className="flex items-center justify-between text-[11px] text-gray-500">
-                <span className="font-semibold text-gray-700">nordika.com</span>
+                <span className="font-semibold text-gray-700">kbfurniture.com</span>
                 <ExternalLink className="w-3 h-3" />
               </div>
               <h4 className="font-bold text-sm text-[#1A1613] leading-snug">
-                {product?.name || 'Nordika Scandinavian Studio Collection'}
+                {product?.name || 'KB Furniture Scandinavian Studio Collection'}
               </h4>
               <p className="text-[11px] text-gray-600 line-clamp-3 leading-relaxed whitespace-pre-line">
                 {currentCaption}
               </p>
               <div className="pt-2 flex items-center gap-2 border-t border-gray-100">
                 <div className="relative w-5 h-5 rounded-full overflow-hidden">
-                  <Image src={defaultAvatar} alt="Nordika" fill className="object-cover" />
+                  <Image src={defaultAvatar} alt="KB Furniture" fill className="object-cover" />
                 </div>
-                <span className="text-[11px] font-bold text-gray-700">Nordika Scandinavian Living</span>
+                <span className="text-[11px] font-bold text-gray-700">KB Furniture Scandinavian Living</span>
               </div>
             </div>
           </div>
@@ -155,11 +155,11 @@ export default function PlatformPreviewCards({
             <div className="p-3.5 flex items-center justify-between">
               <div className="flex items-center gap-2.5">
                 <div className="relative w-8 h-8 rounded-full overflow-hidden">
-                  <Image src={defaultAvatar} alt="Nordika" fill className="object-cover" />
+                  <Image src={defaultAvatar} alt="KB Furniture" fill className="object-cover" />
                 </div>
                 <div>
                   <div className="flex items-center gap-1">
-                    <span className="font-bold text-xs">Nordika Scandinavian Studio</span>
+                    <span className="font-bold text-xs">KB Furniture Scandinavian Studio</span>
                     <span className="text-blue-500 font-bold text-[10px]">✓</span>
                   </div>
                   <span className="text-[10px] text-gray-500">Just now • 🌍</span>
@@ -213,7 +213,7 @@ export default function PlatformPreviewCards({
             {/* Floating Right Actions */}
             <div className="relative self-end px-3 space-y-3.5 flex flex-col items-center drop-shadow-md">
               <div className="relative w-8 h-8 rounded-full border border-white overflow-hidden">
-                <Image src={defaultAvatar} alt="Nordika" fill className="object-cover" />
+                <Image src={defaultAvatar} alt="KB Furniture" fill className="object-cover" />
               </div>
               <div className="flex flex-col items-center">
                 <Heart className="w-5 h-5 text-white fill-white/20" />
@@ -238,13 +238,13 @@ export default function PlatformPreviewCards({
 
             {/* Bottom Caption Overlay */}
             <div className="relative p-3 space-y-1 bg-gradient-to-t from-black/90 via-black/40 to-transparent">
-              <p className="font-bold text-xs">@nordikadesign</p>
+              <p className="font-bold text-xs">@kbfurnituredesign</p>
               <p className="text-[10px] line-clamp-2 leading-snug drop-shadow-sm">
                 {currentCaption.split('\n')[0]}
               </p>
               <div className="flex items-center gap-1.5 text-[9px] text-gray-300 pt-0.5">
                 <Music2 className="w-3 h-3 animate-pulse" />
-                <span className="truncate">Nordika Studio • Original Audio</span>
+                <span className="truncate">KB Furniture Studio • Original Audio</span>
               </div>
             </div>
           </div>

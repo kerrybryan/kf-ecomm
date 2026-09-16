@@ -224,7 +224,7 @@ export default function CustomerDetailPage() {
                     />
                     <div>
                       <p className="font-semibold text-zinc-900 text-xs truncate">{prod.name}</p>
-                      <p className="font-bold text-[#A8875E] text-xs mt-0.5">${prod.price?.toLocaleString()}</p>
+                      <p className="font-bold text-[#A8875E] text-xs mt-0.5">ETB {prod.price?.toLocaleString()}</p>
                     </div>
                   </div>
                 ))}

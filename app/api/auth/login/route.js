@@ -25,6 +25,16 @@ export async function POST(request) {
       );
     }
 
+    // Social-only accounts have no password — direct to social login
+    if (!user.passwordHash) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: `This account uses ${user.provider || 'social'} sign-in. Please continue with that option.`,
+        },
+        { status: 401 }
+      );
+    }
     const isMatch = await comparePassword(password, user.passwordHash);
     if (!isMatch) {
       return NextResponse.json(

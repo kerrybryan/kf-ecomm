@@ -10,10 +10,10 @@ import { formatPrice } from '@/lib/utils';
 export const dynamic = 'force-dynamic';
 
 const STATUS_STEPS = [
-  { id: 'pending', label: 'Order Placed', desc: 'Crafting queue confirmed' },
-  { id: 'processing', label: 'In Studio Preparation', desc: 'Inspection & white-glove packing' },
-  { id: 'shipped', label: 'With White-Glove Courier', desc: 'Appointment window scheduling' },
-  { id: 'delivered', label: 'Delivered & Assembled', desc: 'Placed in your room of choice' },
+  { id: 'pending', label: 'Order Received', desc: 'Order logged & confirmed' },
+  { id: 'processing', label: 'In Workshop', desc: 'Inspection & preparation' },
+  { id: 'shipped', label: 'Out for Delivery', desc: 'Delivery team on the way' },
+  { id: 'delivered', label: 'Delivered', desc: 'Delivered to your address' },
 ];
 
 export default async function OrderConfirmationPage({ params }) {
@@ -40,23 +40,22 @@ export default async function OrderConfirmationPage({ params }) {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Success Header Card */}
         <div className="bg-white rounded-3xl p-8 sm:p-12 border border-stone-200 shadow-xs text-center mb-8">
-          <div className="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 ring-8 ring-emerald-50/50">
+          <div className="w-16 h-16 bg-[#E8ECE3] text-[#6B7A5E] rounded-full flex items-center justify-center mx-auto mb-4 ring-8 ring-[#E8ECE3]/50">
             <CheckCircle2 className="w-8 h-8" />
           </div>
 
-          <span className="text-xs uppercase font-bold tracking-widest text-amber-700 block mb-1">
-            Order Confirmed & Logged
+          <span className="text-xs uppercase font-bold tracking-widest text-[#A8875E] block mb-1">
+            Order Confirmed
           </span>
           <h1 className="text-3xl font-serif-luxury font-bold text-stone-900">
-            Thank you for choosing NÖRDIKA, {order.customer.name.split(' ')[0]}!
+            Thank you for ordering with KB Furniture, {order.customer.name.split(' ')[0]}!
           </h1>
           <p className="text-xs sm:text-sm text-stone-500 mt-2 max-w-lg mx-auto">
-            A confirmation receipt and tracking itinerary have been dispatched to{' '}
-            <strong className="text-stone-800">{order.customer.email}</strong>.
+            Our team will contact you on <strong className="text-stone-800">{order.customer.phone}</strong> to confirm delivery details.
           </p>
 
           <div className="mt-6 inline-flex items-center gap-3 bg-stone-50 border border-stone-200 px-5 py-2.5 rounded-full text-xs font-mono">
-            <span className="text-stone-500 font-sans">Order Reference:</span>
+            <span className="text-stone-500 font-sans">Order Number:</span>
             <span className="font-bold text-stone-900">{order.orderNumber}</span>
           </div>
         </div>
@@ -64,7 +63,7 @@ export default async function OrderConfirmationPage({ params }) {
         {/* Live Delivery Status Timeline */}
         <div className="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-xs mb-8">
           <h2 className="text-sm font-bold uppercase tracking-wider text-stone-900 mb-6">
-            White-Glove Delivery Timeline
+            Delivery Timeline
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-6 relative">
@@ -97,7 +96,7 @@ export default async function OrderConfirmationPage({ params }) {
           {/* Items Summary */}
           <div className="md:col-span-7 bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-xs space-y-4">
             <h3 className="text-sm font-bold uppercase tracking-wider text-stone-900 border-b border-stone-100 pb-3">
-              Crafted Items in Order ({order.items.length})
+              Items Ordered ({order.items.length})
             </h3>
 
             <div className="divide-y divide-stone-100">
@@ -136,15 +135,15 @@ export default async function OrderConfirmationPage({ params }) {
                 <span>{formatPrice(order.subtotal)}</span>
               </div>
               <div className="flex justify-between">
-                <span>White-Glove Shipping</span>
+                <span>Delivery & Setup</span>
                 <span>{order.shipping === 0 ? 'FREE' : formatPrice(order.shipping)}</span>
               </div>
               <div className="flex justify-between">
-                <span>Sales Tax</span>
+                <span>Estimated 15% VAT</span>
                 <span>{formatPrice(order.tax)}</span>
               </div>
               <div className="flex justify-between text-sm font-bold text-stone-900 pt-2 border-t border-stone-200">
-                <span>Total Paid</span>
+                <span>Total</span>
                 <span>{formatPrice(order.total)}</span>
               </div>
             </div>

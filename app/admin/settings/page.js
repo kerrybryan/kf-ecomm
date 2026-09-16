@@ -582,7 +582,7 @@ export default function AdminSettingsPage() {
               type="email"
               value={newUser.email}
               onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
-              placeholder="e.g. elsa@nordika.com"
+              placeholder="e.g. elsa@kbfurniture.com"
               required
             />
           </FormField>

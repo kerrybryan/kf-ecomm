@@ -31,9 +31,9 @@ export async function GET(request, { params }) {
       dueDate: order.createdAt,
       status: order.paymentStatus === 'paid' ? 'PAID' : 'DUE',
       store: {
-        name: settings?.storeName || 'Nordika Scandinavian Studio',
+        name: settings?.storeName || 'KB Furniture Scandinavian Studio',
         address: settings?.storeAddress || '440 Westlake Ave N, Suite 300, Seattle, WA 98109',
-        email: settings?.storeEmail || 'concierge@nordika.com',
+        email: settings?.storeEmail || 'concierge@kbfurniture.com',
         phone: settings?.storePhone || '+1 (206) 555-0199',
       },
       customer: order.customer || { name: 'Valued Client' },

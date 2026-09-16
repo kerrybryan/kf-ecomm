@@ -29,7 +29,7 @@ export async function POST(request) {
             body: JSON.stringify({
               file: base64,
               upload_preset: uploadPreset,
-              folder: 'nordika_catalog',
+              folder: 'kb_furniture_catalog',
             }),
           });
           const data = await res.json();

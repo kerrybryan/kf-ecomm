@@ -35,7 +35,7 @@ export default function SalesTrendChart({ data = [], loading = false }) {
       return (
         <div className="bg-zinc-900 text-white px-3.5 py-2.5 rounded-xl text-xs shadow-xl border border-zinc-800 space-y-1">
           <p className="font-semibold text-zinc-200">{payload[0].payload.date}</p>
-          <p className="text-[#A8875E] font-bold text-sm">${rev.toLocaleString()}</p>
+          <p className="text-[#A8875E] font-bold text-sm">ETB {rev.toLocaleString()}</p>
           <p className="text-zinc-400 text-[11px]">{orders} orders placed</p>
         </div>
       );

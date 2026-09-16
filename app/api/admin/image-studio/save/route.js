@@ -23,7 +23,7 @@ export async function POST(request) {
     }
 
     // 1. Upload the edited & branded image to Cloudinary / storage
-    const uploadResult = await uploadImage(imageDataUrl, 'nordika-image-studio');
+    const uploadResult = await uploadImage(imageDataUrl, 'kb-furniture-image-studio');
     const stableImageUrl = uploadResult.secureUrl || uploadResult.url;
 
     let updatedProduct = null;

@@ -63,11 +63,10 @@ export async function POST(request) {
       );
     }
 
-    // Calculate totals server-side
+    // Calculate totals server-side (Free delivery over 50,000 Birr, else 1,500 Birr, 15% VAT)
     const subtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    // Free shipping over $1500, else $120 standard
-    const shipping = subtotal >= 1500 ? 0 : 120;
-    const tax = Math.round(subtotal * 0.08 * 100) / 100; // 8% estimated tax
+    const shipping = subtotal >= 50000 ? 0 : 1500;
+    const tax = Math.round(subtotal * 0.15); // 15% Ethiopian VAT
     const total = subtotal + shipping + tax;
 
     const orderNumber = generateOrderNumber();
@@ -85,8 +84,8 @@ export async function POST(request) {
           apartment: customer.address.apartment?.trim() || '',
           city: customer.address.city.trim(),
           state: customer.address.state.trim(),
-          postalCode: customer.address.postalCode.trim(),
-          country: customer.address.country || 'United States',
+          postalCode: customer.address.postalCode?.trim() || '1000',
+          country: customer.address.country || 'Ethiopia',
         },
       },
       items: items.map((item) => ({

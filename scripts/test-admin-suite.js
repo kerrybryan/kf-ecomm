@@ -43,7 +43,7 @@ async function makeRequest(path, method = 'GET', body = null, headers = {}) {
 
 async function runAdminTestSuite() {
   console.log('====================================================');
-  console.log('🚀 NORDIKA STUDIO: PHASE 2 ADMIN VERIFICATION SUITE');
+  console.log('🚀 KB FURNITURE STUDIO: PHASE 2 ADMIN VERIFICATION SUITE');
   console.log('====================================================\n');
 
   let passed = 0;
@@ -71,7 +71,7 @@ async function runAdminTestSuite() {
 
     // 2. Test Admin Login (Super Admin)
     const loginRes = await makeRequest('/api/admin/auth/login', 'POST', {
-      email: 'admin@nordika.com',
+      email: 'admin@kbfurniture.com',
       password: 'password123',
     });
     assert(
@@ -89,7 +89,7 @@ async function runAdminTestSuite() {
     const meRes = await makeRequest('/api/admin/auth/me', 'GET', null, authHeaders);
     assert(
       'Verify Session via /api/admin/auth/me',
-      meRes.status === 200 && meRes.body.data?.email === 'admin@nordika.com',
+      meRes.status === 200 && meRes.body.data?.email === 'admin@kbfurniture.com',
       `User: ${meRes.body.data?.name}`
     );
 
@@ -277,7 +277,7 @@ async function runAdminTestSuite() {
     // 12. Test Role-Based Access Control Restrictions (Support Staff)
     console.log('\n--- 10. Role-Based Access Control (RBAC) Enforcement ---');
     const supportLogin = await makeRequest('/api/admin/auth/login', 'POST', {
-      email: 'support@nordika.com',
+      email: 'support@kbfurniture.com',
       password: 'password123',
     });
     const supportCookie = supportLogin.headers['set-cookie'][0].split(';')[0];

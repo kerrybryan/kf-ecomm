@@ -269,21 +269,21 @@ export default function OrderDetailPage() {
             <div className="mt-6 pt-5 border-t border-zinc-100 space-y-2 text-xs">
               <div className="flex justify-between text-zinc-500">
                 <span>Subtotal</span>
-                <span className="font-semibold text-zinc-800">${order.subtotal?.toLocaleString()}</span>
+                <span className="font-semibold text-zinc-800">ETB {order.subtotal?.toLocaleString()}</span>
               </div>
               <div className="flex justify-between text-zinc-500">
-                <span>White-Glove Delivery & Assembly</span>
+                <span>Delivery & Setup</span>
                 <span className="font-semibold text-zinc-800">
-                  {order.shipping === 0 ? 'Complimentary ($0)' : `$${order.shipping?.toLocaleString()}`}
+                  {order.shipping === 0 ? 'Complimentary (ETB 0)' : `ETB ${order.shipping?.toLocaleString()}`}
                 </span>
               </div>
               <div className="flex justify-between text-zinc-500">
-                <span>Estimated Sales Tax</span>
-                <span className="font-semibold text-zinc-800">${order.tax?.toLocaleString()}</span>
+                <span>Estimated 15% VAT</span>
+                <span className="font-semibold text-zinc-800">ETB {order.tax?.toLocaleString()}</span>
               </div>
               <div className="flex justify-between text-sm font-bold text-zinc-900 pt-2 border-t border-zinc-100">
                 <span>Total Amount Charged</span>
-                <span className="text-[#A8875E]">${order.total?.toLocaleString()}</span>
+                <span className="text-[#A8875E]">ETB {order.total?.toLocaleString()}</span>
               </div>
             </div>
           </AdminCard>

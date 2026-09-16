@@ -266,7 +266,7 @@ export default function SourcedItemReviewPage({ params }) {
             </div>
             <div>
               <p className="text-xs font-bold text-emerald-950">
-                Converted to Draft Product: {item.linkedProductId.name || 'Nordika Catalog Product'}
+                Converted to Draft Product: {item.linkedProductId.name || 'KB Furniture Catalog Product'}
               </p>
               <p className="text-[11px] text-emerald-700">
                 This item is now a draft catalog listing priced at ${item.linkedProductId.price?.toLocaleString()}.
@@ -275,7 +275,7 @@ export default function SourcedItemReviewPage({ params }) {
           </div>
           <Link
             href={`/admin/products/${item.linkedProductId._id || item.linkedProductId}/edit`}
-            className="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-xs flex items-center gap-1.5 transition-all"
+            className="px-3.5 py-1.5 rounded-xl bg-[#6B7A5E] hover:bg-[#5A6850] text-white text-xs font-bold shadow-xs flex items-center gap-1.5 transition-all cursor-pointer"
           >
             Open Product Listing
             <ExternalLink className="w-3.5 h-3.5" />
@@ -330,7 +330,7 @@ export default function SourcedItemReviewPage({ params }) {
               ) : (
                 <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-900 flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span>This image has been retouched and branded with the Nordika Studio mark.</span>
+                  <span>This image has been retouched and branded with the KB Furniture Studio mark.</span>
                 </div>
               )}
 

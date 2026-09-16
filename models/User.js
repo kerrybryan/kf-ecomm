@@ -29,7 +29,21 @@ const UserSchema = new mongoose.Schema(
     },
     passwordHash: {
       type: String,
-      required: [true, 'Please provide a password'],
+      default: null, // null for social-only accounts
+    },
+    // OAuth social login fields
+    provider: {
+      type: String,
+      enum: ['email', 'google', 'facebook'],
+      default: 'email',
+    },
+    providerId: {
+      type: String,
+      default: null, // OAuth subject ID from provider
+    },
+    avatar: {
+      type: String,
+      default: null, // Profile picture URL from OAuth provider
     },
     phone: {
       type: String,

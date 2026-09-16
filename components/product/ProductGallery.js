@@ -6,7 +6,7 @@ import { ZoomIn } from 'lucide-react';
 export default function ProductGallery({ images = [], name = 'Product' }) {
   const imageList = images && images.length > 0
     ? images
-    : ['https://picsum.photos/seed/nordika-sofa/1200/800'];
+    : ['https://picsum.photos/seed/kb-furniture-sofa/1200/800'];
 
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -20,7 +20,7 @@ export default function ProductGallery({ images = [], name = 'Product' }) {
               key={idx}
               type="button"
               onClick={() => setActiveIndex(idx)}
-              className={`relative w-20 h-20 rounded-xl overflow-hidden border-2 shrink-0 transition-all ${
+              className={`relative w-20 h-20 rounded-xl overflow-hidden border-2 shrink-0 transition-all cursor-pointer ${
                 activeIndex === idx
                   ? 'border-stone-900 ring-2 ring-stone-900/10'
                   : 'border-stone-200 opacity-70 hover:opacity-100'
@@ -37,7 +37,7 @@ export default function ProductGallery({ images = [], name = 'Product' }) {
       )}
 
       {/* Main Preview Image */}
-      <div className="relative flex-1 aspect-[4/3] md:aspect-[5/4] bg-stone-100 rounded-2xl overflow-hidden border border-stone-200/80 group">
+      <div className="relative flex-1 aspect-[4/3] md:aspect-[5/4] bg-stone-100 rounded-xl overflow-hidden border border-stone-200/80 group">
         <img
           src={imageList[activeIndex]}
           alt={`${name} view ${activeIndex + 1}`}

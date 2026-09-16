@@ -20,8 +20,8 @@ import {
 const BATCH_SAMPLE_CATALOG = [
   {
     id: 'batch-1',
-    name: 'Nordika Haven Bouclé Sofa',
-    url: 'https://picsum.photos/seed/nordika-haven-modular-boucle-sofa/800/800',
+    name: 'KB Furniture Haven Bouclé Sofa',
+    url: 'https://picsum.photos/seed/kb-haven-modular-boucle-sofa/800/800',
     selected: true,
   },
   {

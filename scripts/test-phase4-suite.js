@@ -65,7 +65,7 @@ async function runTests() {
     // 1. Admin Login
     console.log('\n--- 1. Admin Authentication & Session ---');
     const loginRes = await makeRequest('POST', '/api/admin/auth/login', {
-      email: 'admin@nordika.com',
+      email: 'admin@kbfurniture.com',
       password: 'password123',
     });
     assert(loginRes.status === 200 && loginRes.data.success, 'Super Admin login successful');
@@ -88,8 +88,8 @@ async function runTests() {
       '/api/admin/social/accounts',
       {
         platform: 'instagram',
-        accountName: 'Nordika Scandinavian Studio Official',
-        accountHandle: '@nordika.studio',
+        accountName: 'KB Furniture Scandinavian Studio Official',
+        accountHandle: '@kbfurniture.studio',
         isSimulated: true,
       },
       adminCookie
@@ -127,7 +127,7 @@ async function runTests() {
       'POST',
       '/api/admin/social/posts',
       {
-        mediaUrl: 'https://picsum.photos/seed/nordika-haven-sectional/800/800',
+        mediaUrl: 'https://picsum.photos/seed/kb-furniture-haven-sectional/800/800',
         mediaType: 'image',
         platforms: ['instagram', 'pinterest', 'facebook'],
         captions: {
@@ -217,7 +217,7 @@ async function runTests() {
       {
         mode: 'review_queue',
         defaultPlatforms: ['instagram', 'pinterest', 'facebook'],
-        defaultCaptionTemplate: 'Fresh release: {productName} in {material} for ${price}! ✨ #NordikaStudio',
+        defaultCaptionTemplate: 'Fresh release: {productName} in {material} for ${price}! ✨ #KBFurniture',
         enabled: true,
       },
       adminCookie

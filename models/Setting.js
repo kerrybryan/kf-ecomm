@@ -4,41 +4,42 @@ const SettingSchema = new mongoose.Schema(
   {
     storeName: {
       type: String,
-      default: 'Nordika Scandinavian Studio',
+      default: 'KB Furniture Scandinavian Studio',
     },
     storeEmail: {
       type: String,
-      default: 'concierge@nordika.com',
+      default: 'concierge@kbfurniture.com',
     },
     storePhone: {
       type: String,
-      default: '+1 (206) 555-0199',
+      default: '+251 911 234 567',
     },
     storeAddress: {
       type: String,
-      default: '440 Westlake Ave N, Suite 300, Seattle, WA 98109',
+      default: 'Bole Sub-City, Addis Ababa, Ethiopia',
     },
     currency: {
-      code: { type: String, default: 'USD' },
-      symbol: { type: String, default: '$' },
+      code: { type: String, default: 'ETB' },
+      symbol: { type: String, default: 'Birr' },
     },
     shippingRules: {
-      flatRate: { type: Number, default: 150 },
-      freeShippingThreshold: { type: Number, default: 2000 },
-      expeditedRate: { type: Number, default: 350 },
-      whiteGloveRate: { type: Number, default: 450 },
+      flatRate: { type: Number, default: 1500 },
+      freeShippingThreshold: { type: Number, default: 50000 },
+      expeditedRate: { type: Number, default: 3500 },
+      whiteGloveRate: { type: Number, default: 4500 },
     },
     taxRates: [
       {
         region: { type: String, required: true },
-        rate: { type: Number, required: true, default: 8.5 },
+        rate: { type: Number, required: true, default: 15.0 },
       },
     ],
     paymentMethods: {
-      creditCard: { type: Boolean, default: true },
-      applePay: { type: Boolean, default: true },
+      cashOnDelivery: { type: Boolean, default: true },
       bankTransfer: { type: Boolean, default: true },
-      cashOnDelivery: { type: Boolean, default: false },
+      creditCard: { type: Boolean, default: true },
+      telebirr: { type: Boolean, default: true },
+      applePay: { type: Boolean, default: false },
     },
     globalCommissionRate: {
       type: Number,

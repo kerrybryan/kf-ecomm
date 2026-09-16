@@ -65,7 +65,7 @@ async function runTests() {
     // 1. Admin Login
     console.log('\n--- 1. Admin Authentication & Session ---');
     const loginRes = await makeRequest('POST', '/api/admin/auth/login', {
-      email: 'admin@nordika.com',
+      email: 'admin@kbfurniture.com',
       password: 'password123',
     });
     assert(loginRes.status === 200 && loginRes.data.success, 'Super Admin login successful');

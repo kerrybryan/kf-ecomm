@@ -55,218 +55,210 @@ export default function BecomeAnAgentPage() {
   };
 
   return (
-    <div className="bg-[#FAF9F6] min-h-screen py-16">
+    <div className="bg-[#FAF8F5] min-h-screen py-14">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-semibold uppercase tracking-widest mb-3">
-            <Award className="w-3.5 h-3.5 text-amber-700" />
-            <span>NÖRDIKA Trade & Agent Network</span>
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-[#B8551F]/10 border border-[#B8551F]/30 text-[#B8551F] text-xs font-bold uppercase tracking-wider mb-3">
+            <Award className="w-3.5 h-3.5 text-[#B8551F]" />
+            <span>KB Furniture Trade & Agents</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-serif-luxury font-bold text-stone-900 leading-tight">
-            Partner with Nordika as a Trade Representative
+          <h1 className="text-3xl sm:text-4xl font-heading font-extrabold text-[#201C18] leading-tight">
+            Partner With KB Furniture
           </h1>
-          <p className="text-xs sm:text-sm text-stone-600 mt-3 leading-relaxed">
-            Exclusive privileges, tiered trade commissions (up to 20%), 3D Revit/SketchUp architectural models,
-            and dedicated studio project managers for licensed interior designers and regional agents.
+          <p className="text-xs sm:text-sm text-[#6B6459] mt-3 leading-relaxed font-normal">
+            Earn good commissions by recommending or selling solid wood furniture to your clients in Addis Ababa and across Ethiopia.
           </p>
         </div>
 
         {/* Benefits Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <div className="bg-white p-6 rounded-2xl border border-stone-200 shadow-xs flex flex-col justify-between">
+          <div className="bg-white p-6 rounded-2xl border-2 border-[#E5DDD3] shadow-xs flex flex-col justify-between">
             <div>
-              <div className="p-3 bg-stone-900 text-amber-300 w-fit rounded-xl mb-4">
+              <div className="p-3 bg-[#FAF8F5] text-[#B8551F] w-fit rounded-xl mb-4 border border-[#E5DDD3]">
                 <Percent className="w-5 h-5" />
               </div>
-              <h3 className="text-sm font-bold uppercase tracking-wider text-stone-900">
-                Tiered Trade Margins
+              <h3 className="text-sm font-bold uppercase tracking-wider text-[#201C18]">
+                Good Commissions
               </h3>
-              <p className="text-xs text-stone-500 mt-2 leading-relaxed">
-                Enjoy 15% to 25% wholesale trade discounts on all catalog collections with no annual order minimums.
+              <p className="text-xs text-[#6B6459] mt-2 leading-relaxed font-normal">
+                Earn 10% to 20% on every order placed by your clients with fast payouts.
               </p>
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-2xl border border-stone-200 shadow-xs flex flex-col justify-between">
+          <div className="bg-white p-6 rounded-2xl border-2 border-[#E5DDD3] shadow-xs flex flex-col justify-between">
             <div>
-              <div className="p-3 bg-stone-900 text-amber-300 w-fit rounded-xl mb-4">
+              <div className="p-3 bg-[#FAF8F5] text-[#B8551F] w-fit rounded-xl mb-4 border border-[#E5DDD3]">
                 <FileCode className="w-5 h-5" />
               </div>
-              <h3 className="text-sm font-bold uppercase tracking-wider text-stone-900">
-                3D BIM & CAD Assets
+              <h3 className="text-sm font-bold uppercase tracking-wider text-[#201C18]">
+                Catalog & Photos
               </h3>
-              <p className="text-xs text-stone-500 mt-2 leading-relaxed">
-                Instant access to high-fidelity 3D assets for Revit, Rhino, SketchUp, and Corona rendering engines.
+              <p className="text-xs text-[#6B6459] mt-2 leading-relaxed font-normal">
+                Get full product catalogs, high quality photos, and wood material samples.
               </p>
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-2xl border border-stone-200 shadow-xs flex flex-col justify-between">
+          <div className="bg-white p-6 rounded-2xl border-2 border-[#E5DDD3] shadow-xs flex flex-col justify-between">
             <div>
-              <div className="p-3 bg-stone-900 text-amber-300 w-fit rounded-xl mb-4">
+              <div className="p-3 bg-[#FAF8F5] text-[#B8551F] w-fit rounded-xl mb-4 border border-[#E5DDD3]">
                 <Users className="w-5 h-5" />
               </div>
-              <h3 className="text-sm font-bold uppercase tracking-wider text-stone-900">
-                Dedicated Concierge
+              <h3 className="text-sm font-bold uppercase tracking-wider text-[#201C18]">
+                Direct Support
               </h3>
-              <p className="text-xs text-stone-500 mt-2 leading-relaxed">
-                Direct cell hotline to your studio concierge for lead-time estimates and custom swatch delivery.
+              <p className="text-xs text-[#6B6459] mt-2 leading-relaxed font-normal">
+                Direct phone and WhatsApp support from our Addis Ababa workshop team.
               </p>
             </div>
           </div>
         </div>
 
-        {/* Application Form */}
-        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-stone-200 shadow-xs">
+        {/* Application Form Card */}
+        <div className="bg-white rounded-2xl p-6 sm:p-10 border-2 border-[#E5DDD3] shadow-xs">
           {submittedAgent ? (
-            <div className="text-center py-12 space-y-4">
-              <div className="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto ring-8 ring-emerald-50/50">
+            <div className="text-center py-10 space-y-4">
+              <div className="w-16 h-16 bg-[#E9F1E6] rounded-full flex items-center justify-center mx-auto text-[#4C7A3D]">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
-              <h3 className="text-2xl font-serif-luxury font-bold text-stone-900">
-                Application Approved & Queued!
-              </h3>
-              <p className="text-xs sm:text-sm text-stone-600 max-w-md mx-auto leading-relaxed">
-                Welcome to the network, <strong>{submittedAgent.name}</strong>. Your provisional Trade
-                Referral Code is:
-              </p>
-              <div className="inline-block bg-stone-900 text-amber-300 font-mono text-sm font-bold px-6 py-3 rounded-xl border border-stone-800 shadow-xs">
-                {submittedAgent.referralCode}
-              </div>
-              <p className="text-xs text-stone-400">
-                Our trade partnership director will email you your onboarding kit and digital lookbook.
+              <h2 className="text-2xl font-heading font-extrabold text-[#201C18]">
+                Application Received!
+              </h2>
+              <p className="text-xs sm:text-sm text-[#6B6459] max-w-md mx-auto">
+                Thank you, <strong>{submittedAgent.name}</strong>. Our team will review your application and call you within 24 hours.
               </p>
               <div className="pt-4">
                 <Link
                   href="/shop"
-                  className="inline-block bg-stone-900 text-white text-xs font-semibold px-6 py-3 rounded-xl uppercase tracking-widest hover:bg-stone-800"
+                  className="inline-block bg-[#B8551F] hover:bg-[#8F4116] text-white px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wider"
                 >
-                  Explore Catalog
+                  Browse Furniture Catalog
                 </Link>
               </div>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="border-b border-stone-100 pb-4">
-                <h2 className="text-sm font-bold uppercase tracking-wider text-stone-900">
-                  Trade Representative Application
+              <div className="border-b border-[#E5DDD3] pb-4">
+                <h2 className="text-sm font-bold uppercase tracking-wider text-[#201C18]">
+                  Agent Application Form
                 </h2>
-                <p className="text-xs text-stone-500 mt-1">
-                  Complete the verification form below to receive your trade account credentials.
+                <p className="text-xs text-[#6B6459] mt-1">
+                  Fill in your details below to become a registered KB Furniture agent.
                 </p>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-stone-700 mb-1">
-                    Full Legal Name *
+                  <label className="block text-xs font-bold text-[#201C18] mb-1">
+                    Full Name *
                   </label>
                   <input
                     type="text"
                     name="name"
                     required
-                    placeholder="Marcus Lindqvist"
+                    placeholder="Abebe Kebede"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-xs text-stone-900 focus:outline-none focus:border-stone-900"
+                    className="w-full bg-[#FAF8F5] border border-[#E5DDD3] rounded-xl px-4 py-3 text-xs text-[#201C18] focus:outline-none focus:border-[#B8551F]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-stone-700 mb-1">
-                    Business Email *
+                  <label className="block text-xs font-bold text-[#201C18] mb-1">
+                    Email Address *
                   </label>
                   <input
                     type="email"
                     name="email"
                     required
-                    placeholder="marcus@lindqviststudio.com"
+                    placeholder="abebe@example.com"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-xs text-stone-900 focus:outline-none focus:border-stone-900"
+                    className="w-full bg-[#FAF8F5] border border-[#E5DDD3] rounded-xl px-4 py-3 text-xs text-[#201C18] focus:outline-none focus:border-[#B8551F]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-stone-700 mb-1">
+                  <label className="block text-xs font-bold text-[#201C18] mb-1">
                     Phone Number *
                   </label>
                   <input
                     type="tel"
                     name="phone"
                     required
-                    placeholder="+1 (415) 555-0144"
+                    placeholder="+251 911 234 567"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-xs text-stone-900 focus:outline-none focus:border-stone-900"
+                    className="w-full bg-[#FAF8F5] border border-[#E5DDD3] rounded-xl px-4 py-3 text-xs text-[#201C18] focus:outline-none focus:border-[#B8551F]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-stone-700 mb-1">
-                    Primary City / Region *
+                  <label className="block text-xs font-bold text-[#201C18] mb-1">
+                    City / Location *
                   </label>
                   <input
                     type="text"
                     name="city"
                     required
-                    placeholder="San Francisco, CA / Vancouver, BC"
+                    placeholder="Addis Ababa, Hawassa, Bahir Dar"
                     value={formData.city}
                     onChange={handleChange}
-                    className="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-xs text-stone-900 focus:outline-none focus:border-stone-900"
+                    className="w-full bg-[#FAF8F5] border border-[#E5DDD3] rounded-xl px-4 py-3 text-xs text-[#201C18] focus:outline-none focus:border-[#B8551F]"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-stone-700 mb-1">
-                    Industry Role / Sales Channel *
+                  <label className="block text-xs font-bold text-[#201C18] mb-1">
+                    Your Profession *
                   </label>
                   <select
                     name="salesChannel"
                     value={formData.salesChannel}
                     onChange={handleChange}
-                    className="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-xs text-stone-900 focus:outline-none focus:border-stone-900 cursor-pointer"
+                    className="w-full bg-[#FAF8F5] border border-[#E5DDD3] rounded-xl px-4 py-3 text-xs text-[#201C18] focus:outline-none focus:border-[#B8551F] cursor-pointer"
                   >
-                    <option value="Interior Designer / Residential">Interior Designer (Residential)</option>
-                    <option value="Architect / Commercial">Architect (Commercial / Multi-Family)</option>
-                    <option value="Hospitality Procurement">Hospitality Procurement Specialist</option>
-                    <option value="Independent Sales Agent">Independent Luxury Sales Representative</option>
-                    <option value="Retail Furniture Showroom">Retail Showroom Partner</option>
+                    <option value="Interior Designer / Residential">Interior Designer</option>
+                    <option value="Architect / Commercial">Architect</option>
+                    <option value="Independent Sales Agent">Independent Sales Representative</option>
+                    <option value="Retail Furniture Showroom">Showroom / Shop Partner</option>
+                    <option value="Other">Other</option>
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-stone-700 mb-1">
-                    Years of Practice / Experience
+                  <label className="block text-xs font-bold text-[#201C18] mb-1">
+                    Years of Experience
                   </label>
                   <select
                     name="experience"
                     value={formData.experience}
                     onChange={handleChange}
-                    className="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-xs text-stone-900 focus:outline-none focus:border-stone-900 cursor-pointer"
+                    className="w-full bg-[#FAF8F5] border border-[#E5DDD3] rounded-xl px-4 py-3 text-xs text-[#201C18] focus:outline-none focus:border-[#B8551F] cursor-pointer"
                   >
                     <option value="1-2 years">1-2 years</option>
                     <option value="3-5 years">3-5 years</option>
                     <option value="6-10 years">6-10 years</option>
-                    <option value="10+ years (Master Architect / Principal)">10+ years (Principal / Studio Head)</option>
+                    <option value="10+ years">10+ years</option>
                   </select>
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-stone-700 mb-1">
-                  Portfolio / Studio Website / Additional Notes (Optional)
+                <label className="block text-xs font-bold text-[#201C18] mb-1">
+                  Additional Notes (Optional)
                 </label>
                 <textarea
                   name="notes"
                   rows={3}
-                  placeholder="Website URL, Instagram handle, or upcoming project requirements..."
+                  placeholder="Tell us about your work, clients, or questions..."
                   value={formData.notes}
                   onChange={handleChange}
-                  className="w-full bg-stone-50 border border-stone-200 rounded-xl p-4 text-xs text-stone-900 focus:outline-none focus:border-stone-900 resize-none"
+                  className="w-full bg-[#FAF8F5] border border-[#E5DDD3] rounded-xl p-4 text-xs text-[#201C18] focus:outline-none focus:border-[#B8551F] resize-none"
                 />
               </div>
 
@@ -274,10 +266,10 @@ export default function BecomeAnAgentPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full bg-stone-900 hover:bg-stone-800 disabled:opacity-50 text-white py-4 px-6 rounded-xl font-semibold text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all shadow-md active:scale-[0.99]"
+                  className="w-full bg-[#B8551F] hover:bg-[#8F4116] disabled:opacity-50 text-white py-4 px-6 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md active:scale-[0.99] cursor-pointer"
                 >
-                  <Briefcase className="w-4 h-4 text-amber-300" />
-                  <span>{submitting ? 'Verifying Application...' : 'Submit Trade Application'}</span>
+                  <Briefcase className="w-4 h-4 text-white" />
+                  <span>{submitting ? 'Submitting Application...' : 'Apply as an Agent'}</span>
                 </button>
               </div>
             </form>

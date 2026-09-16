@@ -16,7 +16,7 @@ export default function CustomOrderPage() {
     phone: '',
     type: 'custom',
     dimensions: '',
-    budget: '$3,000 - $6,000',
+    budget: '30,000 - 60,000 Birr',
     productContext: '',
     referenceImage: '',
     message: '',
@@ -57,63 +57,62 @@ export default function CustomOrderPage() {
   };
 
   return (
-    <div className="bg-[#FAF9F6] min-h-screen py-16">
+    <div className="bg-[#FAF8F5] min-h-screen py-14">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-semibold uppercase tracking-widest mb-3">
-            <Sparkles className="w-3.5 h-3.5 text-amber-700" />
-            <span>Studio Bespoke Concierge</span>
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-[#B8551F]/10 border border-[#B8551F]/30 text-[#B8551F] text-xs font-bold uppercase tracking-wider mb-3">
+            <Sparkles className="w-3.5 h-3.5 text-[#B8551F]" />
+            <span>Custom Workshop</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-serif-luxury font-bold text-stone-900 leading-tight">
-            Custom Furniture & Architectural Inquiries
+          <h1 className="text-3xl sm:text-4xl font-heading font-extrabold text-[#201C18] leading-tight">
+            Custom Furniture Orders
           </h1>
-          <p className="text-xs sm:text-sm text-stone-600 mt-3 leading-relaxed">
-            Need tailored sofa dimensions, rare walnut slabs, custom stone dining tables, or
-            commercial wholesale orders? Our studio woodworkers and design directors bring your concept to life.
+          <p className="text-xs sm:text-sm text-[#6B6459] mt-3 leading-relaxed font-normal">
+            Tell us your room size, preferred wood, and furniture style. Our workshop in Addis Ababa will build it for you.
           </p>
         </div>
 
         {/* Value Highlights */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <div className="bg-white p-6 rounded-2xl border border-stone-200 shadow-xs flex items-start gap-4">
-            <div className="p-3 bg-stone-50 rounded-xl text-stone-900 shrink-0">
+          <div className="bg-white p-6 rounded-2xl border-2 border-[#E5DDD3] shadow-xs flex items-start gap-4">
+            <div className="p-3 bg-[#FAF8F5] rounded-xl text-[#B8551F] shrink-0 border border-[#E5DDD3]">
               <Ruler className="w-5 h-5" />
             </div>
             <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider text-stone-900">
-                Precision Millimeter Scaling
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#201C18]">
+                Exact Measurements
               </h4>
-              <p className="text-xs text-stone-500 mt-1">
-                Customize sectional lengths, seat depths, and tabletop configurations for your floorplan.
+              <p className="text-xs text-[#6B6459] mt-1">
+                Choose the exact length, width, and height for your room.
               </p>
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-2xl border border-stone-200 shadow-xs flex items-start gap-4">
-            <div className="p-3 bg-stone-50 rounded-xl text-stone-900 shrink-0">
+          <div className="bg-white p-6 rounded-2xl border-2 border-[#E5DDD3] shadow-xs flex items-start gap-4">
+            <div className="p-3 bg-[#FAF8F5] rounded-xl text-[#B8551F] shrink-0 border border-[#E5DDD3]">
               <Paintbrush className="w-5 h-5" />
             </div>
             <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider text-stone-900">
-                Curated Material Library
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#201C18]">
+                Wood & Fabric Choices
               </h4>
-              <p className="text-xs text-stone-500 mt-1">
-                Access imported Italian velvets, bouclés, Roman travertine slabs, and smoked oak finishes.
+              <p className="text-xs text-[#6B6459] mt-1">
+                Choose from solid oak, walnut, durable fabrics, and leather.
               </p>
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-2xl border border-stone-200 shadow-xs flex items-start gap-4">
-            <div className="p-3 bg-stone-50 rounded-xl text-stone-900 shrink-0">
+          <div className="bg-white p-6 rounded-2xl border-2 border-[#E5DDD3] shadow-xs flex items-start gap-4">
+            <div className="p-3 bg-[#FAF8F5] rounded-xl text-[#B8551F] shrink-0 border border-[#E5DDD3]">
               <Clock className="w-5 h-5" />
             </div>
             <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider text-stone-900">
-                24-Hour Studio Response
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#201C18]">
+                Fast Workshop Quote
               </h4>
-              <p className="text-xs text-stone-500 mt-1">
-                Receive initial technical feasibility, material swatch samples, and 3D CAD renders.
+              <p className="text-xs text-[#6B6459] mt-1">
+                We will review your request and call you with price and timeline.
               </p>
             </div>
           </div>
@@ -144,7 +143,7 @@ export default function CustomOrderPage() {
                       phone: '',
                       type: 'custom',
                       dimensions: '',
-                      budget: '$3,000 - $6,000',
+                      budget: '30,000 - 60,000 Birr',
                       productContext: '',
                       referenceImage: '',
                       message: '',
@@ -260,10 +259,10 @@ export default function CustomOrderPage() {
                     onChange={handleChange}
                     className="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-xs text-stone-900 focus:outline-none focus:border-stone-900 cursor-pointer"
                   >
-                    <option value="$1,500 - $3,000">$1,500 - $3,000</option>
-                    <option value="$3,000 - $6,000">$3,000 - $6,000</option>
-                    <option value="$6,000 - $12,000">$6,000 - $12,000</option>
-                    <option value="$12,000+ (Commercial / Multi-room)">$12,000+ (Commercial / Multi-room)</option>
+                    <option value="15,000 - 30,000 Birr">15,000 - 30,000 Birr</option>
+                    <option value="30,000 - 60,000 Birr">30,000 - 60,000 Birr</option>
+                    <option value="60,000 - 120,000 Birr">60,000 - 120,000 Birr</option>
+                    <option value="120,000+ Birr (Full House / Commercial)">120,000+ Birr (Full House / Commercial)</option>
                   </select>
                 </div>
               </div>

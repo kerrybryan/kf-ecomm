@@ -27,7 +27,7 @@ export function middleware(request) {
 
   // Only apply to /admin routes
   if (pathname.startsWith('/admin')) {
-    const token = request.cookies.get('nordika_auth_token')?.value;
+    const token = request.cookies.get('kb_furniture_token')?.value;
     const payload = token ? decodeJwtPayload(token) : null;
     const isTokenValid = payload && payload.userId && (!payload.exp || payload.exp * 1000 > Date.now());
     const isAdmin = isTokenValid && ADMIN_ROLES.includes(payload.role);

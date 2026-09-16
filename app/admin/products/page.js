@@ -204,10 +204,10 @@ export default function AdminProductsPage() {
       sortable: true,
       render: (row) => (
         <div>
-          <span className="font-semibold text-zinc-900">${row.price?.toLocaleString()}</span>
+          <span className="font-semibold text-zinc-900">ETB {row.price?.toLocaleString()}</span>
           {row.originalPrice && (
             <span className="text-[11px] text-zinc-400 line-through ml-1.5">
-              ${row.originalPrice?.toLocaleString()}
+              ETB {row.originalPrice?.toLocaleString()}
             </span>
           )}
         </div>
@@ -424,7 +424,7 @@ export default function AdminProductsPage() {
               />
               <div>
                 <p className="text-xs font-bold text-zinc-900">{deleteProduct.name}</p>
-                <p className="text-[11px] text-zinc-500">${deleteProduct.price?.toLocaleString()} • {deleteProduct.category}</p>
+                <p className="text-[11px] text-zinc-500">ETB {deleteProduct.price?.toLocaleString()} • {deleteProduct.category}</p>
               </div>
             </div>
           )}
@@ -524,7 +524,7 @@ export default function AdminProductsPage() {
                           {row.name}
                         </td>
                         <td className="px-3 py-2 capitalize">{row.category}</td>
-                        <td className="px-3 py-2 font-semibold">${row.price}</td>
+                        <td className="px-3 py-2 font-semibold">ETB {row.price}</td>
                         <td className="px-3 py-2">{row.stockCount}</td>
                         <td className="px-3 py-2 capitalize">{row.status}</td>
                       </tr>
