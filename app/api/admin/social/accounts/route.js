@@ -7,6 +7,7 @@ export const dynamic = 'force-dynamic';
 
 const PLATFORM_DEFAULTS = {
   instagram: {
+<<<<<<< HEAD
     accountName: 'KB Furniture Studio',
     accountHandle: '@kbfurniture.studio',
     accountAvatarUrl: 'https://picsum.photos/seed/kb-furniture-avatar/200/200',
@@ -32,6 +33,33 @@ const PLATFORM_DEFAULTS = {
     accountHandle: '@kbfurniturehome',
     accountAvatarUrl: 'https://picsum.photos/seed/kb-furniture-avatar/200/200',
     profileUrl: 'https://pinterest.com/kbfurniturehome',
+=======
+    accountName: 'Nordika Scandinavian Studio',
+    accountHandle: '@nordika.studio',
+    accountAvatarUrl: 'https://picsum.photos/seed/nordika-avatar/200/200',
+    profileUrl: 'https://instagram.com/nordika.studio',
+    followerCount: 24800,
+  },
+  facebook: {
+    accountName: 'Nordika Studio Official Page',
+    accountHandle: 'Nordika Scandinavian Furniture',
+    accountAvatarUrl: 'https://picsum.photos/seed/nordika-avatar/200/200',
+    profileUrl: 'https://facebook.com/nordikastudio',
+    followerCount: 18200,
+  },
+  tiktok: {
+    accountName: 'Nordika Studio Workshop',
+    accountHandle: '@nordikadesign',
+    accountAvatarUrl: 'https://picsum.photos/seed/nordika-avatar/200/200',
+    profileUrl: 'https://tiktok.com/@nordikadesign',
+    followerCount: 52400,
+  },
+  pinterest: {
+    accountName: 'Nordika Scandinavian Living',
+    accountHandle: '@nordikahome',
+    accountAvatarUrl: 'https://picsum.photos/seed/nordika-avatar/200/200',
+    profileUrl: 'https://pinterest.com/nordikahome',
+>>>>>>> 4cd674b4af49d0a4c0c576d40cf1680f0734cfca
     followerCount: 41200,
   },
 };
@@ -73,9 +101,15 @@ export async function POST(request) {
 
     const defaults = PLATFORM_DEFAULTS[platform] || {
       accountName: `${platform.toUpperCase()} Official Account`,
+<<<<<<< HEAD
       accountHandle: `@kbfurniture_${platform}`,
       accountAvatarUrl: 'https://picsum.photos/seed/kb-furniture-avatar/200/200',
       profileUrl: `https://${platform}.com/kbfurniture`,
+=======
+      accountHandle: `@nordika_${platform}`,
+      accountAvatarUrl: 'https://picsum.photos/seed/nordika-avatar/200/200',
+      profileUrl: `https://${platform}.com/nordika`,
+>>>>>>> 4cd674b4af49d0a4c0c576d40cf1680f0734cfca
       followerCount: 12000,
     };
 

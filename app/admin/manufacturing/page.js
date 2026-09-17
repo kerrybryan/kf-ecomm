@@ -124,8 +124,13 @@ export default function ManufacturingKanbanPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...newOrderForm,
+<<<<<<< HEAD
           productName: selectedProd?.name || newOrderForm.productName || 'KB Furniture Bespoke Piece',
           productImage: selectedProd?.images?.[0] || 'https://picsum.photos/seed/kb-furniture-bench/600/600',
+=======
+          productName: selectedProd?.name || newOrderForm.productName || 'Nordika Bespoke Piece',
+          productImage: selectedProd?.images?.[0] || 'https://picsum.photos/seed/nordika-bench/600/600',
+>>>>>>> 4cd674b4af49d0a4c0c576d40cf1680f0734cfca
           materialsRequired: [
             { name: 'FSC European White Oak 8/4', quantity: 18, unit: 'bdft' },
             { name: 'Nordic Natural Bouclé Fabric', quantity: 4, unit: 'meters' },
@@ -224,7 +229,11 @@ export default function ManufacturingKanbanPage() {
                         <div className="flex items-start justify-between gap-2">
                           <div className="relative w-12 h-12 rounded-lg overflow-hidden bg-stone-100 shrink-0 border border-[#EBE5DF]">
                             <Image
+<<<<<<< HEAD
                               src={order.productImage || 'https://picsum.photos/seed/kb-furniture-bench/200/200'}
+=======
+                              src={order.productImage || 'https://picsum.photos/seed/nordika-bench/200/200'}
+>>>>>>> 4cd674b4af49d0a4c0c576d40cf1680f0734cfca
                               alt="Product"
                               fill
                               className="object-cover"
@@ -309,7 +318,11 @@ export default function ManufacturingKanbanPage() {
             <div className="flex gap-4">
               <div className="relative w-24 h-24 rounded-2xl overflow-hidden bg-stone-100 shrink-0 border border-[#EBE5DF]">
                 <Image
+<<<<<<< HEAD
                   src={selectedOrder.productImage || 'https://picsum.photos/seed/kb-furniture-bench/400/400'}
+=======
+                  src={selectedOrder.productImage || 'https://picsum.photos/seed/nordika-bench/400/400'}
+>>>>>>> 4cd674b4af49d0a4c0c576d40cf1680f0734cfca
                   alt="Product"
                   fill
                   className="object-cover"

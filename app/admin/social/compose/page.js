@@ -86,13 +86,21 @@ function SocialComposerContent() {
 
   const handleSelectProduct = (prod) => {
     setSelectedProduct(prod);
+<<<<<<< HEAD
     const img = prod.images?.[0] || 'https://picsum.photos/seed/kb-furniture-sofa/800/800';
+=======
+    const img = prod.images?.[0] || 'https://picsum.photos/seed/nordika-sofa/800/800';
+>>>>>>> 4cd674b4af49d0a4c0c576d40cf1680f0734cfca
     setMediaUrl(img);
 
     // Initial default caption
     const defaultText = `Introducing the ${prod.name} — handcrafted from ${
       prod.materials?.join(', ') || 'solid European timber'
+<<<<<<< HEAD
     }. Starting at $${prod.price?.toLocaleString()}.\n\nExplore our bespoke Scandinavian collection online at KB Furniture. ✨\n\n#NordicDesign #ScandinavianLiving #BespokeFurniture #KBFurniture`;
+=======
+    }. Starting at $${prod.price?.toLocaleString()}.\n\nExplore our bespoke Scandinavian collection online at Nordika Studio. ✨\n\n#NordicDesign #ScandinavianLiving #BespokeFurniture #NordikaStudio`;
+>>>>>>> 4cd674b4af49d0a4c0c576d40cf1680f0734cfca
 
     setCaptions((prev) => ({
       ...prev,
@@ -135,7 +143,11 @@ function SocialComposerContent() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+<<<<<<< HEAD
           productName: selectedProduct?.name || 'KB Furniture Studio Piece',
+=======
+          productName: selectedProduct?.name || 'Nordika Studio Furniture Piece',
+>>>>>>> 4cd674b4af49d0a4c0c576d40cf1680f0734cfca
           category: selectedProduct?.category || 'living-room',
           materials: selectedProduct?.materials || ['Solid European Oak', 'Bouclé'],
           price: selectedProduct?.price || 950,
