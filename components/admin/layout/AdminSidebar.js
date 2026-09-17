@@ -95,7 +95,7 @@ export default function AdminSidebar({ user, onLogout, isMobileOpen, setIsMobile
 
   const SidebarContent = (
     <div className={`flex flex-col h-full bg-[#111009] text-[#F3ECE1] border-r border-[#1E1A14] select-none transition-all duration-300 ${collapsed ? 'w-16' : 'w-64'}`}>
-      
+
       {/* Brand Header */}
       <div className={`px-4 py-5 border-b border-[#1E1A14] flex items-center ${collapsed ? 'justify-center' : 'justify-between'}`}>
         {!collapsed ? (
@@ -154,11 +154,10 @@ export default function AdminSidebar({ user, onLogout, isMobileOpen, setIsMobile
                       href={item.href}
                       onClick={() => setIsMobileOpen && setIsMobileOpen(false)}
                       title={collapsed ? item.name : undefined}
-                      className={`flex items-center ${collapsed ? 'justify-center px-2' : 'justify-between px-3'} py-2.5 rounded-xl text-xs font-medium transition-all duration-150 group relative ${
-                        active
+                      className={`flex items-center ${collapsed ? 'justify-center px-2' : 'justify-between px-3'} py-2.5 rounded-xl text-xs font-medium transition-all duration-150 group relative ${active
                           ? 'bg-gradient-to-r from-[#A8875E] to-[#8B6C44] text-white shadow-md'
                           : 'text-[#B8AFA4] hover:bg-[#1E1A14] hover:text-white'
-                      }`}
+                        }`}
                     >
                       <div className={`flex items-center ${collapsed ? '' : 'gap-3'}`}>
                         <Icon
@@ -169,9 +168,8 @@ export default function AdminSidebar({ user, onLogout, isMobileOpen, setIsMobile
 
                       {!collapsed && item.badge && (
                         <span
-                          className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wide ${
-                            active ? 'bg-white/20 text-white' : 'bg-[#A8875E]/20 text-[#D99A2B] border border-[#A8875E]/30'
-                          }`}
+                          className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wide ${active ? 'bg-white/20 text-white' : 'bg-[#A8875E]/20 text-[#D99A2B] border border-[#A8875E]/30'
+                            }`}
                         >
                           {item.badge}
                         </span>

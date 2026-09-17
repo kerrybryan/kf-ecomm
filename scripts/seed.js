@@ -519,6 +519,16 @@ const Shipment = mongoose.models.Shipment || mongoose.model('Shipment', Shipment
 const WarrantyClaim = mongoose.models.WarrantyClaim || mongoose.model('WarrantyClaim', WarrantyClaimSchema);
 const LedgerEntry = mongoose.models.LedgerEntry || mongoose.model('LedgerEntry', LedgerEntrySchema);
 const Expense = mongoose.models.Expense || mongoose.model('Expense', ExpenseSchema);
+const SocialAccount = mongoose.models.SocialAccount || mongoose.model('SocialAccount', SocialAccountSchema);
+const SocialPost = mongoose.models.SocialPost || mongoose.model('SocialPost', SocialPostSchema);
+const AutomationRule = mongoose.models.AutomationRule || mongoose.model('AutomationRule', AutomationRuleSchema);
+const RawMaterial = mongoose.models.RawMaterial || mongoose.model('RawMaterial', RawMaterialSchema);
+const ProductionOrder = mongoose.models.ProductionOrder || mongoose.model('ProductionOrder', ProductionOrderSchema);
+const DeliveryZone = mongoose.models.DeliveryZone || mongoose.model('DeliveryZone', DeliveryZoneSchema);
+const Shipment = mongoose.models.Shipment || mongoose.model('Shipment', ShipmentSchema);
+const WarrantyClaim = mongoose.models.WarrantyClaim || mongoose.model('WarrantyClaim', WarrantyClaimSchema);
+const LedgerEntry = mongoose.models.LedgerEntry || mongoose.model('LedgerEntry', LedgerEntrySchema);
+const Expense = mongoose.models.Expense || mongoose.model('Expense', ExpenseSchema);
 
 // Helper to generate dates over the past 30 days
 function getRandomPastDate(daysAgo = 30) {
@@ -1337,6 +1347,16 @@ async function seed() {
       Setting.deleteMany({}),
       Newsletter.deleteMany({}),
       SourcedItem.deleteMany({}),
+      SocialAccount.deleteMany({}),
+      SocialPost.deleteMany({}),
+      AutomationRule.deleteMany({}),
+      RawMaterial.deleteMany({}),
+      ProductionOrder.deleteMany({}),
+      DeliveryZone.deleteMany({}),
+      Shipment.deleteMany({}),
+      WarrantyClaim.deleteMany({}),
+      LedgerEntry.deleteMany({}),
+      Expense.deleteMany({}),
       SocialAccount.deleteMany({}),
       SocialPost.deleteMany({}),
       AutomationRule.deleteMany({}),
@@ -2375,6 +2395,23 @@ async function seed() {
     console.log('\n=========================================');
     console.log('🎉 SEEDING COMPLETED SUCCESSFULLY!');
     console.log(`Summary:`);
+    console.log(` - Categories:        ${createdCategories.length}`);
+    console.log(` - Products:          ${createdProducts.length}`);
+    console.log(` - Users:             ${createdUsers.length}`);
+    console.log(` - Orders:            ${createdOrders.length}`);
+    console.log(` - Inquiries:         ${createdInquiries.length}`);
+    console.log(` - Agents:            ${createdAgents.length}`);
+    console.log(` - Reviews:           ${createdReviews.length}`);
+    console.log(` - Sourced Items:     ${createdSourcedItems.length}`);
+    console.log(` - Social Accounts:   ${createdSocialAccounts.length}`);
+    console.log(` - Social Posts:      ${createdSocialPosts.length}`);
+    console.log(` - Raw Materials:     ${createdMaterials.length}`);
+    console.log(` - Production Orders: ${createdProdOrders.length}`);
+    console.log(` - Delivery Zones:    ${createdZones.length}`);
+    console.log(` - Shipments:         ${createdShipments.length}`);
+    console.log(` - Warranty Claims:   ${createdWarranties.length}`);
+    console.log(` - Expenses:          ${createdExpenses.length}`);
+    console.log(` - Ledger Entries:    ${createdLedger.length}`);
     console.log(` - Categories:        ${createdCategories.length}`);
     console.log(` - Products:          ${createdProducts.length}`);
     console.log(` - Users:             ${createdUsers.length}`);

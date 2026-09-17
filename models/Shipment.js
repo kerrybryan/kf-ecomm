@@ -15,7 +15,11 @@ const ShipmentSchema = new mongoose.Schema(
     },
     carrier: {
       type: String,
+<<<<<<< HEAD
       default: 'KB Furniture White-Glove Fleet',
+=======
+      default: 'Nordika White-Glove Fleet',
+>>>>>>> 4cd674b4af49d0a4c0c576d40cf1680f0734cfca
     },
     deliveryService: {
       type: String,

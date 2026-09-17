@@ -18,7 +18,11 @@ export async function GET(request) {
         mode: 'review_queue',
         defaultPlatforms: ['instagram', 'pinterest', 'facebook'],
         defaultCaptionTemplate:
+<<<<<<< HEAD
           'Introducing the {productName} — masterfully crafted in {material}. Starting at ${price}.\n\nExplore our bespoke Scandinavian collection online at KB Furniture. ✨\n\n#NordicDesign #ScandinavianLiving #BespokeFurniture #KBFurniture #LuxuryInteriors',
+=======
+          'Introducing the {productName} — masterfully crafted in {material}. Starting at ${price}.\n\nExplore our bespoke Scandinavian collection online at Nordika Studio. ✨\n\n#NordicDesign #ScandinavianLiving #BespokeFurniture #NordikaStudio #LuxuryInteriors',
+>>>>>>> 4cd674b4af49d0a4c0c576d40cf1680f0734cfca
         enabled: true,
       });
     }
