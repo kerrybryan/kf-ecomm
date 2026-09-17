@@ -13,7 +13,11 @@ export async function POST(request) {
     const { productName, category, materials, price, tone = 'modern', customPrompt = '' } = body;
 
     const captions = await generateSocialCaptions({
+<<<<<<< HEAD
       productName: productName || 'KB Furniture Scandinavian Piece',
+=======
+      productName: productName || 'Nordika Scandinavian Piece',
+>>>>>>> 4cd674b4af49d0a4c0c576d40cf1680f0734cfca
       category: category || 'living-room',
       materials: materials || ['Solid Oak', 'Bouclé'],
       price: price || 950,

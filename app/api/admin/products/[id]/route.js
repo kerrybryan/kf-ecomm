@@ -77,6 +77,8 @@ export async function PUT(request, { params }) {
 
     const previousStatus = product.status;
 
+    const previousStatus = product.status;
+
     updatableFields.forEach((field) => {
       if (body[field] !== undefined) {
         product[field] = body[field];

@@ -190,14 +190,22 @@ export default function WarrantyClaimsPage() {
               <button
                 type="button"
                 onClick={() => handleResolve(selectedClaim._id, 'replacement_approved')}
+<<<<<<< HEAD
                 className="px-4 py-2 rounded-xl bg-[#6B7A5E] text-white text-xs font-bold hover:bg-[#5A6850] transition-colors cursor-pointer"
+=======
+                className="px-4 py-2 rounded-xl bg-[#A8875E] text-white text-xs font-bold hover:bg-[#967750]"
+>>>>>>> 4cd674b4af49d0a4c0c576d40cf1680f0734cfca
               >
                 Approve Replacement
               </button>
               <button
                 type="button"
                 onClick={() => handleResolve(selectedClaim._id, 'resolved')}
+<<<<<<< HEAD
                 className="px-4 py-2 rounded-xl bg-[#6B7A5E] text-white text-xs font-bold hover:bg-[#5A6850] transition-colors cursor-pointer"
+=======
+                className="px-4 py-2 rounded-xl bg-emerald-600 text-white text-xs font-bold hover:bg-emerald-700"
+>>>>>>> 4cd674b4af49d0a4c0c576d40cf1680f0734cfca
               >
                 Mark Resolved
               </button>

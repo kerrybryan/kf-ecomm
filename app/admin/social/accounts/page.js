@@ -23,9 +23,15 @@ const PLATFORM_CONFIGS = [
     name: 'Instagram Business',
     desc: 'Feed posts, carousel albums, stories & reels via Meta Graph API',
     iconColor: 'bg-gradient-to-tr from-yellow-500 via-pink-600 to-purple-700 text-white',
+<<<<<<< HEAD
     defaultHandle: '@kbfurniture.studio',
     defaultName: 'KB Furniture Studio',
     defaultAvatar: 'https://picsum.photos/seed/kb-furniture-avatar/200/200',
+=======
+    defaultHandle: '@nordika.studio',
+    defaultName: 'Nordika Scandinavian Studio',
+    defaultAvatar: 'https://picsum.photos/seed/nordika-avatar/200/200',
+>>>>>>> 4cd674b4af49d0a4c0c576d40cf1680f0734cfca
     followers: '24.8K',
   },
   {
@@ -33,9 +39,15 @@ const PLATFORM_CONFIGS = [
     name: 'Pinterest Business',
     desc: 'Rich product pins, catalog visual search & interior boards',
     iconColor: 'bg-red-600 text-white',
+<<<<<<< HEAD
     defaultHandle: '@kbfurniturehome',
     defaultName: 'KB Furniture Living',
     defaultAvatar: 'https://picsum.photos/seed/kb-furniture-avatar/200/200',
+=======
+    defaultHandle: '@nordikahome',
+    defaultName: 'Nordika Scandinavian Living',
+    defaultAvatar: 'https://picsum.photos/seed/nordika-avatar/200/200',
+>>>>>>> 4cd674b4af49d0a4c0c576d40cf1680f0734cfca
     followers: '41.2K',
   },
   {
@@ -43,9 +55,15 @@ const PLATFORM_CONFIGS = [
     name: 'Facebook Page',
     desc: 'Official brand storefront page, product collections & video posts',
     iconColor: 'bg-blue-600 text-white',
+<<<<<<< HEAD
     defaultHandle: 'KB Furniture',
     defaultName: 'KB Furniture Official Page',
     defaultAvatar: 'https://picsum.photos/seed/kb-furniture-avatar/200/200',
+=======
+    defaultHandle: 'Nordika Scandinavian Furniture',
+    defaultName: 'Nordika Studio Official Page',
+    defaultAvatar: 'https://picsum.photos/seed/nordika-avatar/200/200',
+>>>>>>> 4cd674b4af49d0a4c0c576d40cf1680f0734cfca
     followers: '18.2K',
   },
   {
@@ -53,9 +71,15 @@ const PLATFORM_CONFIGS = [
     name: 'TikTok Creator Hub',
     desc: 'Short-form joinery woodworking reels & workshop process showcases',
     iconColor: 'bg-black text-white',
+<<<<<<< HEAD
     defaultHandle: '@kbfurnituredesign',
     defaultName: 'KB Furniture Workshop',
     defaultAvatar: 'https://picsum.photos/seed/kb-furniture-avatar/200/200',
+=======
+    defaultHandle: '@nordikadesign',
+    defaultName: 'Nordika Studio Workshop',
+    defaultAvatar: 'https://picsum.photos/seed/nordika-avatar/200/200',
+>>>>>>> 4cd674b4af49d0a4c0c576d40cf1680f0734cfca
     followers: '52.4K',
   },
 ];
@@ -222,7 +246,11 @@ export default function SocialAccountsPage() {
                   </div>
                 ) : (
                   <div className="p-3.5 rounded-xl bg-gray-50 border border-dashed border-gray-300 text-xs text-gray-500">
+<<<<<<< HEAD
                     No active account linked. Click &ldquo;Connect&rdquo; to authorize KB Furniture.
+=======
+                    No active account linked. Click &ldquo;Connect&rdquo; to authorize Nordika Studio.
+>>>>>>> 4cd674b4af49d0a4c0c576d40cf1680f0734cfca
                   </div>
                 )}
               </div>
@@ -303,7 +331,11 @@ export default function SocialAccountsPage() {
                 </div>
               </div>
               <p className="text-[11px] text-[#7C7265] leading-relaxed">
+<<<<<<< HEAD
                 Granting permission allows KB Furniture Publishing Hub to publish photos, reels, and product catalog tags to this channel.
+=======
+                Granting permission allows Nordika Studio Publishing Hub to publish photos, reels, and product catalog tags to this channel.
+>>>>>>> 4cd674b4af49d0a4c0c576d40cf1680f0734cfca
               </p>
             </div>
 
